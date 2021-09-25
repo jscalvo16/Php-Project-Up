@@ -14,6 +14,6 @@ class Fase extends Model
 
     public function entregables(){
 
-        return $this->hasMany('App\Entregable','IdFase');
+        return $this->hasMany('App\Entregable','FkIdFase');
     }
 }

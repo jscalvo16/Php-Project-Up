@@ -13,6 +13,6 @@ class Avance extends Model
 
     public function observaciones(){
 
-        return $this->hasMany('App\Observacion','IdAvan');
+        return $this->hasMany('App\Observacion','FkIdAvan');
     }
 }

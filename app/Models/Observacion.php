@@ -14,7 +14,7 @@ class Observacion extends Model
 
     public function respuestas(){
 
-        return $this->hasMany('App\Respuesta','IdObser');
+        return $this->hasMany('App\Respuesta','FkIdObser');
     }
 
 

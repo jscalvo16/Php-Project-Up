@@ -14,11 +14,11 @@ class Usuario extends Model
 
     public function respuestas(){
 
-        return $this->hasMany('App\Respuesta','IdUsua');
+        return $this->hasMany('App\Respuesta','FkIdUsua');
     }
 
     public function observaciones(){
 
-        return $this->hasMany('App\Observacion','IdUsua');
+        return $this->hasMany('App\Observacion','FkIdUsua');
     }
 }

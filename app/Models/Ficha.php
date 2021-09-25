@@ -19,6 +19,6 @@ class Ficha extends Model
 
     public function gruposDeProyecto(){
 
-        return $this->hasMany('App\GrupoDeProyecto','Idficha');
+        return $this->hasMany('App\GrupoDeProyecto','FkIdficha');
     }
 }

@@ -13,6 +13,6 @@ class Entregable extends Model
 
     public function avances(){
 
-        return $this->hasMany('App\Avance','IdEntre');
+        return $this->hasMany('App\Avance','FkIdEntre');
     }
 }

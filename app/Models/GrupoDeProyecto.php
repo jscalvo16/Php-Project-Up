@@ -14,11 +14,11 @@ class GrupoDeProyecto extends Model
 
     public function usuarios(){
 
-        return $this->hasMany('App\Usuario','IdGrupo');
+        return $this->hasMany('App\Usuario','FkIdGrupo');
     }
 
     public function avances(){
 
-        return $this->hasMany('App\Avance','IdGrupo');
+        return $this->hasMany('App\Avance','FkIdGrupo');
     }
 }
