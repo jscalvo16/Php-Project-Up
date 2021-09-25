@@ -16,4 +16,9 @@ class Ficha extends Model
     public function usuarios(){
         return $this->belongsToMany(Usuario::class, 'usuafich', 'FkIdFicha', 'FkIdUsua', 'IdFicha', 'IdUsua');
     }
+
+    public function gruposDeProyecto(){
+
+        return $this->hasMany('App\GrupoDeProyecto','Idficha');
+    }
 }

@@ -11,4 +11,14 @@ class Usuario extends Model
     protected $table = "usuario";
     protected $primaryKey = "IdUsua";
     public $timestamps = false;
+
+    public function respuestas(){
+
+        return $this->hasMany('App\Respuesta','IdUsua');
+    }
+
+    public function observaciones(){
+
+        return $this->hasMany('App\Observacion','IdUsua');
+    }
 }
