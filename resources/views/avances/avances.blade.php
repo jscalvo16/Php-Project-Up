@@ -110,7 +110,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="nuevaFicha.html">Crear fichas</a>
+                                    <a href="gestionFichas.html">Gestión de fichas</a>
                                 </li>
                                 <li>
                                     <a href="fichas.html">2242753</a>

@@ -114,7 +114,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="">Crear fichas</a>
+                                <a href="gestionFichas.html">Gestión de fichas</a>
                             </li>
                             @foreach($fichas as $ficha)
                             <li>
