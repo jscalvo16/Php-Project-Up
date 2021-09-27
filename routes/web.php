@@ -26,3 +26,4 @@ Route::get('prueba', 'App\Http\Controllers\indexController@mostrarPagina');
 Route::get('login', 'App\Http\Controllers\Auth\LoginController@mostrarLogin');
 
 Route::resource('users','App\Http\Controllers\UsuarioController');
+Route::resource('ficha','App\Http\Controllers\fichaController');

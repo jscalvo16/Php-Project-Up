@@ -175,7 +175,8 @@
                         <div class="card-body">
                             <h2>Crear una nueva ficha</h2>
                             <br>
-                            <form action="#" method="GET">
+                            <form action="{{url('ficha')}}" method="POST">
+                                @csrf
                                 <div class="form-row">
                                     <!-- Input número ficha -->
                                     <div class="form-group col-md-6">
@@ -186,7 +187,7 @@
                                     <!-- Select Jornada de la ficha -->
                                     <div class="form-group col-md-6">
                                         <label><sup class="obligatorio">*</sup>Jornada</label>
-                                        <select id="inputState" class="form-control">
+                                        <select id="inputState" class="form-control" name="jornada">
                                             <option selected>Elige</option>
                                             <option>Jornada Mañana</option>
                                             <option>Jornada Tarde</option>
