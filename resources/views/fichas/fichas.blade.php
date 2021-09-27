@@ -189,12 +189,25 @@
                             <div class="tab-content m-t-15" id="myTabContentJustified">
                                 <div class="tab-pane fade show active" id="infoFicha" role="tabpanel" aria-labelledby="home-tab-justified">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
+                                            <h4>Coordinador: Gustavo Beltrán Macías</h4>
                                             <h4>Instructores de revisión</h4>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item">Juan Pablo Rojas Martinez</li>
                                                 <li class="list-group-item">Rosa Porras Castañeda</li>
                                             </ul>
+                                        </div>
+                                        <div class="col-md-3 ml-auto">
+                                            <h5>Inicio etapa lectiva: 12/02/2020</h5>
+                                            <h5>Fin etapa lectiva: 30/06/2022</h5>
+                                            <h5>Jornada: Tarde</h5>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <h4>Aprendices</h4>
                                         </div>
                                         <!-- Crear grupo o entregable (botones) -->
                                         <div class="col-md-3 ml-auto">
@@ -208,9 +221,6 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <br>
-                                    <br>
-                                    <h4>Aprendices</h4>
                                     <h4 class="coordinador">Coordinador: Gustavo Beltrán Macías</h4>
                                     <div class="m-t-25">
                                         <table id="data-table" class="table">
