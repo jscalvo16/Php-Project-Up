@@ -24,8 +24,9 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            "nombres" => "required|alpha|max:30",
-            "apellidos" => "required|alpha|max:30",
+            // Reglas de validación
+            "nombres" => "required|regex:/^[a-zA-Z\s]+$/u|max:30",
+            "apellidos" => "required|regex:/^[a-zA-Z\s]+$/u|max:30",
             "tipoDoc" => "required",
             "numerodoc" => "required|numeric",
             "fechaNacimiento" => "required",
@@ -39,6 +40,7 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
+            // Mensajes personalizados
             'nombres.required' => "El campo no puede estar vacío",
             'nombres.alpha' => "El campo solo puede tener caracteres",
             'apellidos.required' => "El campo no puede estar vacío",
