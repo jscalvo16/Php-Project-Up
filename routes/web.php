@@ -24,3 +24,5 @@ Route::get('prueba', 'App\Http\Controllers\indexController@mostrarPagina');
 
 // Rutas para las acciones de login
 Route::get('login', 'App\Http\Controllers\Auth\LoginController@mostrarLogin');
+
+Route::resource('users','App\Http\Controllers\UsuarioController');

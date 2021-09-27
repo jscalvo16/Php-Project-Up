@@ -169,7 +169,7 @@
                         <nav class="breadcrumb breadcrumb-dash">
                             <a href="index.html" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
                             <a class="breadcrumb-item" href="{{url('users')}}">Usuarios</a>
-                            <span class="breadcrumb-item active">Nuevo Usuario</span>
+                            <span class="breadcrumb-item active">Editar usuario</span>
                         </nav>
                     </div>
                 </div>
@@ -177,14 +177,15 @@
                     <div class="card-body">
                         <h2>Registrar un nuevo usuario</h2>
                         <br>
-                        <form action="{{url('users')}}" method="POST">
+                        <form action="{{url('users/'.$usuario->IdUsua)}}" method="POST">
+                            @method('PUT')
                             @csrf
                             <div class="form-row">
                                 <!-- Input Nombres -->
                                 <div class="form-group col-md-6">
                                     <label for="nombres"><sup class="obligatorio">*</sup>Nombres</label>
                                     <input type="text" class="form-control" name="nombres" id="nombres"
-                                           placeholder="Nombres">
+                                           placeholder="Nombres" value="{{$usuario->NombUsua}}">
                                     <strong class="text-danger">{{$errors->first('nombres')}}</strong>
                                 </div>
 
@@ -192,15 +193,15 @@
                                 <div class="form-group col-md-6">
                                     <label for="apellidos"><sup class="obligatorio">*</sup>Apellidos</label>
                                     <input type="text" class="form-control" name="apellidos" id="apellidos"
-                                           placeholder="Apellidos">
+                                           placeholder="Apellidos" value="{{$usuario->ApelUsua}}">
                                     <strong class="text-danger">{{$errors->first('apellidos')}}</strong>
                                 </div>
 
                                 <!-- Select Tipo de documento -->
                                 <div class="form-group col-md-6">
                                     <label><sup class="obligatorio">*</sup>Tipo de documento</label>
-                                    <select id="inputState" class="form-control" name="tipoDoc">
-                                        <option selected>Elige</option>
+                                    <select id="inputState" class="form-control" name="tipoDoc" >
+                                        <option selected value="{{$usuario->TipoDocUsua}}">Elige</option>
                                         <option value="C.C">C.C</option>
                                         <option value="T.I">T.I</option>
                                     </select>
@@ -212,7 +213,7 @@
                                     <label for="numerodoc"><sup class="obligatorio">*</sup>Número de
                                         identificación</label>
                                     <input type="text" class="form-control" name="numerodoc" id="numerodoc"
-                                           placeholder="Número de identificación">
+                                           placeholder="Número de identificación" value="{{$usuario->NumbDocUsua}}">
                                     <strong class="text-danger">{{$errors->first('numerodoc')}}</strong>
                                 </div>
 
@@ -220,7 +221,8 @@
                                 <div class="form-group col-md-6">
                                     <label for="fechaNacimiento"><sup class="obligatorio">*</sup>Fecha de
                                         nacimiento</label>
-                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento">
+                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
+                                           value="{{$usuario->fechNAciUsua}}">
                                     <strong class="text-danger">{{$errors->first('fechaNacimiento')}}</strong>
                                 </div>
 
@@ -228,7 +230,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="email"><sup class="obligatorio">*</sup>Correo misena</label>
                                     <input type="text" class="form-control" name="email" id="email"
-                                           placeholder="Correo misena">
+                                           placeholder="Correo misena" value="{{$usuario->CorrUsua}}">
                                     <strong class="text-danger">{{$errors->first('email')}}</strong>
                                 </div>
 
@@ -236,7 +238,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="email"><sup class="obligatorio">*</sup>Contraseña</label>
                                     <input type="password" class="form-control" name="contraseña" id="email"
-                                           placeholder="Contraseña">
+                                           placeholder="Contraseña" value="{{$usuario->ContraUsua}}">
                                     <strong class="text-danger">{{$errors->first('contraseña')}}</strong>
                                 </div>
 
