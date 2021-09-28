@@ -27,3 +27,4 @@ Route::get('login', 'App\Http\Controllers\Auth\LoginController@mostrarLogin');
 
 Route::resource('users','App\Http\Controllers\UsuarioController');
 Route::resource('ficha','App\Http\Controllers\fichaController');
+Route::resource('grupo','App\Http\Controllers\GrupoController');

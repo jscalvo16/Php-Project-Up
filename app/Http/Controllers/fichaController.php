@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ficha;
+use App\Models\GrupoDeProyecto;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
@@ -61,7 +62,12 @@ class fichaController extends Controller
     public function show($id)
     {
         $fich = Ficha::find($id);
-        return view('fichas.fichas')->with("fich", $fich);
+        $gruposFicha=GrupoDeProyecto::select('NombGrupo','DescriGrupo')->
+        where('FkIdFicha','=',$id)->
+        get();
+
+        return view('fichas.fichas',compact('gruposFicha'))->with("fich", $fich);
+
     }
 
     /**
