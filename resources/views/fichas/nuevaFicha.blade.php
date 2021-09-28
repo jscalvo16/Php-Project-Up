@@ -182,6 +182,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="numFicha"><sup class="obligatorio">*</sup>Número de ficha</label>
                                         <input type="text" class="form-control" name="numFicha" id="numFicha" placeholder="Número de ficha">
+                                        <strong>{{$errors->first('numFicha')}}</strong>
                                     </div>
 
                                     <!-- Select Jornada de la ficha -->
@@ -192,6 +193,7 @@
                                             <option value="Diurna">Jornada Mañana</option>
                                             <option value="Mixta">Jornada Tarde</option>
                                             <option value="Nocturna">Jornada Noche</option>
+                                            <strong>{{$errors->first('jornada')}}</strong>
                                         </select>
                                     </div>
 
@@ -199,12 +201,14 @@
                                     <div class="form-group col-md-6">
                                         <label for="inicioEtapa"><sup class="obligatorio">*</sup>Fecha inicio de etapa lectiva</label>
                                         <input type="date" class="form-control" name="inicioEtapa" id="inicioEtapa">
+                                        <strong>{{$errors->first('inicioEtapa')}}</strong>
                                     </div>
 
                                     <!-- Input Fecha fin etapa lectiva -->
                                     <div class="form-group col-md-6">
                                         <label for="finEtapa"><sup class="obligatorio">*</sup>Fecha fin de etapa lectiva</label>
                                         <input type="date" class="form-control" name="finEtapa" id="finEtapa">
+                                        <strong>{{$errors->first('finEtapa')}}</strong>
                                     </div>
                                 </div>
 

@@ -24,7 +24,16 @@ class FichaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "numFicha" => "required",
+            "inicioEtapa" => "required",
+            "finEtapa" => "required",
+            "jornada" => "required"
+        ];
+    }
+    public function messages()
+    {
+        return [
+          "numFicha.required" => "El campo no puede estar vacío",
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ficha;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use App\Http\Requests\FichaRequest;
 
 class fichaController extends Controller
 {
@@ -35,7 +36,7 @@ class fichaController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FichaRequest $request)
     {
         $valorMax = Ficha::all()->max('IdFicha');
         $valorMax++;
@@ -84,7 +85,7 @@ class fichaController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FichaRequest $request, $id)
     {
         $fich = Ficha::find($id);
 
