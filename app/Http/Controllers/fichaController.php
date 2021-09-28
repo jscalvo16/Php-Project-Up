@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ficha;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 class fichaController extends Controller
@@ -15,7 +16,7 @@ class fichaController extends Controller
     public function index()
     {
         $fich = Ficha::all();
-        return view('fichas.nuevaFicha')->with('fichas',$fich);
+        return view('fichas.gestionFichas')->with('fichas', $fich);
     }
 
     /**
@@ -25,59 +26,82 @@ class fichaController extends Controller
      */
     public function create()
     {
-        //
+        return view('fichas.nuevaFicha');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $valorMax = Ficha::all()->max('IdFicha');
+        $valorMax++;
+
+        $newFich = new Ficha;
+
+        $newFich->NumbFich = $request->input("numFicha");
+        $newFich->InicEtapElec = $request->input("inicioEtapa");
+        $newFich->FinEtapElec = $request->input("finEtapa");
+        $newFich->JornFicha = $request->input("jornada");
+
+        $newFich->save();
+
+        return redirect("ficha")->with("MensajeFicha", "Se creo de forma satisfactoria ");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $fich = Ficha::find($id);
-        return view('fichas.fichas')->with("ficha",$fich);
+        return view('fichas.fichas')->with("fich", $fich);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $fich = Ficha::find($id);
+
+        return view('fichas.editarFicha')->with("fich", $fich);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $fich = Ficha::find($id);
+
+        $fich->NumbFich = $request->input("numFicha");
+        $fich->InicEtapElec = $request->input("inicioEtapa");
+        $fich->FinEtapElec = $request->input("finEtapa");
+        $fich->JornFicha = $request->input("jornada");
+
+        $fich ->save();
+
+        return redirect("ficha")->with("MensajeFicha","Se Actualizo la ficha");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

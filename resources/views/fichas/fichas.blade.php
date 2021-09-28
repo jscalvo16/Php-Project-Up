@@ -170,7 +170,7 @@
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
                                 <a href="index.html" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-                                <span class="breadcrumb-item active">Ficha 2242753</span>
+                                <span class="breadcrumb-item active">Ficha {{$fich->NumbFich}}</span>
                             </nav>
                         </div>
                     </div>
@@ -197,11 +197,13 @@
                                                 <li class="list-group-item">Rosa Porras Castañeda</li>
                                             </ul>
                                         </div>
+
                                         <div class="col-md-3 ml-auto">
-                                            <h5>Inicio etapa lectiva: 12/02/2020</h5>
-                                            <h5>Fin etapa lectiva: 30/06/2022</h5>
-                                            <h5>Jornada: Tarde</h5>
+                                            <h5>Inicio etapa lectiva: <br>{{$fich->InicEtapElec}}</h5>
+                                            <h5>Fin etapa lectiva: <br>{{$fich->FinEtapElec}}</h5>
+                                            <h5>Jornada: {{$fich->JornFicha}}</h5>
                                         </div>
+
                                     </div>
                                     <br>
                                     <br>
@@ -221,7 +223,6 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <h4 class="coordinador">Coordinador: Gustavo Beltrán Macías</h4>
                                     <div class="m-t-25">
                                         <table id="data-table" class="table">
                                             <thead>

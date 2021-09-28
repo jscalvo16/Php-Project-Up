@@ -114,13 +114,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="gestionFichas.html">Gestión de fichas</a>
+                                <a href="{{'ficha'}}">Gestión de fichas</a>
                             </li>
-                            @foreach($fichas as $ficha)
+
                             <li>
-                                <a href="fichas.html">{{$ficha -> NumbFich}}</a>
+                                <a href="fichas.html">0212121</a>
                             </li>
-                            @endforeach
+
                             <li>
                                 <a href="#">2242745</a>
                             </li>

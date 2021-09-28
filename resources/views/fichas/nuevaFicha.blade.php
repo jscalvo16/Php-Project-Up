@@ -189,10 +189,9 @@
                                         <label><sup class="obligatorio">*</sup>Jornada</label>
                                         <select id="inputState" class="form-control" name="jornada">
                                             <option selected>Elige</option>
-                                            <option>Jornada Mañana</option>
-                                            <option>Jornada Tarde</option>
-                                            <option>Jornada Mixta</option>
-                                            <option>Jornada Noche</option>
+                                            <option value="Diurna">Jornada Mañana</option>
+                                            <option value="Mixta">Jornada Tarde</option>
+                                            <option value="Nocturna">Jornada Noche</option>
                                         </select>
                                     </div>
 
