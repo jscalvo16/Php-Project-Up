@@ -48,14 +48,14 @@
                         <li class="dropdown dropdown-animated scale-left">
                             <div class="pointer" data-toggle="dropdown">
                                 <div class="avatar avatar-image  m-h-10 m-r-15">
-                                    <img src="assets/images/avatars/logo-sena.png"  alt="Logo SENA">
+                                    <img src="{{asset('assets/img/avatars/logo-sena.png ')}}"  alt="Logo SENA">
                                 </div>
                             </div>
                             <div class="p-b-15 p-t-20 dropdown-menu pop-profile">
                                 <div class="p-h-20 p-b-15 m-b-10 border-bottom">
                                     <div class="d-flex m-r-50">
                                         <div class="avatar avatar-lg avatar-image">
-                                            <img src="assets/images/avatars/logo-sena.png" alt="Logo SENA">
+                                            <img src="{{asset('assets/img/avatars/logo-sena.png ')}}" alt="Logo SENA">
                                         </div>
                                         <div class="m-l-10">
                                             <p class="m-b-0 text-dark font-weight-semibold">Nicolas Rosero</p>
@@ -189,9 +189,9 @@
                                         <label><sup class="obligatorio">*</sup>Jornada</label>
                                         <select id="inputState" class="form-control" name="jornada">
                                             <option selected>Elige</option>
-                                            <option value="Diurna">Jornada Mañana</option>
-                                            <option value="Mixta">Jornada Tarde</option>
-                                            <option value="Nocturna">Jornada Noche</option>
+                                            <option value="Diurna">Jornada Diurna</option>
+                                            <option value="Mixta">Jornada Mixta</option>
+                                            <option value="Nocturna">Jornada Nocturna</option>
                                         </select>
                                     </div>
 
