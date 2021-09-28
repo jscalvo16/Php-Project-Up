@@ -47,10 +47,9 @@ class fichaController extends Controller
         $newFich->InicEtapElec = $request->input("inicioEtapa");
         $newFich->FinEtapElec = $request->input("finEtapa");
         $newFich->JornFicha = $request->input("jornada");
-
         $newFich->save();
 
-        return redirect("ficha")->with("MensajeFicha", "Se creo de forma satisfactoria ");
+        return redirect("ficha")->with("MensajeFicha", "Ficha creada correctamente ");
     }
 
     /**
@@ -75,7 +74,7 @@ class fichaController extends Controller
     {
         $fich = Ficha::find($id);
 
-        return view('fichas.editarFicha')->with("fich", $fich);
+        return view('fichas.editarFicha')->with("ficha", $fich);
     }
 
     /**
@@ -96,7 +95,7 @@ class fichaController extends Controller
 
         $fich ->save();
 
-        return redirect("ficha")->with("MensajeFicha","Se Actualizo la ficha");
+        return redirect("ficha")->with("MensajeFicha","Información actualizada correctamente");
     }
 
     /**

@@ -222,7 +222,7 @@
                                     <label for="fechaNacimiento"><sup class="obligatorio">*</sup>Fecha de
                                         nacimiento</label>
                                     <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
-                                           value="{{$usuario->fechNAciUsua}}">
+                                           value="{{$usuario->FechNaciUsua}}">
                                     <strong class="text-danger">{{$errors->first('fechaNacimiento')}}</strong>
                                 </div>
 

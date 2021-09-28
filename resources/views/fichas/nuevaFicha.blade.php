@@ -48,14 +48,14 @@
                         <li class="dropdown dropdown-animated scale-left">
                             <div class="pointer" data-toggle="dropdown">
                                 <div class="avatar avatar-image  m-h-10 m-r-15">
-                                    <img src="assets/images/avatars/logo-sena.png"  alt="Logo SENA">
+                                    <img src="{{asset('assets/img/avatars/logo-sena.png ')}}"  alt="Logo SENA">
                                 </div>
                             </div>
                             <div class="p-b-15 p-t-20 dropdown-menu pop-profile">
                                 <div class="p-h-20 p-b-15 m-b-10 border-bottom">
                                     <div class="d-flex m-r-50">
                                         <div class="avatar avatar-lg avatar-image">
-                                            <img src="assets/images/avatars/logo-sena.png" alt="Logo SENA">
+                                            <img src="{{asset('assets/img/avatars/logo-sena.png ')}}" alt="Logo SENA">
                                         </div>
                                         <div class="m-l-10">
                                             <p class="m-b-0 text-dark font-weight-semibold">Nicolas Rosero</p>
@@ -182,7 +182,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="numFicha"><sup class="obligatorio">*</sup>Número de ficha</label>
                                         <input type="text" class="form-control" name="numFicha" id="numFicha" placeholder="Número de ficha">
-                                        <strong>{{$errors->first('numFicha')}}</strong>
+                                        <strong class="text-danger">{{$errors->first('numFicha')}}</strong>
                                     </div>
 
                                     <!-- Select Jornada de la ficha -->
@@ -193,7 +193,7 @@
                                             <option value="Diurna">Jornada Mañana</option>
                                             <option value="Mixta">Jornada Tarde</option>
                                             <option value="Nocturna">Jornada Noche</option>
-                                            <strong>{{$errors->first('jornada')}}</strong>
+                                            <strong class="text-danger">{{$errors->first('jornada')}}</strong>
                                         </select>
                                     </div>
 
@@ -201,14 +201,14 @@
                                     <div class="form-group col-md-6">
                                         <label for="inicioEtapa"><sup class="obligatorio">*</sup>Fecha inicio de etapa lectiva</label>
                                         <input type="date" class="form-control" name="inicioEtapa" id="inicioEtapa">
-                                        <strong>{{$errors->first('inicioEtapa')}}</strong>
+                                        <strong class="text-danger">{{$errors->first('inicioEtapa')}}</strong>
                                     </div>
 
                                     <!-- Input Fecha fin etapa lectiva -->
                                     <div class="form-group col-md-6">
                                         <label for="finEtapa"><sup class="obligatorio">*</sup>Fecha fin de etapa lectiva</label>
                                         <input type="date" class="form-control" name="finEtapa" id="finEtapa">
-                                        <strong>{{$errors->first('finEtapa')}}</strong>
+                                        <strong class="text-danger">{{$errors->first('finEtapa')}}</strong>
                                     </div>
                                 </div>
 

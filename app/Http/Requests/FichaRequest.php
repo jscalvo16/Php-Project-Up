@@ -13,7 +13,7 @@ class FichaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,9 +24,9 @@ class FichaRequest extends FormRequest
     public function rules()
     {
         return [
-            "numFicha" => "required",
-            "inicioEtapa" => "required",
-            "finEtapa" => "required",
+            "numFicha" => "required|regex:/^[A-Z0-9\s]+$/u|max:11",
+            "inicioEtapa" => "required|date",
+            "finEtapa" => "required|date",
             "jornada" => "required"
         ];
     }
@@ -34,6 +34,10 @@ class FichaRequest extends FormRequest
     {
         return [
           "numFicha.required" => "El campo no puede estar vacío",
+          "numFicha.max" => "El valor maximo debe ser 11 caracteres",
+          "inicioEtapa.required" => "La fecha no puede estar vacía",
+          "finEtapa.required" => "La fecha no puede estar vacía"
+
         ];
     }
 }
