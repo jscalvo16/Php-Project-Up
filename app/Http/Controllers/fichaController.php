@@ -64,11 +64,20 @@ class fichaController extends Controller
         $fich = Ficha::find($id);
 
         // Consulta para los grupos de proyecto de la ficha
-        $gruposFicha=GrupoDeProyecto::select('IdGrupo', 'NombGrupo','DescriGrupo')->
-        where('FkIdFicha','=',$id)->
+        $gruposFicha = GrupoDeProyecto::select('IdGrupo', 'NombGrupo', 'DescriGrupo')->
+        where('FkIdFicha', '=', $id)->
         get();
 
-        return view('fichas.fichas',compact('gruposFicha'))->with("fich", $fich);
+        //Consulta para los integrantes de la ficha
+        $instructores = Ficha::find($id)->usuarios()->select('NombUsua','ApelUsua')->where('FkIdRol','=','2')->get();
+
+        //Consulta para los aprendices de la ficha
+        $aprendices = Ficha::find($id)->usuarios()->select('IdUsua','NombUsua','ApelUsua','email','NumbDocUsua','FechNaciUsua','EstaUsua')->where('FkIdRol','=','1')->get();
+
+        //Consulta [ara los Cordinadores
+        $coordinador = Ficha::find($id)->usuarios()->select('NombUsua','ApelUsua')->where('FkIdRol','=','3')->get();
+
+        return view('fichas.fichas', compact('gruposFicha', 'instructores','aprendices','coordinador'))->with("fich", $fich);
 
     }
 
@@ -101,9 +110,9 @@ class fichaController extends Controller
         $fich->FinEtapElec = $request->input("finEtapa");
         $fich->JornFicha = $request->input("jornada");
 
-        $fich ->save();
+        $fich->save();
 
-        return redirect("ficha")->with("MensajeFicha","Información actualizada correctamente");
+        return redirect("ficha")->with("MensajeFicha", "Información actualizada correctamente");
     }
 
     /**

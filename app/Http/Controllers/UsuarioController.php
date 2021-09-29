@@ -47,8 +47,8 @@ class UsuarioController extends Controller
         $newUser->TipoDocUsua = $request->input("tipoDoc");
         $newUser->NumbDocUsua = $request->input("numerodoc");
         $newUser->FechNaciUsua = $request->input("fechaNacimiento");
-        $newUser->CorrUsua = $request->input("email");
-        $newUser->ContraUsua = $request->input("contraseña");
+        $newUser->email = $request->input("email");
+        $newUser->password = $request->input("contraseña");
         $newUser->FkIdRol = $request->input("rol");
         $newUser->EstaUsua = $request->input("estado");
 
@@ -97,8 +97,8 @@ class UsuarioController extends Controller
         $User->TipoDocUsua = $request->input("tipoDoc");
         $User->NumbDocUsua = $request->input("numerodoc");
         $User->FechNaciUsua = $request->input("fechaNacimiento");
-        $User->CorrUsua = $request->input("email");
-        $User->ContraUsua = $request->input("contraseña");
+        $User->email = $request->input("email");
+        $User->password = $request->input("contraseña");
         $User->FkIdRol = $request->input("rol");
         $User->EstaUsua = $request->input("estado");
 
