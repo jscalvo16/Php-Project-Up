@@ -197,7 +197,7 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         @foreach($coordinador as $coo)
-                                        <h4>Coordinador: {{$coo->NombUsua}} {{$coo->ApelUsua}}</h4>
+                                            <h4>Coordinador: {{$coo->NombUsua}} {{$coo->ApelUsua}}</h4>
                                         @endforeach
                                         <h4>Instructores de revisión</h4>
                                         @foreach($instructores as $users)
@@ -254,7 +254,7 @@
                                                 <td>{{$internos->FechNaciUsua}}</td>
                                                 <td>{{$internos->email}}</td>
                                                 @if($internos->EstaUsua == 1)
-                                                <td>Activo</td>
+                                                    <td>Activo</td>
                                                 @elseif($internos->EstaUsua == 0)
                                                     <td>Inactivo</td>
                                                 @endif
@@ -325,7 +325,8 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="#" method="POST">
+                                            <form action="{{url('grupo')}}" method="POST">
+                                                @csrf
                                                 <div class="form-row">
                                                     <!-- Input Nombre del proyecto -->
                                                     <div class="form-group col-md-12">
@@ -355,34 +356,59 @@
                                                     </h4>
                                                     <!-- Select integrante 1 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante" class="form-control">
+                                                        <select id="integrante1" class="form-control" name="integrante1">
                                                             <option selected>Integrante 1</option>
-                                                            <option>Muchos aprendices...</option>
+                                                            @foreach($aprendices as $aprendiz)
+                                                                @if($aprendiz->FkIdGrupo==null)
+                                                                    <option
+                                                                        value="{{$aprendiz->IdUsua}}">{{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}</option>
+                                                                @endif
+                                                            @endforeach
                                                         </select>
                                                     </div>
 
                                                     <!-- Select integrante 2 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante" class="form-control">
+                                                        <select id="integrante2" class="form-control" name="integrante2">
                                                             <option selected>Integrante 2</option>
-                                                            <option>Muchos aprendices...</option>
+                                                            @foreach($aprendices as $aprendiz)
+
+                                                                @if($aprendiz->FkIdGrupo==null)
+                                                                    <option
+                                                                        value="{{$aprendiz->IdUsua}}">{{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}</option>
+                                                                @endif
+                                                            @endforeach
                                                         </select>
                                                     </div>
 
                                                     <!-- Select integrante 3 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante" class="form-control">
+                                                        <select id="integrante3" class="form-control" name="integrante3">
                                                             <option selected>Integrante 3</option>
-                                                            <option>Muchos aprendices...</option>
+                                                            @foreach($aprendices as $aprendiz)
+
+                                                                @if($aprendiz->FkIdGrupo==null)
+                                                                    <option
+                                                                        value="{{$aprendiz->IdUsua}}">{{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}</option>
+                                                                @endif
+                                                            @endforeach
                                                         </select>
                                                     </div>
 
                                                     <!-- Select integrante 4 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante" class="form-control">
+                                                        <select id="integrante4" class="form-control" name="integrante4">
                                                             <option selected>Integrante 4</option>
-                                                            <option>Muchos aprendices...</option>
+                                                            @foreach($aprendices as $aprendiz)
+
+                                                                @if($aprendiz->FkIdGrupo==null)
+                                                                    <option
+                                                                        value="{{$aprendiz->IdUsua}}">{{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}</option>
+                                                                @endif
+                                                            @endforeach
                                                         </select>
+                                                        <!--Input ID de la ficha-->
+                                                        <input type="hidden" value="{{$fich->IdFicha}}" name="idFicha">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

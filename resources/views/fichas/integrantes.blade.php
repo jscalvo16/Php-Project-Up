@@ -167,29 +167,29 @@
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
                                 <a href="index.html" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-                                <a class="breadcrumb-item" href="fichas.html">Ficha 2242753</a>
-                                <span class="breadcrumb-item active">S.I. Para la gestión de residentes en el CR La Aurora
+                                <a class="breadcrumb-item" href="fichas.html">Ficha {{$grupo->FkIdFicha}}</a>
+                                <span class="breadcrumb-item active">
+                                    {{$grupo->NombGrupo}}
                                 </span>
                             </nav>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h1>S.I. Para la gestión de residentes en el CR La Aurora</h1>
+                            <h1> {{$grupo->NombGrupo}}</h1>
                             <br>
                             <!-- Descripción y alcance del proyecto -->
                             <div class="row ">
                                 <div class="col-md-5">
                                     <h4>Descripción</h4>
                                     <p>
-                                        El sistema de información estará destinado a realizar un sistema para gestionar
-                                        la entrada y salida de visitantes y residentes en el CR La Aurora.
+                                        {{$grupo->DescriGrupo}}
                                     </p>
                                 </div>
                                 <div class="col-md-5 ml-auto">
                                     <h4>Alcance</h4>
                                     <p>
-                                        Gestionar la entrada y salida de los visitantes y residentes en el CR La Aurora.
+                                        {{$grupo->AlcanGrupo}}
                                     </p>
                                 </div>
                             </div>
@@ -200,19 +200,14 @@
 
                             <!-- Integrantes del grupo de proyecto -->
                             <h4>Integrantes</h4>
+
                             <div class="row d-flex justify-content-center">
-                                <p class="col-md-3 integrante"><i class="anticon anticon-check-circle"></i> Carlos Rico
-                                    Aranda
+                                @foreach($integrantesGrupo as $integrante)
+
+                                <p class="col-md-3 integrante"><i class="anticon anticon-check-circle"></i>
+                                    {{$integrante->NombUsua}} {{$integrante->ApelUsua}}
                                 </p>
-                                <p class="col-md-3 integrante"><i class="anticon anticon-check-circle"></i> Rodolfo
-                                    Segura Aguirre
-                                </p>
-                                <p class="col-md-3 integrante"><i class="anticon anticon-check-circle"></i> Armando
-                                    Villa Cano
-                                </p>
-                                <p class="col-md-3 integrante"><i class="anticon anticon-check-circle"></i> Laura Ropero
-                                    Morales
-                                </p>
+                                @endforeach
                             </div>
                             <!-- Fin integrantes -->
                         </div>

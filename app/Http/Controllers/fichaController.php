@@ -72,7 +72,7 @@ class fichaController extends Controller
         $instructores = Ficha::find($id)->usuarios()->select('NombUsua','ApelUsua')->where('FkIdRol','=','2')->get();
 
         //Consulta para los aprendices de la ficha
-        $aprendices = Ficha::find($id)->usuarios()->select('IdUsua','NombUsua','ApelUsua','email','NumbDocUsua','FechNaciUsua','EstaUsua')->where('FkIdRol','=','1')->get();
+        $aprendices = Ficha::find($id)->usuarios()->select('IdUsua','NombUsua','ApelUsua','email','NumbDocUsua','FechNaciUsua','EstaUsua','FkIdGrupo')->where('FkIdRol','=','1')->get();
 
         //Consulta [ara los Cordinadores
         $coordinador = Ficha::find($id)->usuarios()->select('NombUsua','ApelUsua')->where('FkIdRol','=','3')->get();

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\GrupoDeProyecto;
+use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 class GrupoController extends Controller
@@ -30,31 +32,57 @@ class GrupoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $maxId = GrupoDeProyecto::all()->max('IdGrupo');
+        $maxId++;
+
+        //Sección crear grupo
+
+        $nuevoGrupo = new GrupoDeProyecto;
+        $nuevoGrupo->NombGrupo = $request->input('nombreProyecto');
+        $nuevoGrupo->DescriGrupo = $request->input('descProyecto');
+        $nuevoGrupo->AlcanGrupo = $request->input('alcProyecto');
+        $nuevoGrupo->FkIdFicha = $request->input('idFicha');
+        $nuevoGrupo->save();
+
+        //Sección actualizar usuario que lo vincula al grupo
+        $asignarGrupo = Usuario::find($request->input('integrante1'));
+        $asignarGrupo->FkIdGrupo=$maxId;
+
+
+        $asignarGrupo->save();
+
+        return redirect('fichas/' . $request->input('idFicha'));
     }
 
     /**
      * Muestra el grupo seleccionado por el id
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
 
-        $grupo=GrupoDeProyecto::find($id);
-        return view('fichas.integrantes')->with("grupo",$grupo);
+        $integrantesGrupo = Usuario::select('NombUsua', 'ApelUsua')->
+        where('FkIdRol', '=', '1')->
+        where('FkIdGrupo', '=', $id)->
+        get();
+
+        $grupo = GrupoDeProyecto::find($id);
+        return view('fichas.integrantes', compact('integrantesGrupo'))->with("grupo", $grupo);
+
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -65,8 +93,8 @@ class GrupoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -77,7 +105,7 @@ class GrupoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
