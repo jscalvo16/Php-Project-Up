@@ -62,7 +62,9 @@ class fichaController extends Controller
     public function show($id)
     {
         $fich = Ficha::find($id);
-        $gruposFicha=GrupoDeProyecto::select('NombGrupo','DescriGrupo')->
+
+        // Consulta para los grupos de proyecto de la ficha
+        $gruposFicha=GrupoDeProyecto::select('IdGrupo', 'NombGrupo','DescriGrupo')->
         where('FkIdFicha','=',$id)->
         get();
 
