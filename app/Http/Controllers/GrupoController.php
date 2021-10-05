@@ -49,14 +49,13 @@ class GrupoController extends Controller
         $nuevoGrupo->FkIdFicha = $request->input('idFicha');
         $nuevoGrupo->save();
 
-        //Sección actualizar usuario que lo vincula al grupo
-        $asignarGrupo = Usuario::find($request->input('integrante1'));
+        //Sección actualizar usuario para que se vincule al grupo
+        $asignarGrupo = Usuario::find($request->input('integrante'));
         $asignarGrupo->FkIdGrupo=$maxId;
-
 
         $asignarGrupo->save();
 
-        return redirect('fichas/' . $request->input('idFicha'));
+        return redirect('ficha/' . $request->input('idFicha'))->with('mensaje', 'Grupo creado exitosamente');
     }
 
     /**
