@@ -55,7 +55,7 @@ class UsuarioController extends Controller
 
         $newUser->save();
 
-        return redirect('users')->with("mensaje","Exito Al registrar");
+        return redirect('users')->with("mensaje","Usuario registrado correctamente");
     }
 
     /**
@@ -105,7 +105,7 @@ class UsuarioController extends Controller
 
         $User->save();
 
-        return redirect('users')->with("mensaje","Se edito de forma satisfactoria");
+        return redirect('users')->with("mensaje","Información modificada correctamente");
     }
 
     /**

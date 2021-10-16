@@ -95,7 +95,7 @@
             <div class="side-nav-inner">
                 <ul class="side-nav-menu scrollable">
                     <li class="nav-item dropdown open">
-                        <a class="dropdown-toggle" href="usuarios.html">
+                        <a class="dropdown-toggle" href=" {{ url('users') }} ">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-user"></i>
                                 </span>
@@ -114,7 +114,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="nuevaFicha.html">Crear fichas</a>
+                                <a href="gestionFichas.html">Gestión de fichas</a>
                             </li>
                             <li>
                                 <a href="fichas.html">2242753</a>
@@ -177,6 +177,25 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
+                        @if (session("mensaje"))
+                        <div class="notification-toast top-right" id="notification-toast" data-delay="3000">
+                            <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="alert alert-success m-b-0">
+                                    <button type="button" class="ml-2 close" data-dismiss="toast" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <div class="d-flex justify-content-start">
+                                        <span class="alert-icon m-r-20 font-size-30">
+                                            <i class="anticon anticon-check-circle text-success"></i>
+                                        </span>
+                                        <div class="m-t-10">
+                                            <p>{{ session("mensaje") }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <h4>Usuarios</h4>
                         <div class="row">
                             <div class="col-md-2 ml-auto">
@@ -190,9 +209,6 @@
                                     <i class="anticon anticon-plus"></i> Nuevo usuario
                                 </a>
                             </div>
-                            @if(session("mensaje"))
-                                <strong>{{session("mensaje")}}</strong>
-                            @endif
                         </div>
                         <div class="m-t-25">
                             <table id="data-table" class="table">
@@ -326,6 +342,9 @@
 
 <!-- Core JS -->
 <script src=" {{ asset('js/app.min.js') }} "></script>
+
+<!-- Cerrar toast js -->
+<script src=" {{ asset('js/toastAlert.js') }} "></script>
 
 </body>
 
