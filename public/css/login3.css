@@ -1,0 +1,366 @@
+#main-header {
+	background: #333;
+	color: white;
+	height: 65px;
+}
+	#main-header a {
+		color: white;
+	}
+
+/*
+ * Logo
+ */
+#logo-header {
+	float: left;
+	padding: 15px 0 0 20px;
+	text-decoration: none;
+}
+	#logo-header:hover {
+		color: #0b76a6;
+	}
+
+	#logo-header .site-name {
+		display: block;
+		font-weight: 700;
+		font-size: 1.2em;
+	}
+
+	#logo-header .site-desc {
+		display: block;
+		font-weight: 300;
+		font-size: 0.8em;
+		color: #999;
+	}
+
+
+/*
+ * Navegación
+ */
+nav {
+	float: right;
+}
+	nav ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		padding-right: 20px;
+	}
+
+		nav ul li {
+			display: inline-block;
+			line-height: 80px;
+		}
+
+			nav ul li a {
+				display: block;
+				padding: 0 10px;
+				text-decoration: none;
+			}
+
+				nav ul li a:hover {
+					background: #0b76a6;
+				}
+    *{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body{
+    font-family: "Open Sans", sans-serif;
+    overflow: hidden;
+}
+
+.container{
+	background: url(../assets/img/waveGray.jpg) center bottom no-repeat;
+	background-size: cover;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap :7rem;
+}
+
+.imgChida{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.loginImg {
+	width: 37%;
+}
+
+.login-content{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+}
+
+.imgChida img{
+	width: 600px;
+}
+
+form{
+	width: 360px;
+    margin-left: 150px;
+}
+
+.login-content h3{
+	color: #5D5D5D;
+}
+
+.login-content .input-div{
+	position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px 0;
+    padding: 5px 0;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.login-content .input-div.one{
+	margin-top: 0;
+}
+
+.i{
+	color: #d9d9d9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.i i{
+	transition: .3s;
+}
+
+.input-div > div{
+    position: relative;
+	height: 45px;
+}
+
+.input-div > div > h5{
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #999;
+	font-size: 18px;
+	transition: .3s;
+}
+
+.input-div:before, .input-div:after{
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	width: 0%;
+	height: 2px;
+	background-color: #FF7A3C;
+	transition: .4s;
+}
+
+.input-div:before{
+	right: 50%;
+}
+
+.input-div:after{
+	left: 50%;
+}
+
+.input-div.focus:before, .input-div.focus:after{
+	width: 50%;
+}
+
+.input-div.focus > div > h5{
+	top: -5px;
+	font-size: 15px;
+}
+
+.input-div.focus > .i > i{
+	color: #FF7A3C;
+}
+
+.input-div > div > input{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	background: none;
+	padding: 0.5rem 0.7rem;
+	font-size: 1.2rem;
+	color: #555;
+	font-family: 'poppins', sans-serif;
+}
+
+.input-div.pass{
+	margin-bottom: 4px;
+}
+
+a{
+	display: block;
+	text-align: right;
+	text-decoration: none;
+	color: #999;
+	font-size: 0.9rem;
+	transition: .3s;
+}
+
+a:hover{
+	color: #FF7A3C;
+}
+
+.btn{
+	display: block;
+	width: 100%;
+	height: 50px;
+	border-radius: 25px;
+	outline: none;
+	border: none;
+	background-image: linear-gradient(to right, #FF7A3C, #FF7A3C, #FF7A3C);
+	background-size: 200%;
+	font-size: 1.2rem;
+	color: #fff;
+	font-family: 'Poppins', sans-serif;
+	text-transform: uppercase;
+	margin: 1rem 0;
+	cursor: pointer;
+}
+.btn:hover{
+	background: #5D5D5D;
+}
+
+
+@media screen and (max-width: 1050px){
+	.container{
+		grid-gap: 5rem;
+	}
+}
+
+@media screen and (max-width: 1000px){
+	form{
+		width: 290px;
+	}
+
+	.login-content h2{
+        font-size: 2.4rem;
+        margin: 8px 0;
+	}
+
+	.img img{
+		width: 400px;
+	}
+}
+
+@media screen and (max-width: 900px){
+	.container{
+		grid-template-columns: 1fr;
+	}
+
+	.img{
+		display: none;
+	}
+
+	.wave{
+		display: none;
+	}
+
+	.login-content{
+		justify-content: center;
+	}
+}
+.wrap {
+    position: absolute;
+    perspective: 600px;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .card-shadow, .card {
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 800px;
+    height: 600px;
+    z-index: 1;
+    position: absolute;
+    border-radius: 10px;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+  }
+
+  .card {
+    background: #fff url("https://www.elestudiante.com.co/wp-content/uploads/2020/02/que-cursos-del-sena-hay.jpg") 50% 50%;
+    background-size: 150%;
+  }
+
+  .card-shine {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    z-index: 1;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 60%);
+    z-index: -1;
+  }
+
+  .card-shadow {
+    top: 10px;
+    transform-style: preserve-3d;
+    transform: translateZ(40px);
+    z-index: -1;
+    background: #B3B3B3;
+    transform: scale(0.5, 0.5);
+    box-shadow: 0 0 30px 10px #aaa;
+  }
+
+  .card-front, .card-title, .card-subtitle {
+    position: absolute;
+    color: #FFF;
+    transform-style: preserve-3d;
+  }
+
+  .card-front {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .card-title {
+    font-weight: 700;
+    text-align: left;
+    left: 30px;
+    bottom: 140px;
+    font-size: 35px;
+    line-height: 30px;
+    text-shadow: 0 5px 8px rgba(0, 0, 0, 0.65);
+    transform: translateZ(0px);
+    overflow: hidden;
+    margin: 0;
+    width: 80%;
+  }
+
+  .card-subtitle {
+    font-weight: normal;
+    text-align: left;
+    left: 30px;
+    width: 80%;
+    bottom: 80px;
+    font-size: 25px;
+    line-height: 20px;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8);
+    transform: translateZ(0px);
+  }
