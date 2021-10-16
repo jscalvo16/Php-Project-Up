@@ -228,6 +228,7 @@
                                         <h5>Inicio etapa lectiva: <br>{{$fich->InicEtapElec}}</h5>
                                         <h5>Fin etapa lectiva: <br>{{$fich->FinEtapElec}}</h5>
                                         <h5>Jornada: {{$fich->JornFicha}}</h5>
+                                        <h5>{{$fich->Trimestre}}</h5>
                                     </div>
 
                                 </div>
@@ -239,11 +240,6 @@
                                     </div>
                                     <!-- Crear grupo y entregables (botones) -->
                                     <div class="col-md-2 ml-auto">
-                                        <a class="btn btn-crear" href="{{ url('ficha/'.$fich->IdFicha.'/entregables') }}">
-                                            Entregables
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2">
                                         <button class="btn btn-crear" data-toggle="modal" data-target=".modal-grupo">
                                             <i class="anticon anticon-plus"></i> Crear grupo
                                         </button>
@@ -317,7 +313,7 @@
                                                 <div class="card-footer">
                                                     <div class="text-right">
                                                         <a class="btn btn-ver-mas"
-                                                           href="{{url('grupo/'.$grupos->IdGrupo)}}">Ver mas</a>
+                                                           href="{{url('ficha/'.$fich->IdFicha.'/grupo/'.$grupos->IdGrupo)}}">Ver mas</a>
                                                     </div>
                                                 </div>
                                             </div>

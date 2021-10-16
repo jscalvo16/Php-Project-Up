@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ficha;
 use App\Models\GrupoDeProyecto;
 use App\Models\User;
 use App\Models\Usuario;
@@ -66,16 +67,7 @@ class GrupoController extends Controller
      */
     public function show($id)
     {
-
-        $integrantesGrupo = Usuario::select('NombUsua', 'ApelUsua')->
-        where('FkIdRol', '=', '1')->
-        where('FkIdGrupo', '=', $id)->
-        get();
-
-        $grupo = GrupoDeProyecto::find($id);
-        return view('fichas.integrantes', compact('integrantesGrupo'))->with("grupo", $grupo);
-
-
+        //
     }
 
     /**
@@ -111,4 +103,29 @@ class GrupoController extends Controller
     {
         //
     }
+
+    // *--- Métodos personalizados ---*
+    public function mostrarGrupoFicha($idFicha, $idGrupo){
+        // Consultar el grupo de proyecto
+        $grupo = GrupoDeProyecto::find($idGrupo);
+
+        // Consultar los entregbles de la ficha
+        $entregables = Ficha::find($idFicha)->
+        entregables()->
+        select('IdEntre', 'TituEntre', 'DescEntre', 'TrimEntre', 'FkIdFase')->
+        get();
+
+        // Consultar los usuarios que pertenecen al grupo
+        $integrantesGrupo = Usuario::select('NombUsua', 'ApelUsua')->
+        where('FkIdRol', '=', '1')->
+        where('FkIdGrupo', '=', $idGrupo)->
+        get();
+
+        //Consultar la ficha
+        $ficha = Ficha::find($idFicha);
+
+        return view('fichas.integrantes', compact('grupo', 'entregables', 'integrantesGrupo', 'ficha'));
+    }
+
+    // *--- Fin métodos personalizados ---*
 }

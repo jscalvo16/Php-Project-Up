@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Entregable;
 use App\Models\Fase;
 use App\Models\Ficha;
+use App\Models\GrupoDeProyecto;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,7 @@ class EntregableController extends Controller
      */
     public function store(Request $request)
     {
+
         // Sección para crear el entregable
         $maxVal = Entregable::all()->max('IdEntre');
         $maxVal++;
@@ -67,11 +69,21 @@ class EntregableController extends Controller
         $nuevoEntre->IdInstruSeg = $request->input('instructor');
         $nuevoEntre->FkIdFase = $request->input('fases');
 
+        //Validar si se subio un archivo y subir la ruta del archivo
+        if($request->hasFile('archivo')){
+            $nuevoEntre->ArchEntre = $request->file('archivo')->store('entregables');
+        }
+
         $nuevoEntre->save();
 
-        return redirect('ficha/'. $request->input('ficha') .'/entregables')->with('mensaje', 'Entregable creado correctamente');
+        // Sección para vicular las fichas a los entregables
+        $ficha = Ficha::find($request->input('fichas'));
+        for($x=0; $x<=count($ficha); $x++){
+            $ficha[$x]->entregables()->attach($maxVal);
+            $ficha[$x]->save();
+        }
 
-
+        return redirect('entregable')->with('mensaje', 'Entregable creado y asignado correctamente');
     }
 
     /**
@@ -119,52 +131,20 @@ class EntregableController extends Controller
         //
     }
 
-    // Métodos personalizados
-    /* public function entregablesFicha($id){
-        // Consultar la ficha
-        $ficha = Ficha::find($id);
+    // *--- Métodos personalizados ---*
 
-        // Consulta de los entregables de la ficha
-        $infoEntre = Ficha::find($id)->
-        entregables()->
-        select('IdEntre', 'TituEntre', 'TrimEntre', 'DescEntre', 'FechIniEntre', 'FechFin', 'ArchEntre', 'IdInstruSeg', 'FkIdFase')->
-        get();
-
-        return view('entregables.gestionEntregables', compact('ficha', 'infoEntre'));
-    }
-
-    public function crearForm($id){
-        // Consultar la ficha
-        $ficha = Ficha::find($id);
-
-        // Consultar las fases
-        $fases = Fase::all();
-
-        // Consultar los instructores de la ficha
-        $instructores = Ficha::find($id)->usuarios()->
-        select('IdUsua', 'NombUsua','ApelUsua')->where('FkIdRol','=','2')->
-        get();
-
-        return view('entregables.nuevoEntregable', compact('ficha', 'fases', 'instructores'));
-    }
-
-    public function editarForm($idFicha, $idEntre){
+    public function mostarEntregables($idFicha, $idGrupo, $idEntre){
         // Consultar la ficha
         $ficha = Ficha::find($idFicha);
 
-        // Consultar las fases
-        $fases = Fase::all();
+        // Consultar el grupo de proyecto
+        $grupo = GrupoDeProyecto::find($idGrupo);
 
-        // Consultar los instructores de la ficha
-        $instructores = Ficha::find($idFicha)->usuarios()->
-        select('IdUsua', 'NombUsua','ApelUsua')->where('FkIdRol','=','2')->
-        get();
+        // Consultar el entregable al que se accede
+        $entregable = Entregable::find($idEntre);
 
-        // Consultar entregable seleccionado
-        $entre = Entregable::find($idEntre);
+        return view('avances.nuevoAvance', compact('ficha', 'grupo', 'entregable'));
+    }
 
-        return view('entregables.editarEntregable', compact('ficha', 'fases', 'instructores', 'entre'));
-    } */
-    // Fin métodos personalizados
-
+    // *--- Fin métodos personalizados ---*
 }

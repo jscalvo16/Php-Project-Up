@@ -182,9 +182,16 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h2>Crear espacio de entregable</h2>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <h2>Crear espacio de entregable</h2>
+                                </div>
+                                <div class="m-r-15 ml-auto">
+                                    <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Solo se permite la carga de un archivo, si se desea subir más de uno puede subir un comprimido (.zip, .rar) <br> No se permite la carga individual de archivos ejectutables (.php, .java, .cs, .py, .exe, ...) Estos solo se permiten en archivos comprimidos"></i>
+                                </div>
+                            </div>
                             <br>
-                            <form action="{{ url('entregable') }}" method="POST">
+                            <form action="{{ url('entregable') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <!-- Input Título del entregable -->
@@ -257,7 +264,7 @@
                                     <!-- Select fichas -->
                                     <div class="form-group col-md-6">
                                         <label><sup class="obligatorio">*</sup>Fichas donde se asigna el entregable</label>
-                                        <select class="form-control" name="fichas" id="fichas" multiple>
+                                        <select class="form-control" name="fichas[]" id="fichas" multiple>
                                             <option selected>Elige</option>
                                             @foreach ($fichas as $ficha)
                                                 <option value="{{ $ficha->IdFicha }}">

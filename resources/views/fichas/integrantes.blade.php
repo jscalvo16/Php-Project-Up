@@ -167,7 +167,7 @@
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
                                 <a href="index.html" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-                                <a class="breadcrumb-item" href="fichas.html">Ficha {{$grupo->FkIdFicha}}</a>
+                                <a class="breadcrumb-item" href="{{ url('ficha/'.$ficha->IdFicha) }}">Ficha {{$ficha->NumbFich}}</a>
                                 <span class="breadcrumb-item active">
                                     {{$grupo->NombGrupo}}
                                 </span>
@@ -216,57 +216,65 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- Sección de los entregables  -->
-                            <h2>Entregables</h2>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <h2>Entregables</h2>
+                                </div>
+                                <div class="col-md-7 ml-auto">
+                                    <form action="">
+                                        <div class="form-row">
+                                            <!-- Select Jornada de la ficha -->
+                                            <label class="col-md-1 ml-auto">Filtro: </label>
+                                            <div class="col-md-5">
+                                                <select id="trimestre" class="form-control" name="trimestre">
+                                                    <option selected>Elige</option>
+                                                    <option>Trimestres</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <!-- Entregables -->
                             <div class="m-t-25 espacios">
+                                @foreach ($entregables as $infoEntre)
                                 <div class="card" style="max-width: 350px">
                                     <div class="card-body">
-                                        <h4>Análisis de requisitos</h4>
+                                        <h4>{{ $infoEntre->TituEntre }}</h4>
                                         <p>
-                                            Subir un documento con los requisitos que han propuesto durante el levantamiento de información.
+                                            {{ $infoEntre->DescEntre }}
                                         </p>
                                         <p class="card-text">
-                                            <small class="text-muted"><strong>Fase:</strong> Análisis de requisitos</small>
+                                            <small class="text-muted"><strong>Fase:</strong>
+
+                                                @if ($infoEntre->FkIdFase == 1)
+                                                    Análisis de requisitos
+                                                @endif
+                                                @if ($infoEntre->FkIdFase == 2)
+                                                    Diseño del sistema
+                                                @endif
+                                                @if ($infoEntre->FkIdFase == 3)
+                                                    Implementación o Desarrollo
+                                                @endif
+                                                @if ($infoEntre->FkIdFase == 4)
+                                                    Verificación
+                                                @endif
+                                                @if ($infoEntre->FkIdFase == 5)
+                                                    Mantenimiento
+                                                @endif
+
+                                            </small>
                                         </p>
                                     </div>
                                     <div class="card-footer">
                                         <div class="text-right">
-                                            <a class="btn btn-ver-mas" href="nuevoAvance.html"><i class="anticon anticon-upload"></i> Subir</a>
+                                            <a class="btn btn-ver-mas" href="{{ url('ficha/'.$ficha->IdFicha.'/grupo/'.$grupo->IdGrupo.'/entregable/'.$infoEntre->IdEntre) }}">
+                                                <i class="anticon anticon-upload"></i> Subir
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card" style="max-width: 350px">
-                                    <div class="card-body">
-                                        <h4>Análisis de de Stakeholders</h4>
-                                        <p>
-                                            Subir un documento con los Stakeholders encontrados y analizados junto con las posibles funciones de cada uno.
-                                        </p>
-                                        <p class="card-text">
-                                            <small class="text-muted"><strong>Fase:</strong> Análisis de requisitos</small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="text-right">
-                                            <a class="btn btn-ver-mas" href="nuevoAvance.html"><i class="anticon anticon-upload"></i> Subir</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card" style="max-width: 350px">
-                                    <div class="card-body">
-                                        <h4>Revisión de informe</h4>
-                                        <p>
-                                            Subir el informe del proyecto con: Introduccón, alcance, requisitos funcionales y no funcionales y Stakeholders.
-                                        </p>
-                                        <p class="card-text">
-                                            <small class="text-muted"><strong>Fase:</strong> Análisis de requisitos</small>
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="text-right">
-                                            <a class="btn btn-ver-mas" href="nuevoAvance.html"><i class="anticon anticon-upload"></i> Subir</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <!-- Fin entregables -->
                         </div>

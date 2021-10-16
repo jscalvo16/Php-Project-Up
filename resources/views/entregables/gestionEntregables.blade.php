@@ -224,8 +224,8 @@
                                             <th>Cierre del espacio</th>
                                             <th>Adjunto</th>
                                             <th>Instructor</th>
-                                            <th>Ficha</th>
                                             <th>Fase</th>
+                                            <th>Ficha</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -240,7 +240,7 @@
                                                 @if ($entre->ArchEntre == null)
                                                     <td>No hay adjuntos</td>
                                                 @elseif ($entre->ArchEntre != null)
-                                                    <td>{{ $entre->ArchEntre }}</td>
+                                                    <td>{{ Storage::url($entre->ArchEntre); }}</td>
                                                 @endif
                                                 <td>{{ $entre->IdInstruSeg }}</td>
                                                 @if ($entre->FkIdFase == 1 )
