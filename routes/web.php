@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\TestMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +29,11 @@ Route::get('login', 'App\Http\Controllers\Auth\LoginController@mostrarLogin');
 
 Route::resource('users','App\Http\Controllers\UsuarioController');
 Route::resource('ficha','App\Http\Controllers\fichaController');
+
+
+Route::get('test',function (){
+    $detalles = ["Enviado por" => "Juan Sebastian Calvo"];
+
+    Mail::to('jsebascc2003@gmail.com')->send(new TestMail($detalles));
+    die('correo enviado');
+});

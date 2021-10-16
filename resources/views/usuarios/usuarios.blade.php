@@ -235,7 +235,7 @@
                                         <td>{{$usuario -> TipoDocUsua}}</td>
                                         <td>{{$usuario -> NumbDocUsua}}</td>
                                         <td>{{$usuario -> FechNaciUsua}}</td>
-                                        <td>{{$usuario -> CorrUsua}}</td>
+                                        <td>{{$usuario -> email}}</td>
                                         @if($usuario -> FkIdRol == 1)
                                             <td>Aprendiz</td>
                                         @endif

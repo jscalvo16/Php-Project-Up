@@ -232,14 +232,6 @@
                                     <strong class="text-danger">{{$errors->first('email')}}</strong>
                                 </div>
 
-                                <!--Input de la contraseña falta arreglarXD-->
-                                <div class="form-group col-md-6">
-                                    <label for="email"><sup class="obligatorio">*</sup>Contraseña</label>
-                                    <input type="password" class="form-control" name="contraseña" id="email"
-                                           placeholder="Contraseña">
-                                    <strong class="text-danger">{{$errors->first('contraseña')}}</strong>
-                                </div>
-
                                 <!-- Select Rol usuario -->
                                 <div class="form-group col-md-6">
                                     <label><sup class="obligatorio">*</sup>Rol</label>

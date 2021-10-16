@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
+use App\Mail\NotifyUsersMail;
 use App\Models\Usuario;
 use App\Models\Rol;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UsuarioController extends Controller
 {
@@ -47,12 +49,13 @@ class UsuarioController extends Controller
         $newUser->TipoDocUsua = $request->input("tipoDoc");
         $newUser->NumbDocUsua = $request->input("numerodoc");
         $newUser->FechNaciUsua = $request->input("fechaNacimiento");
-        $newUser->CorrUsua = $request->input("email");
-        $newUser->ContraUsua = $request->input("contraseña");
+        $newUser->email = $request->input("email");
+        $newUser->password = $request->input("numerodoc");
         $newUser->FkIdRol = $request->input("rol");
         $newUser->EstaUsua = $request->input("estado");
-
         $newUser->save();
+
+        Mail::to($request->input("email"))->send(new NotifyUsersMail($maxVal));
 
         return redirect('users')->with("mensaje","Usuario registrado correctamente");
     }
@@ -97,8 +100,8 @@ class UsuarioController extends Controller
         $User->TipoDocUsua = $request->input("tipoDoc");
         $User->NumbDocUsua = $request->input("numerodoc");
         $User->FechNaciUsua = $request->input("fechaNacimiento");
-        $User->CorrUsua = $request->input("email");
-        $User->ContraUsua = $request->input("contraseña");
+        $User->email = $request->input("email");
+        $User->password = $request->input("contraseña");
         $User->FkIdRol = $request->input("rol");
         $User->EstaUsua = $request->input("estado");
 
