@@ -28,16 +28,19 @@ Route::get('login', 'App\Http\Controllers\Auth\LoginController@mostrarLogin');
 Route::post('login', 'App\Http\Controllers\Auth\LoginController@login');
 Route::get('logout', 'App\Http\Controllers\Auth\LoginController@logout');
 
-Route::get('recuperar-password', "App\Http\Controllers\Auth\ResetPasswordController@emailform");
-Route::post('enviar-link',"App\Http\Controllers\Auth\ResetPasswordController@submitlink");
-Route::get('reset-password/{token}', "App\Http\Controllers\Auth\ResetPasswordController@resetform");
-Route::post('reset-password', "App\Http\Controllers\Auth\ResetPasswordController@resetpassword");
-
 Route::resource('users','App\Http\Controllers\UsuarioController');
 
+// Ruta para el envío del correo electrónico
 Route::get('prueba-email',function(){
     $detalles = ["Enviado por" => "Project Up"];
 
     Mail::to('sneira58@misena.edu.co')->send(new TestMail($detalles));
     die('correo enviado');
 });
+
+// Rutas para el cambio de contraseña por solicitud del usuario
+Route::get('recuperar-password', "App\Http\Controllers\Auth\ResetPasswordController@emailform");
+Route::post('enviar-link',"App\Http\Controllers\Auth\ResetPasswordController@submitlink");
+Route::get('reset-password/{token}', "App\Http\Controllers\Auth\ResetPasswordController@resetform");
+Route::post('reset-password', "App\Http\Controllers\Auth\ResetPasswordController@resetpassword");
+

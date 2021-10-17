@@ -28,7 +28,6 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Project Up')->view('emails.reset-link');
-        //return $this->view('view.name')
+        return $this->subject('Project Up')->view('email.reset-link');
     }
 }

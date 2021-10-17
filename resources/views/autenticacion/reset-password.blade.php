@@ -84,6 +84,7 @@
             </div>
         </div>
         <strong class="text-danger">{{ $errors->first('password') }}</strong>
+        <input type="hidden" name="token" value="{{ $token }}">
         <input type="submit" class="btn" value="ENVIAR">
 
           </div>

@@ -29,8 +29,6 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->subject("Este es un correo de prueba rockstar")
-                    ->view('emails.test');
-        //return $this->view('view.name');
+        return $this->subject("Este es un correo de prueba rockstar")->view('email.test');
     }
 }
