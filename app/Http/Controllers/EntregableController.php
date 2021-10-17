@@ -78,9 +78,9 @@ class EntregableController extends Controller
 
         // Sección para vicular las fichas a los entregables
         $ficha = Ficha::find($request->input('fichas'));
-        for($x=0; $x<=count($ficha); $x++){
-            $ficha[$x]->entregables()->attach($maxVal);
-            $ficha[$x]->save();
+        foreach ($ficha as $f){
+            $f->entregables()->attach($maxVal);
+            $f->save();
         }
 
         return redirect('entregable')->with('mensaje', 'Entregable creado y asignado correctamente');
