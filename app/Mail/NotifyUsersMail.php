@@ -29,6 +29,6 @@ class NotifyUsersMail extends Mailable
      */
     public function build()
     {
-        return $this->subject("Prueba de notificacion")-> view('Mail.test');
+        return $this->subject("Bienvenido a ProjectUp")-> view('email.cambiarContrasenaNuevo');
     }
 }

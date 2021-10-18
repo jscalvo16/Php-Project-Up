@@ -238,7 +238,7 @@
                                     <select id="inputState" class="form-control" name="rol">
                                         <option selected>Elige</option>
                                         @foreach($rol as $roles)
-                                            <option value="{{$roles -> IdRol}}">{{$roles -> TipoRol}}</option>
+                                            <option value="{{$roles->IdRol}}">{{$roles->TipoRol}}</option>
                                         @endforeach
                                     </select>
                                     <strong class="text-danger">{{$errors->first('rol')}}</strong>

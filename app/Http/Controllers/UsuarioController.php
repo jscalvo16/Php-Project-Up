@@ -7,6 +7,8 @@ use App\Models\Usuario;
 use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -50,12 +52,13 @@ class UsuarioController extends Controller
         $newUser->NumbDocUsua = $request->input("numerodoc");
         $newUser->FechNaciUsua = $request->input("fechaNacimiento");
         $newUser->email = $request->input("email");
-        $newUser->password = $request->input("numerodoc");
+        $newUser->password = Hash::make($request->input(Str::random(12)));
         $newUser->FkIdRol = $request->input("rol");
         $newUser->EstaUsua = $request->input("estado");
         $newUser->save();
 
-        Mail::to($request->input("email"))->send(new NotifyUsersMail($maxVal));
+        // Enviar el correo para el cambio de contraseña
+        //Mail::to($request->input("email"))->send(new NotifyUsersMail($maxVal));
 
         return redirect('users')->with("mensaje","Usuario registrado correctamente");
     }
