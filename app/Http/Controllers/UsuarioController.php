@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
+use App\Mail\CambiarContrasenaMail;
 use App\Models\Usuario;
 use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class UsuarioController extends Controller
 {
@@ -42,6 +45,10 @@ class UsuarioController extends Controller
         $maxVal = Usuario::all()->max('IdUsua');
         $maxVal++;
 
+        // Generar contraseña aleatoria
+        $contrasena = Str::random(12);
+
+        // Crear al usuario
         $newUser = new Usuario;
         $newUser->NombUsua = $request->input("nombres");
         $newUser->ApelUsua = $request->input("apellidos");
@@ -49,11 +56,13 @@ class UsuarioController extends Controller
         $newUser->NumbDocUsua = $request->input("numerodoc");
         $newUser->FechNaciUsua = $request->input("fechaNacimiento");
         $newUser->email = $request->input("email");
-        $newUser->password = Hash::make($request->input("contraseña")) ;
+        $newUser->password = Hash::make($contrasena);
         $newUser->FkIdRol = $request->input("rol");
         $newUser->EstaUsua = $request->input("estado");
-
         $newUser->save();
+
+        // Enviar correo para el cambio de contraseña
+        Mail::to($request->input("email"))->send(new CambiarContrasenaMail($maxVal));
 
         return redirect('users')->with("mensaje","Usuario registrado correctamente");
     }

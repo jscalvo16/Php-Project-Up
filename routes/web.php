@@ -44,3 +44,6 @@ Route::post('enviar-link',"App\Http\Controllers\Auth\ResetPasswordController@sub
 Route::get('reset-password/{token}', "App\Http\Controllers\Auth\ResetPasswordController@resetform");
 Route::post('reset-password', "App\Http\Controllers\Auth\ResetPasswordController@resetpassword");
 
+// Rutas para cambio de contraseña cuando se crea un usuario
+Route::get('cambiarContrasena/{idUser}', 'App\Http\Controllers\Auth\CambiarContrasenaController@mostrarFormCambiarPass');
+Route::post('cambiarContrasena/{idUser}', 'App\Http\Controllers\Auth\CambiarContrasenaController@cambiarContrasena');

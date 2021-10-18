@@ -31,9 +31,7 @@ class UserRequest extends FormRequest
             "numerodoc" => "required|numeric",
             "fechaNacimiento" => "required",
             "email" => "required|email|max:115",
-            "contraseña" => "required",
-            "rol" => "required",
-            "estado" => "required"
+            "rol" => "required"
         ];
     }
 
@@ -49,8 +47,7 @@ class UserRequest extends FormRequest
             'numerodoc.required' => "El campo no puede estar vacío",
             'numerodoc.numeric' => "El campo debe tener solo caracteres numericos",
             'email.required' => "El campo no puede estar vacío",
-            'email.email' => "El campo debe ser un correo",
-            'contraseña' => "El campo no puede estar vacío"
+            'email.email' => "El campo debe ser un correo"
         ];
     }
 

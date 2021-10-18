@@ -16,15 +16,15 @@
     <div class="email__body">
         <img class="loginImg" src=" {{ asset('assets/img/Logo_login.png') }} " alt="Logo PROJECTUP">
         <h1 class="body__heading">Bienvenido a Project Up</h1>
-        <p class="body__text">Para cambiar tu contraseña da click en el boton de abajo</p>
-        <p class="body__text">Gracias por contactarte con nosotros </p>
+        <p class="body__text">Ya casi eres parte de nosotros, solo te falta un paso!🎉</p>
+        <p class="body__text">Cambia la contraseña y podrás iniciar sesión en ProjectUp</p>
     </div>
 
     <!-- Footer del mensaje -->
     <div class="email__footer">
-        <a href="{{url('reset-password', $token)}}">
+        <a href="{{url('cambiarContrasena/'. $idUser)}}">
             <button class="footer__button" type="button" value="Read more">
-                Cambio de contraseña
+                Cambiar de contraseña
             </button>
         </a>
     </div>

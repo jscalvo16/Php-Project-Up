@@ -31,26 +31,14 @@
 <body>
     <div class="container">
         <div class="login-content" style="margin-left: 425px">
-            <form action="{{url('reset-password')}}" method="POST" >
+            <form action="{{url('cambiarContrasena/'. $usuario->IdUsua)}}" method="POST" >
                 @csrf
                 <p style="text-align: center">
                     <img class="loginImg" src=" {{ asset('assets/img/Logo_login.png') }} " alt="Logo PROJECTUP">
                 </p>
                 <br>
-                <h3 class="title">Cambio de contraseña</h3>
+                <h3 class="title">Cambio de password</h3>
                 <br>
-                <!-- Input Email -->
-                <div class="input-div one">
-                    <div class="i">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="div">
-                        <h5>Correo misena</h5>
-                        <input type="text" class="input" id="usuario" name="email" value="{{old('email')}}">
-                        <strong class="text-danger">{{ $errors->first('email') }}</strong>
-                    </div>
-                </div>
-
                 <!-- Input contraseña -->
                 <div class="input-div one">
                     <div class="i">
@@ -59,7 +47,6 @@
                     <div class="div">
                         <h5>Contraseña</h5>
                         <input type="password" class="input" id="usuario" name="password" value="{{old('password')}}">
-                        <strong class="text-danger">{{ $errors->first('password') }}</strong>
                     </div>
                 </div>
 
@@ -71,10 +58,8 @@
                     <div class="div">
                         <h5>Confirmar contraseña</h5>
                         <input type="password" class="input" id="usuario" name="password_confirmation">
-                        <strong class="text-danger">{{ $errors->first('password') }}</strong>
                     </div>
                 </div>
-                <input type="hidden" name="token" value="{{ $token }}">
                 <input type="submit" class="btn" value="Cambiar">
             </form>
         </div>
