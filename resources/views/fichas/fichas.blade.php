@@ -373,7 +373,7 @@
                                                             <option selected>Integrante 2</option>
                                                             @foreach($aprendices as $aprendiz)
 
-                                                                @if($aprendiz->FkIdGrupo==null)
+                                                             @if($aprendiz->FkIdGrupo==null)
                                                                     <option
                                                                         value="{{$aprendiz->IdUsua}}">{{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}</option>
                                                                 @endif

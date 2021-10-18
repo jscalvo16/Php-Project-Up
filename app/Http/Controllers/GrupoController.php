@@ -37,6 +37,7 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
+
         $maxId = GrupoDeProyecto::all()->max('IdGrupo');
         $maxId++;
 
@@ -48,15 +49,28 @@ class GrupoController extends Controller
         $nuevoGrupo->AlcanGrupo = $request->input('alcProyecto');
         $nuevoGrupo->FkIdFicha = $request->input('idFicha');
         $nuevoGrupo->save();
+        $idGrupo = $nuevoGrupo->IdGrupo;
+
 
         //Sección actualizar usuario que lo vincula al grupo
-        $asignarGrupo = Usuario::find($request->input('integrante1'));
-        $asignarGrupo->FkIdGrupo=$maxId;
 
+        $usuarioUno = Usuario::find($request->input('integrante1'));
+        $usuarioUno->FkIdGrupo=$idGrupo;
+        $usuarioUno->save();
 
-        $asignarGrupo->save();
+        $usuarioDos = Usuario::find($request->input('integrante2'));
+        $usuarioDos->FkIdGrupo=$idGrupo;
+        $usuarioDos->save();
 
-        return redirect('fichas/' . $request->input('idFicha'));
+        $usuarioTres = Usuario::find($request->input('integrante3'));
+        $usuarioTres->FkIdGrupo=$idGrupo;
+        $usuarioTres->save();
+
+        $usuarioCuatro = Usuario::find($request->input('integrante4'));
+        $usuarioCuatro->FkIdGrupo=$idGrupo;
+        $usuarioCuatro->save();
+
+        return redirect('ficha/' . $request->input('idFicha'))->with('mensaje', 'Grupo creado exitosamente');
     }
 
     /**
