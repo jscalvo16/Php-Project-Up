@@ -32,7 +32,7 @@ class ResetPasswordController extends Controller
         ];
         $mensajes = [
             "required" => "Campo requerido",
-            "exists" => "Ese Correo no existe",
+            "exists" => "El Correo no existe",
         ];
 
         $validador = Validator::make($r->all(), $reglas, $mensajes);
