@@ -47,6 +47,7 @@
                     <div class="div">
                         <h5>Contraseña</h5>
                         <input type="password" class="input" id="usuario" name="password" value="{{old('password')}}">
+                        <strong class="text-danger"> {{$erros->first('password')}} </strong>
                     </div>
                 </div>
 
@@ -58,6 +59,7 @@
                     <div class="div">
                         <h5>Confirmar contraseña</h5>
                         <input type="password" class="input" id="usuario" name="password_confirmation">
+                        <strong class="text-danger"> {{$erros->first('password_confirmation')}} </strong>
                     </div>
                 </div>
                 <input type="submit" class="btn" value="Cambiar">

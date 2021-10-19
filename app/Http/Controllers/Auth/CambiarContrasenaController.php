@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\changePasswordRequest;
 use App\Models\Usuario;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class CambiarContrasenaController extends Controller
@@ -16,7 +16,7 @@ class CambiarContrasenaController extends Controller
     }
 
     // Método para cambiar la contraseña del usuario
-    public function cambiarContrasena(Request $request, $idUser){
+    public function cambiarContrasena(changePasswordRequest  $request, $idUser){
         $modificarUser = Usuario::find($idUser);
         $modificarUser->password = Hash::make($request->input('password'));
         $modificarUser->save();
