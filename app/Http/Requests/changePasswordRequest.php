@@ -24,19 +24,16 @@ class changePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            "password" => 'request|regex"/^[a-zA-Z\s]+$/u|max:12|min:6',
-            "password_confirmation" => 'request|confirmed'
+            "password" => 'required|max:12|min:6|confirmed'
         ];
     }
 
     public function messages()
     {
         return [
-            "password.request" => 'Este campo no puede estar vacío',
-            "pasword.max" => 'El campo solo puede tener máximo 12 caracteres' ,
+            "password.required" => 'Este campo no puede estar vacío',
+            "password.max" => 'El campo solo puede tener máximo 12 caracteres' ,
             "password.min" => 'El campo debe tener mínimo 6 caracteres' ,
-            "password_confirmation.request" => 'Este campo no puede estar vacío',
-
         ];
     }
 }

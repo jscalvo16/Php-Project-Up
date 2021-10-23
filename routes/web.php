@@ -32,9 +32,9 @@ Route::resource('users','App\Http\Controllers\UsuarioController');
 
 // Ruta para el envío del correo electrónico
 Route::get('prueba-email',function(){
-    $detalles = ["Enviado por" => "Project Up"];
+    $detalles = ["Enviado por" => "Juan Sebastian Calvo"];
 
-    Mail::to('sneira58@misena.edu.co')->send(new TestMail($detalles));
+    Mail::to('jsebascc2003@gmail.com')->send(new TestMail($detalles));
     die('correo enviado');
 });
 

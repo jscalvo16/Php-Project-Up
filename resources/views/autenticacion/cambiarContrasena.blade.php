@@ -44,13 +44,13 @@
                     <div class="i">
                         <i class="fas fa-unlock-alt"></i>
                     </div>
+                    <strong class="text-danger"> {{$errors->first('password')}} </strong>
+                    <br>
                     <div class="div">
                         <h5>Contraseña</h5>
                         <input type="password" class="input" id="usuario" name="password" value="{{old('password')}}">
-                        <strong class="text-danger"> {{$erros->first('password')}} </strong>
                     </div>
                 </div>
-
                 <!-- Input confirmar contraseña -->
                 <div class="input-div one">
                     <div class="i">
@@ -59,7 +59,6 @@
                     <div class="div">
                         <h5>Confirmar contraseña</h5>
                         <input type="password" class="input" id="usuario" name="password_confirmation">
-                        <strong class="text-danger"> {{$erros->first('password_confirmation')}} </strong>
                     </div>
                 </div>
                 <input type="submit" class="btn" value="Cambiar">
