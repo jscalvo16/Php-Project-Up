@@ -24,19 +24,21 @@ class FichaRequest extends FormRequest
     public function rules()
     {
         return [
-            "numFicha" => "required|regex:/^[A-Z0-9\s]+$/u|max:11",
+            "numFicha" => "required|regex:/^[A-Z0-9\s]+$/u|max:11|unique:ficha,NumbFich",
             "inicioEtapa" => "required|date",
             "finEtapa" => "required|date",
             "jornada" => "required"
         ];
     }
+
     public function messages()
     {
         return [
-          "numFicha.required" => "El campo no puede estar vacío",
-          "numFicha.max" => "El valor maximo debe ser 11 caracteres",
-          "inicioEtapa.required" => "La fecha no puede estar vacía",
-          "finEtapa.required" => "La fecha no puede estar vacía"
+            "numFicha.required" => "El campo no puede estar vacío",
+            "numFicha.max" => "El valor maximo debe ser 11 caracteres",
+            "numFicha.unique" => "El número de ficha ya se encuentra registrado",
+            "inicioEtapa.required" => "La fecha no puede estar vacía",
+            "finEtapa.required" => "La fecha no puede estar vacía"
         ];
     }
 }

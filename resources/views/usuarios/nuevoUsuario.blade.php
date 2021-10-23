@@ -184,7 +184,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="nombres"><sup class="obligatorio">*</sup>Nombres</label>
                                     <input type="text" class="form-control" name="nombres" id="nombres"
-                                           placeholder="Nombres">
+                                           placeholder="Nombres" value="{{old('nombres')}}">
                                     <strong class="text-danger">{{$errors->first('nombres')}}</strong>
                                 </div>
 
@@ -192,7 +192,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="apellidos"><sup class="obligatorio">*</sup>Apellidos</label>
                                     <input type="text" class="form-control" name="apellidos" id="apellidos"
-                                           placeholder="Apellidos">
+                                           placeholder="Apellidos" value="{{old('apellidos')}}">
                                     <strong class="text-danger">{{$errors->first('apellidos')}}</strong>
                                 </div>
 
@@ -212,7 +212,7 @@
                                     <label for="numerodoc"><sup class="obligatorio">*</sup>Número de
                                         identificación</label>
                                     <input type="text" class="form-control" name="numerodoc" id="numerodoc"
-                                           placeholder="Número de identificación">
+                                           placeholder="Número de identificación" value="{{old('numerodoc')}}">
                                     <strong class="text-danger">{{$errors->first('numerodoc')}}</strong>
                                 </div>
 
@@ -220,7 +220,8 @@
                                 <div class="form-group col-md-6">
                                     <label for="fechaNacimiento"><sup class="obligatorio">*</sup>Fecha de
                                         nacimiento</label>
-                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento">
+                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
+                                           value="{{old('fechaNacimiento')}}">
                                     <strong class="text-danger">{{$errors->first('fechaNacimiento')}}</strong>
                                 </div>
 
@@ -228,7 +229,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="email"><sup class="obligatorio">*</sup>Correo misena</label>
                                     <input type="text" class="form-control" name="email" id="email"
-                                           placeholder="Correo misena">
+                                           placeholder="Correo misena" value="{{old('email')}}">
                                     <strong class="text-danger">{{$errors->first('email')}}</strong>
                                 </div>
 

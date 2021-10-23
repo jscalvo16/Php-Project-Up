@@ -31,6 +31,13 @@ Route::get('logout', 'App\Http\Controllers\Auth\LoginController@logout');
 Route::resource('users','App\Http\Controllers\UsuarioController');
 Route::resource('ficha','App\Http\Controllers\fichaController');
 
+Route::get('prueba-email',function(){
+    $detalles = ["Enviado por" => "Juan Sebastian Calvo"];
+
+    Mail::to('jsebascc2003@gmail.com')->send(new TestMail($detalles));
+    die('correo enviado');
+});
+
 // Rutas para el cambio de contraseña por solicitud del usuario
 Route::get('recuperar-password', "App\Http\Controllers\Auth\ResetPasswordController@emailform");
 Route::post('enviar-link',"App\Http\Controllers\Auth\ResetPasswordController@submitlink");

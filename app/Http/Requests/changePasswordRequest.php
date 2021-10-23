@@ -34,6 +34,7 @@ class changePasswordRequest extends FormRequest
             "password.required" => 'Este campo no puede estar vacío',
             "password.max" => 'El campo solo puede tener máximo 12 caracteres' ,
             "password.min" => 'El campo debe tener mínimo 6 caracteres' ,
+            "password.confirmed" => 'Los capos no son iguales'
         ];
     }
 }
