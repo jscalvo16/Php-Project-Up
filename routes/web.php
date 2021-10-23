@@ -29,14 +29,7 @@ Route::post('login', 'App\Http\Controllers\Auth\LoginController@login');
 Route::get('logout', 'App\Http\Controllers\Auth\LoginController@logout');
 
 Route::resource('users','App\Http\Controllers\UsuarioController');
-
-// Ruta para el envío del correo electrónico
-Route::get('prueba-email',function(){
-    $detalles = ["Enviado por" => "Juan Sebastian Calvo"];
-
-    Mail::to('jsebascc2003@gmail.com')->send(new TestMail($detalles));
-    die('correo enviado');
-});
+Route::resource('ficha','App\Http\Controllers\fichaController');
 
 // Rutas para el cambio de contraseña por solicitud del usuario
 Route::get('recuperar-password', "App\Http\Controllers\Auth\ResetPasswordController@emailform");
@@ -47,3 +40,6 @@ Route::post('reset-password', "App\Http\Controllers\Auth\ResetPasswordController
 // Rutas para cambio de contraseña cuando se crea un usuario
 Route::get('cambiarContrasena/{idUser}', 'App\Http\Controllers\Auth\CambiarContrasenaController@mostrarFormCambiarPass');
 Route::post('cambiarContrasena/{idUser}', 'App\Http\Controllers\Auth\CambiarContrasenaController@cambiarContrasena');
+
+
+

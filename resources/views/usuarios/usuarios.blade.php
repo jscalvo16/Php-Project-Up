@@ -114,11 +114,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="gestionFichas.html">Gestión de fichas</a>
+                                <a href="{{'ficha'}}">Gestión de fichas</a>
                             </li>
+
                             <li>
-                                <a href="fichas.html">2242753</a>
+                                <a href="fichas.html">0212121</a>
                             </li>
+
                             <li>
                                 <a href="#">2242745</a>
                             </li>
