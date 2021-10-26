@@ -334,6 +334,8 @@
                                                             del proyecto</label>
                                                         <input type="text" class="form-control" name="nombreProyecto"
                                                                id="nombreProyecto" placeholder="Nombre del proyecto">
+                                                        <strong
+                                                            class="text-danger">{{$errors->first('nombreProyecto')}}</strong>
                                                     </div>
 
                                                     <!-- Textarea descripción del proyecto -->
@@ -342,6 +344,8 @@
                                                             del proyecto</label>
                                                         <textarea class="form-control textarea" name="descProyecto"
                                                                   id="descProyecto"></textarea>
+                                                        <strong
+                                                            class="text-danger">{{$errors->first('descProyecto')}}</strong>
                                                     </div>
 
                                                     <!-- Textarea descripción del proyecto -->
@@ -350,6 +354,8 @@
                                                             del proyecto</label>
                                                         <textarea class="form-control textarea" name="alcProyecto"
                                                                   id="alcProyecto"></textarea>
+                                                        <strong
+                                                            class="text-danger">{{$errors->first('alcProyecto')}}</strong>
                                                     </div>
 
                                                     <h4 class="col-md-12"><sup class="obligatorio">*</sup>Integrantes
@@ -365,6 +371,9 @@
                                                                 @endif
                                                             @endforeach
                                                         </select>
+                                                        @if(session('message'))
+                                                            <strong class="text-danger">{{session('message')}}</strong>
+                                                        @endif
                                                     </div>
 
                                                     <!-- Select integrante 2 -->
@@ -379,6 +388,9 @@
                                                                 @endif
                                                             @endforeach
                                                         </select>
+                                                        @if(session('message'))
+                                                            <strong class="text-danger">{{session('message')}}</strong>
+                                                        @endif
                                                     </div>
 
                                                     <!-- Select integrante 3 -->
@@ -393,6 +405,9 @@
                                                                 @endif
                                                             @endforeach
                                                         </select>
+                                                        @if(session('message'))
+                                                            <strong class="text-danger">{{session('message')}}</strong>
+                                                        @endif
                                                     </div>
 
                                                     <!-- Select integrante 4 -->
@@ -407,6 +422,9 @@
                                                                 @endif
                                                             @endforeach
                                                         </select>
+                                                        @if(session('message'))
+                                                            <strong class="text-danger">{{session('message')}}</strong>
+                                                    @endif
                                                         <!--Input ID de la ficha-->
                                                         <input type="hidden" value="{{$fich->IdFicha}}" name="idFicha">
                                                     </div>

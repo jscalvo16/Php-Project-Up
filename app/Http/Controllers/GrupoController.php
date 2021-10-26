@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GrupoRequest;
 use App\Models\GrupoDeProyecto;
 use App\Models\User;
 use App\Models\Usuario;
@@ -35,7 +36,7 @@ class GrupoController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GrupoRequest $request)
     {
 
         $maxId = GrupoDeProyecto::all()->max('IdGrupo');
@@ -55,22 +56,33 @@ class GrupoController extends Controller
         //Sección actualizar usuario que lo vincula al grupo
 
         $usuarioUno = Usuario::find($request->input('integrante1'));
-        $usuarioUno->FkIdGrupo=$idGrupo;
+        $usuarioUno->FkIdGrupo = $idGrupo;
         $usuarioUno->save();
 
         $usuarioDos = Usuario::find($request->input('integrante2'));
-        $usuarioDos->FkIdGrupo=$idGrupo;
+        $usuarioDos->FkIdGrupo = $idGrupo;
         $usuarioDos->save();
 
         $usuarioTres = Usuario::find($request->input('integrante3'));
-        $usuarioTres->FkIdGrupo=$idGrupo;
+        $usuarioTres->FkIdGrupo = $idGrupo;
         $usuarioTres->save();
 
         $usuarioCuatro = Usuario::find($request->input('integrante4'));
-        $usuarioCuatro->FkIdGrupo=$idGrupo;
+        $usuarioCuatro->FkIdGrupo = $idGrupo;
         $usuarioCuatro->save();
 
-        return redirect('ficha/' . $request->input('idFicha'))->with('mensaje', 'Grupo creado exitosamente');
+        //validacion de select´s
+
+        if ($request->input('integrante1') == $request->input('integrante2') && $request->input('integrante1') == $request->input('integrante3') && $request->input('integrante1') == $request->input('integrante4')) {
+            $message = "El aprendiz ya ha sido seleccionado";
+        } elseif ($request->input('integrante2') == $request->input('integrante3') && $request->input('integrante2') == $request->input('integrante4')) {
+            $message = "El aprendiz ya ha sido seleccionado";
+        } elseif ($request->input('integrante3') == $request->input('integrante4')) {
+            $message = "El aprendiz ya ha sido seleccionado";
+        }
+
+        return redirect('ficha/' . $request->input('idFicha'))->with('mensaje', 'Grupo creado exitosamente')
+            ->with('message',$message);
     }
 
     /**

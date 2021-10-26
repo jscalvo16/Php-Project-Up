@@ -301,7 +301,8 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{url('grupo')}}" method="POST">
+                                        <form action="{{url('grupo/'.$grupo->IdGrupo)}}" method="POST">
+                                            @method('PUT')
                                             @csrf
                                             <div class="form-row">
                                                 <!-- Input Nombre del proyecto -->
@@ -309,7 +310,10 @@
                                                     <label for="nombreProyecto"><sup class="obligatorio">*</sup>Nombre
                                                         del proyecto</label>
                                                     <input type="text" class="form-control" name="nombreProyecto"
-                                                           id="nombreProyecto" placeholder="Nombre del proyecto" value="{{$grupo->NombGrupo}}">
+                                                           id="nombreProyecto" placeholder="Nombre del proyecto"
+                                                           value="{{$grupo->NombGrupo}}">
+                                                    <strong
+                                                        class="text-danger">{{$errors->first('nombreProyecto')}}</strong>
                                                 </div>
 
                                                 <!-- Textarea descripción del proyecto -->
@@ -317,7 +321,9 @@
                                                     <label for="descProyecto"><sup class="obligatorio">*</sup>Descripción
                                                         del proyecto</label>
                                                     <textarea class="form-control textarea" name="descProyecto"
-                                                              id="descProyecto" >{{$grupo->DescriGrupo}}</textarea>
+                                                              id="descProyecto">{{$grupo->DescriGrupo}}</textarea>
+                                                    <strong
+                                                        class="text-danger">{{$errors->first('descProyecto')}}</strong>
                                                 </div>
 
                                                 <!-- Textarea descripción del proyecto -->
@@ -325,7 +331,10 @@
                                                     <label for="alcProyecto"><sup class="obligatorio">*</sup>Alcance
                                                         del proyecto</label>
                                                     <textarea class="form-control textarea" name="alcProyecto"
-                                                              id="alcProyecto" >{{$grupo->AlcanGrupo}}</textarea>
+                                                              id="alcProyecto">{{$grupo->AlcanGrupo}}</textarea>
+                                                    <strong
+                                                        class="text-danger">{{$errors->first('alcProyecto')}}</strong>
+
                                                 </div>
 
                                                 <h4 class="col-md-12"><sup class="obligatorio">*</sup>Integrantes
@@ -333,9 +342,13 @@
                                                 <!-- Select integrante 1 -->
                                                 <div class="form-group col-md-6">
                                                     <select id="integrante1" class="form-control" name="integrante1">
-                                                        <option selected>Integrante 1</option>
+                                                        <option selected value=""></option>
 
                                                     </select>
+                                                    @if(session('message'))
+                                                        <strong class="text-danger">{{session('message')}}</strong>
+                                                    @endif
+
                                                 </div>
 
                                                 <!-- Select integrante 2 -->
@@ -344,6 +357,11 @@
                                                         <option selected>Integrante 2</option>
 
                                                     </select>
+                                                    @if(session('message'))
+                                                        <strong class="text-danger">{{session('message')}}</strong>
+                                                    @endif
+
+
                                                 </div>
 
                                                 <!-- Select integrante 3 -->
@@ -352,6 +370,10 @@
                                                         <option selected>Integrante 3</option>
 
                                                     </select>
+                                                    @if(session('message'))
+                                                        <strong class="text-danger">{{session('message')}}</strong>
+                                                    @endif
+
                                                 </div>
 
                                                 <!-- Select integrante 4 -->
@@ -360,7 +382,11 @@
                                                         <option selected>Integrante 4</option>
 
                                                     </select>
-                                                    <!--Input ID de la ficha-->
+                                                    @if(session('message'))
+                                                        <strong class="text-danger">{{session('message')}}</strong>
+                                                @endif
+
+                                                <!--Input ID de la ficha-->
                                                     <input type="hidden" value="{{$grupo->FkIdFicha}}" name="idFicha">
                                                 </div>
                                             </div>
