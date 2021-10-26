@@ -65,13 +65,13 @@ class EntregableController extends Controller
         $nuevoEntre->DescEntre = $request->input('descEntre');
         $nuevoEntre->FechIniEntre = $request->input('fechaInicio');
         $nuevoEntre->FechFin = $request->input('fechaFin');
-        $nuevoEntre->ArchEntre = $request->input('archivo');
         $nuevoEntre->IdInstruSeg = $request->input('instructor');
         $nuevoEntre->FkIdFase = $request->input('fases');
 
         //Validar si se subio un archivo y subir la ruta del archivo
         if($request->hasFile('archivo')){
-            $nuevoEntre->ArchEntre = $request->file('archivo')->store('entregables');
+            $nombre = $request->file('archivo')->getClientOriginalName();
+            $nuevoEntre->ArchEntre = $request->file('archivo')->storeAs('entregables', $nombre);
         }
 
         $nuevoEntre->save();

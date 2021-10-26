@@ -240,7 +240,7 @@
                                                 @if ($entre->ArchEntre == null)
                                                     <td>No hay adjuntos</td>
                                                 @elseif ($entre->ArchEntre != null)
-                                                    <td>{{ Storage::url($entre->ArchEntre); }}</td>
+                                                    <td>{{ $entre->ArchEntre }}</td>
                                                 @endif
                                                 <td>{{ $entre->IdInstruSeg }}</td>
                                                 @if ($entre->FkIdFase == 1 )
