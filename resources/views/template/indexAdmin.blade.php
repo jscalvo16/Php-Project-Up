@@ -138,6 +138,14 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
+                            <a class="dropdown-toggle" href="{{ url('entregable') }}">
+                                <span class="icon-holder">
+                                    <i class="anticon anticon-snippets"></i>
+                                </span>
+                                <span class="title">Entregables</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="avances.html">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-file-done"></i>

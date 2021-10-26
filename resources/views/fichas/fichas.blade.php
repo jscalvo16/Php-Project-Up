@@ -177,6 +177,26 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
+                        @if (session("mensaje"))
+                            <div class="notification-toast top-right" id="notification-toast" data-delay="3000">
+                                <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+                                    <div class="alert alert-success m-b-0">
+                                        <button type="button" class="ml-2 close" data-dismiss="toast"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="d-flex justify-content-start">
+                                        <span class="alert-icon m-r-20 font-size-30">
+                                            <i class="anticon anticon-check-circle text-success"></i>
+                                        </span>
+                                            <div class="m-t-10">
+                                                <p>{{ session("mensaje") }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         <ul class="nav nav-tabs nav-justified" id="myTabJustified" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab-justified" data-toggle="tab" href="#infoFicha"
@@ -211,6 +231,7 @@
                                         <h5>Inicio etapa lectiva: <br>{{$fich->InicEtapElec}}</h5>
                                         <h5>Fin etapa lectiva: <br>{{$fich->FinEtapElec}}</h5>
                                         <h5>Jornada: {{$fich->JornFicha}}</h5>
+                                        <h5>{{$fich->Trimestre}}</h5>
                                     </div>
 
                                 </div>
@@ -220,14 +241,8 @@
                                     <div class="col-md-2">
                                         <h4>Aprendices</h4>
                                     </div>
-                                    <!-- Crear grupo o entregable (botones) -->
-                                    <div class="col-md-3 ml-auto">
-                                        <button class="btn btn-crear entre" data-toggle="modal"
-                                                data-target=".modal-entregable">
-                                            <i class="anticon anticon-plus"></i> Crear entregable
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2">
+                                    <!-- Crear grupo y entregables (botones) -->
+                                    <div class="col-md-2 ml-auto">
                                         <button class="btn btn-crear" data-toggle="modal" data-target=".modal-grupo">
                                             <i class="anticon anticon-plus"></i> Crear grupo
                                         </button>
@@ -301,7 +316,8 @@
                                                 <div class="card-footer">
                                                     <div class="text-right">
                                                         <a class="btn btn-ver-mas"
-                                                           href="{{url('grupo/'.$grupos->IdGrupo)}}">Ver mas</a>
+                                                           href="{{url('ficha/'.$fich->IdFicha.'/grupo/'.$grupos->IdGrupo)}}">Ver
+                                                            mas</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -340,34 +356,39 @@
 
                                                     <!-- Textarea descripción del proyecto -->
                                                     <div class="form-group col-md-6">
+
                                                         <label for="descProyecto"><sup class="obligatorio">*</sup>Descripción
                                                             del proyecto</label>
                                                         <textarea class="form-control textarea" name="descProyecto"
                                                                   id="descProyecto"></textarea>
                                                         <strong
                                                             class="text-danger">{{$errors->first('descProyecto')}}</strong>
+
                                                     </div>
 
                                                     <!-- Textarea descripción del proyecto -->
                                                     <div class="form-group col-md-6">
+
                                                         <label for="alcProyecto"><sup class="obligatorio">*</sup>Alcance
                                                             del proyecto</label>
                                                         <textarea class="form-control textarea" name="alcProyecto"
                                                                   id="alcProyecto"></textarea>
                                                         <strong
                                                             class="text-danger">{{$errors->first('alcProyecto')}}</strong>
+
                                                     </div>
 
                                                     <h4 class="col-md-12"><sup class="obligatorio">*</sup>Integrantes
                                                     </h4>
                                                     <!-- Select integrante 1 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante1" class="form-control" name="integrante1">
+                                                        <select id="integrante1" class="form-control" name="integrante">
                                                             <option selected>Integrante 1</option>
                                                             @foreach($aprendices as $aprendiz)
                                                                 @if($aprendiz->FkIdGrupo==null)
-                                                                    <option
-                                                                        value="{{$aprendiz->IdUsua}}">{{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}</option>
+                                                                    <option value="{{$aprendiz->IdUsua}}">
+                                                                        {{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}
+                                                                    </option>
                                                                 @endif
                                                             @endforeach
                                                         </select>
@@ -378,13 +399,14 @@
 
                                                     <!-- Select integrante 2 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante2" class="form-control" name="integrante2">
+                                                        <select id="integrante2" class="form-control" name="integrante">
                                                             <option selected>Integrante 2</option>
                                                             @foreach($aprendices as $aprendiz)
+                                                                @if($aprendiz->FkIdGrupo==null)
+                                                                    <option value="{{$aprendiz->IdUsua}}">
+                                                                        {{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}
+                                                                    </option>
 
-                                                             @if($aprendiz->FkIdGrupo==null)
-                                                                    <option
-                                                                        value="{{$aprendiz->IdUsua}}">{{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}</option>
                                                                 @endif
                                                             @endforeach
                                                         </select>
@@ -395,13 +417,14 @@
 
                                                     <!-- Select integrante 3 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante3" class="form-control" name="integrante3">
+                                                        <select id="integrante3" class="form-control" name="integrante">
                                                             <option selected>Integrante 3</option>
                                                             @foreach($aprendices as $aprendiz)
 
                                                                 @if($aprendiz->FkIdGrupo==null)
-                                                                    <option
-                                                                        value="{{$aprendiz->IdUsua}}">{{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}</option>
+                                                                    <option value="{{$aprendiz->IdUsua}}">
+                                                                        {{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}
+                                                                    </option>
                                                                 @endif
                                                             @endforeach
                                                         </select>
@@ -412,20 +435,21 @@
 
                                                     <!-- Select integrante 4 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante4" class="form-control" name="integrante4">
+                                                        <select id="integrante4" class="form-control" name="integrante">
                                                             <option selected>Integrante 4</option>
                                                             @foreach($aprendices as $aprendiz)
 
                                                                 @if($aprendiz->FkIdGrupo==null)
-                                                                    <option
-                                                                        value="{{$aprendiz->IdUsua}}">{{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}</option>
+                                                                    <option value="{{$aprendiz->IdUsua}}">
+                                                                        {{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}
+                                                                    </option>
                                                                 @endif
                                                             @endforeach
                                                         </select>
                                                         @if(session('message'))
                                                             <strong class="text-danger">{{session('message')}}</strong>
                                                     @endif
-                                                        <!--Input ID de la ficha-->
+                                                    <!--Input ID de la ficha-->
                                                         <input type="hidden" value="{{$fich->IdFicha}}" name="idFicha">
                                                     </div>
                                                 </div>
@@ -441,109 +465,6 @@
                                 </div>
                             </div>
                             <!-- Fin formulario modal para crear un grupo de proyecto -->
-
-
-                            <!-- Formulario modal para crear un entregable -->
-                            <div class="modal fade modal-entregable" id="exampleModal">
-                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title" id="exampleModalLabel">Crear un entregable</h1>
-                                            <i class="anticon anticon-info-circle text-gray infoArchivo"
-                                               data-toggle="tooltip" data-placement="left" data-html="true"
-                                               title="Solo se permite la carga de un archivo, si se desea subir más de uno puede subir un comprimido (.zip, .rar) <br> No se permite la carga individual de archivos ejectutables (.php, .java, .cs, .py, ...) Estos solo se permiten en archivos comprimidos"></i>
-                                            <button type="button" class="close" data-dismiss="modal">
-                                                <i class="anticon anticon-close"></i>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="#" method="POST">
-                                                <div class="form-row">
-                                                    <!-- Input Título del entregable -->
-                                                    <div class="form-group col-md-12">
-                                                        <label for="tituloEntre"><sup class="obligatorio">*</sup>Título
-                                                            del entregable</label>
-                                                        <input type="text" class="form-control" name="tituloEntre"
-                                                               id="tituloEntre" placeholder="Título del entregable">
-                                                    </div>
-
-                                                    <!-- Textarea descripción del proyecto -->
-                                                    <div class="form-group col-md-6">
-                                                        <label for="descEntre"><sup class="obligatorio">*</sup>Descripción</label>
-                                                        <textarea class="form-control textarea" rows="6" cols="30"
-                                                                  name="descEntre" id="descEntre"></textarea>
-                                                    </div>
-
-                                                    <!-- Input fecha de inicio -->
-                                                    <div class="form-group col-md-6">
-                                                        <label for="fechaInicio"><sup class="obligatorio">*</sup>Fecha
-                                                            de inicio</label>
-                                                        <input type="date" class="form-control" name="fechaInicio"
-                                                               id="fechaInicio">
-
-                                                        <br>
-
-                                                        <!-- Input fecha de inicio -->
-                                                        <label for="fechaFin"><sup class="obligatorio">*</sup>Fecha de
-                                                            cierre</label>
-                                                        <input type="date" class="form-control" name="fechaFin"
-                                                               id="fechaFin">
-                                                    </div>
-
-                                                    <!-- Select trimestre -->
-                                                    <div class="form-group col-md-6">
-                                                        <label><sup class="obligatorio">*</sup>Trimestre</label>
-                                                        <select id="trimestre" class="form-control">
-                                                            <option selected>Elige</option>
-                                                            <option>Trimestre I</option>
-                                                            <option>Trimestre II</option>
-                                                            <option>Trimestre III</option>
-                                                            <option>Trimestre IV</option>
-                                                            <option>Trimestre V</option>
-                                                            <option>Trimestre VI</option>
-                                                            <option>Trimestre VII</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <!-- Select fases -->
-                                                    <div class="form-group col-md-6">
-                                                        <label><sup class="obligatorio">*</sup>Fases de
-                                                            desarrollo</label>
-                                                        <select id="fases" class="form-control">
-                                                            <option selected>Elige</option>
-                                                            <option>Fases de la entidad Fase...</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <!-- Select instructores -->
-                                                    <div class="form-group col-md-6">
-                                                        <label><sup class="obligatorio">*</sup>Instructor</label>
-                                                        <select id="instructor" class="form-control">
-                                                            <option selected>Elige</option>
-                                                            <option>Instructores de seguimiento.</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <!-- Input archivo de apoyo -->
-                                                    <div class="form-group col-md-6">
-                                                        <label for="archivo"><sup class="obligatorio">*</sup>Adjunto de
-                                                            apoyo</label>
-                                                        <input type="file" class="form-control" name="archivo"
-                                                               id="archivo" placeholder="Adjunto de apoyo">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-cerrar-modal"
-                                                            data-dismiss="modal">Cerrar
-                                                    </button>
-                                                    <input type="submit" class="btn btn-crear" value="Crear">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Fin formulario modal para crear un entregable -->
                         </div>
                     </div>
                 </div>
@@ -577,6 +498,9 @@
 
     <!-- Core JS -->
     <script src=" {{ asset('js/app.min.js') }} "></script>
+
+    <!-- Cerrar toast js -->
+    <script src=" {{ asset('js/toastAlert.js') }} "></script>
 </body>
 
 </html>

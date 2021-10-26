@@ -68,16 +68,24 @@ class fichaController extends Controller
         where('FkIdFicha', '=', $id)->
         get();
 
-        //Consulta para los integrantes de la ficha
-        $instructores = Ficha::find($id)->usuarios()->select('NombUsua','ApelUsua')->where('FkIdRol','=','2')->get();
+        //Consulta para los instructores de la ficha
+        $instructores = Ficha::find($id)->usuarios()->
+        select('NombUsua','ApelUsua')->where('FkIdRol','=','2')->
+        get();
 
         //Consulta para los aprendices de la ficha
-        $aprendices = Ficha::find($id)->usuarios()->select('IdUsua','NombUsua','ApelUsua','email','NumbDocUsua','FechNaciUsua','EstaUsua','FkIdGrupo')->where('FkIdRol','=','1')->get();
+        $aprendices = Ficha::find($id)->usuarios()->
+        select('IdUsua','NombUsua','ApelUsua','email','NumbDocUsua','FechNaciUsua','EstaUsua','FkIdGrupo')->
+        where('FkIdRol','=','1')->
+        get();
 
-        //Consulta [ara los Cordinadores
-        $coordinador = Ficha::find($id)->usuarios()->select('NombUsua','ApelUsua')->where('FkIdRol','=','3')->get();
+        //Consulta para los coordinadores de la ficha
+        $coordinador = Ficha::find($id)->usuarios()->
+        select('NombUsua','ApelUsua')->
+        where('FkIdRol','=','3')->
+        get();
 
-        return view('fichas.fichas', compact('gruposFicha', 'instructores','aprendices','coordinador'))->with("fich", $fich);
+        return view('fichas.fichas', compact('gruposFicha', 'instructores', 'aprendices', 'coordinador'))->with("fich", $fich);
 
     }
 

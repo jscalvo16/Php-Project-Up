@@ -160,7 +160,6 @@
         <!-- Page Container START -->
         <div class="page-container">
 
-
             <!-- Content Wrapper (información del grupo seleccionado) START -->
             <div class="main-content">
                 <div class="page-header">
@@ -168,10 +167,11 @@
                     <div class="header-sub-title">
                         <nav class="breadcrumb breadcrumb-dash">
                             <a href="index.html" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-                            <a class="breadcrumb-item" href="fichas.html">Ficha {{$grupo->FkIdFicha}}</a>
+                            <a class="breadcrumb-item"
+                               href="{{ url('ficha/'.$ficha->IdFicha) }}">Ficha {{$ficha->NumbFich}}</a>
                             <span class="breadcrumb-item active">
                                     {{$grupo->NombGrupo}}
-                                </span>
+                            </span>
                         </nav>
                     </div>
                 </div>
@@ -225,194 +225,193 @@
                     </div>
                 </div>
 
+                <!-- Modales -->
+                <!-- Formulario modal para crear un grupo de proyecto -->
+                <div class="modal fade modal-grupo" id="modalGrupos">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title" id="modalGruposLabel">Modficar un grupo de
+                                    proyecto</h1>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <i class="anticon anticon-close"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{url('grupo/'.$grupo->IdGrupo)}}" method="POST">
+                                    @method('PUT')
+                                    @csrf
+                                    <div class="form-row">
+                                        <!-- Input Nombre del proyecto -->
+                                        <div class="form-group col-md-12">
+                                            <label for="nombreProyecto"><sup class="obligatorio">*</sup>Nombre
+                                                del proyecto</label>
+                                            <input type="text" class="form-control" name="nombreProyecto"
+                                                   id="nombreProyecto" placeholder="Nombre del proyecto"
+                                                   value="{{$grupo->NombGrupo}}">
+                                            <strong
+                                                class="text-danger">{{$errors->first('nombreProyecto')}}</strong>
+                                        </div>
+
+                                        <!-- Textarea descripción del proyecto -->
+                                        <div class="form-group col-md-6">
+                                            <label for="descProyecto"><sup class="obligatorio">*</sup>Descripción
+                                                del proyecto</label>
+                                            <textarea class="form-control textarea" name="descProyecto"
+                                                      id="descProyecto">{{$grupo->DescriGrupo}}</textarea>
+                                            <strong
+                                                class="text-danger">{{$errors->first('descProyecto')}}</strong>
+                                        </div>
+
+                                        <!-- Textarea descripción del proyecto -->
+                                        <div class="form-group col-md-6">
+                                            <label for="alcProyecto"><sup class="obligatorio">*</sup>Alcance
+                                                del proyecto</label>
+                                            <textarea class="form-control textarea" name="alcProyecto"
+                                                      id="alcProyecto">{{$grupo->AlcanGrupo}}</textarea>
+                                            <strong
+                                                class="text-danger">{{$errors->first('alcProyecto')}}</strong>
+
+                                        </div>
+
+                                        <h4 class="col-md-12"><sup class="obligatorio">*</sup>Integrantes
+                                        </h4>
+                                        <!-- Select integrante 1 -->
+                                        <div class="form-group col-md-6">
+                                            <select id="integrante1" class="form-control" name="integrante1">
+                                                <option selected value=""></option>
+
+                                            </select>
+                                            @if(session('message'))
+                                                <strong class="text-danger">{{session('message')}}</strong>
+                                            @endif
+
+                                        </div>
+
+                                        <!-- Select integrante 2 -->
+                                        <div class="form-group col-md-6">
+                                            <select id="integrante2" class="form-control" name="integrante2">
+                                                <option selected>Integrante 2</option>
+
+                                            </select>
+                                            @if(session('message'))
+                                                <strong class="text-danger">{{session('message')}}</strong>
+                                            @endif
+
+
+                                        </div>
+
+                                        <!-- Select integrante 3 -->
+                                        <div class="form-group col-md-6">
+                                            <select id="integrante3" class="form-control" name="integrante3">
+                                                <option selected>Integrante 3</option>
+
+                                            </select>
+                                            @if(session('message'))
+                                                <strong class="text-danger">{{session('message')}}</strong>
+                                            @endif
+
+                                        </div>
+
+                                        <!-- Select integrante 4 -->
+                                        <div class="form-group col-md-6">
+                                            <select id="integrante4" class="form-control" name="integrante4">
+                                                <option selected>Integrante 4</option>
+
+                                            </select>
+                                            @if(session('message'))
+                                                <strong class="text-danger">{{session('message')}}</strong>
+                                        @endif
+
+                                        <!--Input ID de la ficha-->
+                                            <input type="hidden" value="{{$grupo->FkIdFicha}}" name="idFicha">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-cerrar-modal"
+                                                data-dismiss="modal">Cerrar
+                                        </button>
+                                        <input type="submit" class="btn btn-crear" value="Crear">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-body">
                         <!-- Sección de los entregables  -->
-                        <h2>Entregables</h2>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h2>Entregables</h2>
+                            </div>
+                            <div class="col-md-7 ml-auto">
+                                <form action="">
+                                    <div class="form-row">
+                                        <!-- Select Jornada de la ficha -->
+                                        <label class="col-md-1 ml-auto">Filtro: </label>
+                                        <div class="col-md-5">
+                                            <select id="trimestre" class="form-control"
+                                                    name="trimestre">
+                                                <option selected>Elige</option>
+                                                <option>Trimestres</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <!-- Entregables -->
                         <div class="m-t-25 espacios">
-                            <div class="card" style="max-width: 350px">
-                                <div class="card-body">
-                                    <h4>Análisis de requisitos</h4>
-                                    <p>
-                                        Subir un documento con los requisitos que han propuesto durante el levantamiento
-                                        de información.
-                                    </p>
-                                    <p class="card-text">
-                                        <small class="text-muted"><strong>Fase:</strong> Análisis de requisitos</small>
-                                    </p>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="text-right">
-                                        <a class="btn btn-ver-mas" href="nuevoAvance.html"><i
-                                                class="anticon anticon-upload"></i> Subir</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card" style="max-width: 350px">
-                                <div class="card-body">
-                                    <h4>Análisis de de Stakeholders</h4>
-                                    <p>
-                                        Subir un documento con los Stakeholders encontrados y analizados junto con las
-                                        posibles funciones de cada uno.
-                                    </p>
-                                    <p class="card-text">
-                                        <small class="text-muted"><strong>Fase:</strong> Análisis de requisitos</small>
-                                    </p>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="text-right">
-                                        <a class="btn btn-ver-mas" href="nuevoAvance.html"><i
-                                                class="anticon anticon-upload"></i> Subir</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card" style="max-width: 350px">
-                                <div class="card-body">
-                                    <h4>Revisión de informe</h4>
-                                    <p>
-                                        Subir el informe del proyecto con: Introduccón, alcance, requisitos funcionales
-                                        y no funcionales y Stakeholders.
-                                    </p>
-                                    <p class="card-text">
-                                        <small class="text-muted"><strong>Fase:</strong> Análisis de requisitos</small>
-                                    </p>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="text-right">
-                                        <a class="btn btn-ver-mas" href="nuevoAvance.html"><i
-                                                class="anticon anticon-upload"></i> Subir</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Fin entregables -->
+                            @foreach ($entregables as $infoEntre)
+                                <div class="card" style="max-width: 350px">
+                                    <div class="card-body">
+                                        <h4>{{ $infoEntre->TituEntre }}</h4>
+                                        <p>
+                                            {{ $infoEntre->DescEntre }}
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-muted"><strong>Fase:</strong>
 
-                        <!-- Modales -->
-                        <!-- Formulario modal para crear un grupo de proyecto -->
-                        <div class="modal fade modal-grupo" id="modalGrupos">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title" id="modalGruposLabel">Modficar un grupo de
-                                            proyecto</h1>
-                                        <button type="button" class="close" data-dismiss="modal">
-                                            <i class="anticon anticon-close"></i>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="{{url('grupo/'.$grupo->IdGrupo)}}" method="POST">
-                                            @method('PUT')
-                                            @csrf
-                                            <div class="form-row">
-                                                <!-- Input Nombre del proyecto -->
-                                                <div class="form-group col-md-12">
-                                                    <label for="nombreProyecto"><sup class="obligatorio">*</sup>Nombre
-                                                        del proyecto</label>
-                                                    <input type="text" class="form-control" name="nombreProyecto"
-                                                           id="nombreProyecto" placeholder="Nombre del proyecto"
-                                                           value="{{$grupo->NombGrupo}}">
-                                                    <strong
-                                                        class="text-danger">{{$errors->first('nombreProyecto')}}</strong>
-                                                </div>
-
-                                                <!-- Textarea descripción del proyecto -->
-                                                <div class="form-group col-md-6">
-                                                    <label for="descProyecto"><sup class="obligatorio">*</sup>Descripción
-                                                        del proyecto</label>
-                                                    <textarea class="form-control textarea" name="descProyecto"
-                                                              id="descProyecto">{{$grupo->DescriGrupo}}</textarea>
-                                                    <strong
-                                                        class="text-danger">{{$errors->first('descProyecto')}}</strong>
-                                                </div>
-
-                                                <!-- Textarea descripción del proyecto -->
-                                                <div class="form-group col-md-6">
-                                                    <label for="alcProyecto"><sup class="obligatorio">*</sup>Alcance
-                                                        del proyecto</label>
-                                                    <textarea class="form-control textarea" name="alcProyecto"
-                                                              id="alcProyecto">{{$grupo->AlcanGrupo}}</textarea>
-                                                    <strong
-                                                        class="text-danger">{{$errors->first('alcProyecto')}}</strong>
-
-                                                </div>
-
-                                                <h4 class="col-md-12"><sup class="obligatorio">*</sup>Integrantes
-                                                </h4>
-                                                <!-- Select integrante 1 -->
-                                                <div class="form-group col-md-6">
-                                                    <select id="integrante1" class="form-control" name="integrante1">
-                                                        <option selected value=""></option>
-
-                                                    </select>
-                                                    @if(session('message'))
-                                                        <strong class="text-danger">{{session('message')}}</strong>
-                                                    @endif
-
-                                                </div>
-
-                                                <!-- Select integrante 2 -->
-                                                <div class="form-group col-md-6">
-                                                    <select id="integrante2" class="form-control" name="integrante2">
-                                                        <option selected>Integrante 2</option>
-
-                                                    </select>
-                                                    @if(session('message'))
-                                                        <strong class="text-danger">{{session('message')}}</strong>
-                                                    @endif
-
-
-                                                </div>
-
-                                                <!-- Select integrante 3 -->
-                                                <div class="form-group col-md-6">
-                                                    <select id="integrante3" class="form-control" name="integrante3">
-                                                        <option selected>Integrante 3</option>
-
-                                                    </select>
-                                                    @if(session('message'))
-                                                        <strong class="text-danger">{{session('message')}}</strong>
-                                                    @endif
-
-                                                </div>
-
-                                                <!-- Select integrante 4 -->
-                                                <div class="form-group col-md-6">
-                                                    <select id="integrante4" class="form-control" name="integrante4">
-                                                        <option selected>Integrante 4</option>
-
-                                                    </select>
-                                                    @if(session('message'))
-                                                        <strong class="text-danger">{{session('message')}}</strong>
+                                                @if ($infoEntre->FkIdFase == 1)
+                                                    Análisis de requisitos
+                                                @endif
+                                                @if ($infoEntre->FkIdFase == 2)
+                                                    Diseño del sistema
+                                                @endif
+                                                @if ($infoEntre->FkIdFase == 3)
+                                                    Implementación o Desarrollo
+                                                @endif
+                                                @if ($infoEntre->FkIdFase == 4)
+                                                    Verificación
+                                                @endif
+                                                @if ($infoEntre->FkIdFase == 5)
+                                                    Mantenimiento
                                                 @endif
 
-                                                <!--Input ID de la ficha-->
-                                                    <input type="hidden" value="{{$grupo->FkIdFicha}}" name="idFicha">
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-cerrar-modal"
-                                                        data-dismiss="modal">Cerrar
-                                                </button>
-                                                <input type="submit" class="btn btn-crear" value="Crear">
-                                            </div>
-                                        </form>
+                                            </small>
+                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="text-right">
+                                            <a class="btn btn-ver-mas"
+                                               href="{{ url('ficha/'.$ficha->IdFicha.'/grupo/'.$grupo->IdGrupo.'/entregable/'.$infoEntre->IdEntre) }}">
+                                                <i class="anticon anticon-upload"></i> Subir
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
-                        <!-- Fin formulario modal para crear un grupo de proyecto -->
-
-
                     </div>
                 </div>
-
                 <!-- Content Wrapper (información del grupo seleccionado) END -->
 
                 <!-- Footer START -->
                 <footer class="footer">
                     <div class="footer-content">
-                        <p class="m-b-0">Copyright © 2021 PROJECTUP. Todos los derechos reservados.</p>
+                        <p class="m-b-0">Copyright © 2021 PROJECTUP. Todos los derechos
+                            reservados.</p>
                         <span>
                                 <a href="" class="text-gray m-r-15">Term &amp; Conditions</a>
                                 <a href="" class="text-gray">Privacy &amp; Policy</a>
