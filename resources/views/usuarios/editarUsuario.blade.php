@@ -230,7 +230,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="email"><sup class="obligatorio">*</sup>Correo misena</label>
                                     <input type="text" class="form-control" name="email" id="email"
-                                           placeholder="Correo misena" value="{{$usuario->CorrUsua}}">
+                                           placeholder="Correo misena" value="{{$usuario->email}}">
                                     <strong class="text-danger">{{$errors->first('email')}}</strong>
                                 </div>
 
@@ -238,7 +238,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="email"><sup class="obligatorio">*</sup>Contraseña</label>
                                     <input type="password" class="form-control" name="contraseña" id="email"
-                                           placeholder="Contraseña" value="{{$usuario->ContraUsua}}">
+                                           placeholder="Contraseña" value="{{$usuario->password}}">
                                     <strong class="text-danger">{{$errors->first('contraseña')}}</strong>
                                 </div>
 

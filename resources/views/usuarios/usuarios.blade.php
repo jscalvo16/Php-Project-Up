@@ -247,20 +247,27 @@
                                         @if($usuario -> FkIdRol == 4)
                                             <td>Administrador</td>
                                         @endif
-                                        <td>
+                                        <td class="text-center">
                                             @switch($usuario->EstaUsua)
                                                 @case(null)
-                                                <strong>Usuario sin estado <a
-                                                        href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}">Cambiar
-                                                        Estado</a></strong>
+                                                <strong>Sin estado</strong>
+                                                <button class="btn btn-warning" title="Activar">
+                                                    <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}" title="Activar">
+                                                        <i class="anticon anticon-poweroff"></i>
+                                                    </a>
+                                                </button>
                                                 @break
                                                 @case(1)
-                                                <strong>Estado Activo <a
-                                                        href="{{'users/'.$usuario->IdUsua.'/manejoEstado'}}">Cambiar</a></strong>
+                                                <strong class="text-success">Activo</strong>
+                                                <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}" class="btn btn-danger" title="Inactivar">
+                                                    <i class="anticon anticon-stop"></i>
+                                                </a>
                                                 @break
                                                 @case(2)
-                                                <strong>Estado inhactivo <a
-                                                        href="{{'users/'.$usuario->IdUsua.'/manejoEstado'}}">cambiar</a></strong>
+                                                <strong class="text-danger">Inhactivo</strong>
+                                                <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}" class="btn btn-success" title="Activar">
+                                                    <i class="anticon anticon-poweroff"></i>
+                                                </a>
                                                 @break
                                             @endswitch
                                         </td>
@@ -279,10 +286,9 @@
                                     <th>Apellidos</th>
                                     <th>Tipo documento</th>
                                     <th>Número identificación</th>
-                                    <th>Fecha nacimiento</th>
                                     <th>Correo</th>
-                                    <th>Estado</th>
                                     <th>Rol</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                                 </tfoot>
