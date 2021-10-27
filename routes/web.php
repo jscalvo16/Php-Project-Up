@@ -29,6 +29,7 @@ Route::post('login', 'App\Http\Controllers\Auth\LoginController@login');
 Route::get('logout', 'App\Http\Controllers\Auth\LoginController@logout');
 
 Route::resource('users','App\Http\Controllers\UsuarioController');
+Route::get('users/{users}/manejoEstado','App\Http\Controllers\UsuarioController@manejoEstado');
 Route::resource('ficha','App\Http\Controllers\fichaController');
 
 Route::get('prueba-email',function(){
