@@ -38,7 +38,7 @@ class fichaController extends Controller
      */
     public function store(Request $request)
     {
-        $valorMax = Ficha::all()->max('IdFicha');
+        $valorMax = Ficha::all()->max('IdFich a');
         $valorMax++;
 
         $newFich = new Ficha;

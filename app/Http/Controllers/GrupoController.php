@@ -47,13 +47,14 @@ class GrupoController extends Controller
 
         //Sección crear grupo
 
-        $nuevoGrupo = new GrupoDeProyecto;
+       $nuevoGrupo = new GrupoDeProyecto;
         $nuevoGrupo->NombGrupo = $request->input('nombreProyecto');
         $nuevoGrupo->DescriGrupo = $request->input('descProyecto');
         $nuevoGrupo->AlcanGrupo = $request->input('alcProyecto');
         $nuevoGrupo->FkIdFicha = $request->input('idFicha');
         $nuevoGrupo->save();
         $idGrupo = $nuevoGrupo->IdGrupo;
+
 
 
         //Sección actualizar usuario que lo vincula al grupo
@@ -118,9 +119,49 @@ class GrupoController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GrupoRequest $request, $id)
     {
-        //
+        $Grupo = GrupoDeProyecto::find($id);
+
+        //Sección actualizar  grupo
+
+
+        $Grupo->NombGrupo = $request->input('nombreProyecto');
+        $Grupo->DescriGrupo = $request->input('descProyecto');
+        $Grupo->AlcanGrupo = $request->input('alcProyecto');
+        $Grupo->FkIdFicha = $request->input('idFicha');
+        $Grupo->save();
+        $idGrupo = $Grupo->IdGrupo;
+        //Sección actualizar usuario que lo vincula al grupo
+
+        $usuarioUno = Usuario::find($request->input('integrante1'));
+        $usuarioUno->FkIdGrupo = $idGrupo;
+        $usuarioUno->save();
+
+        $usuarioDos = Usuario::find($request->input('integrante2'));
+        $usuarioDos->FkIdGrupo = $idGrupo;
+        $usuarioDos->save();
+
+        $usuarioTres = Usuario::find($request->input('integrante3'));
+        $usuarioTres->FkIdGrupo = $idGrupo;
+        $usuarioTres->save();
+
+        $usuarioCuatro = Usuario::find($request->input('integrante4'));
+        $usuarioCuatro->FkIdGrupo = $idGrupo;
+        $usuarioCuatro->save();
+
+        //validacion de select´s
+
+        if ($request->input('integrante1') == $request->input('integrante2') && $request->input('integrante1') == $request->input('integrante3') && $request->input('integrante1') == $request->input('integrante4')) {
+            $message = "El aprendiz ya ha sido seleccionado";
+        } elseif ($request->input('integrante2') == $request->input('integrante3') && $request->input('integrante2') == $request->input('integrante4')) {
+            $message = "El aprendiz ya ha sido seleccionado";
+        } elseif ($request->input('integrante3') == $request->input('integrante4')) {
+            $message = "El aprendiz ya ha sido seleccionado";
+        }
+
+        return redirect('ficha/' . $request->input('idFicha').'/grupo/'.$Grupo->IdGrupo)->with('mensaje', 'Grupo actualizado exitosamente')
+            ->with('message', $message);
     }
 
     /**

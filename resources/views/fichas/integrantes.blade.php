@@ -226,12 +226,12 @@
                 </div>
 
                 <!-- Modales -->
-                <!-- Formulario modal para crear un grupo de proyecto -->
+                <!-- Formulario modal para modificar un grupo de proyecto -->
                 <div class="modal fade modal-grupo" id="modalGrupos">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title" id="modalGruposLabel">Modficar un grupo de
+                                <h1 class="modal-title" id="modalGruposLabel">Modificar un grupo de
                                     proyecto</h1>
                                 <button type="button" class="close" data-dismiss="modal">
                                     <i class="anticon anticon-close"></i>
@@ -279,7 +279,7 @@
                                         <!-- Select integrante 1 -->
                                         <div class="form-group col-md-6">
                                             <select id="integrante1" class="form-control" name="integrante1">
-                                                <option selected value=""></option>
+                                                <option selected value="">Integrante 1</option>
 
                                             </select>
                                             @if(session('message'))

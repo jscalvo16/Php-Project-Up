@@ -382,8 +382,9 @@
                                                     </h4>
                                                     <!-- Select integrante 1 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante1" class="form-control" name="integrante">
-                                                            <option selected>Integrante 1</option>
+                                                        <select id="integrante1" class="form-control"
+                                                                name="integrante1">
+                                                            <option selected value="0">Integrante 1</option>
                                                             @foreach($aprendices as $aprendiz)
                                                                 @if($aprendiz->FkIdGrupo==null)
                                                                     <option value="{{$aprendiz->IdUsua}}">
@@ -399,7 +400,8 @@
 
                                                     <!-- Select integrante 2 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante2" class="form-control" name="integrante">
+                                                        <select id="integrante2" class="form-control"
+                                                                name="integrante2">
                                                             <option selected>Integrante 2</option>
                                                             @foreach($aprendices as $aprendiz)
                                                                 @if($aprendiz->FkIdGrupo==null)
@@ -417,7 +419,8 @@
 
                                                     <!-- Select integrante 3 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante3" class="form-control" name="integrante">
+                                                        <select id="integrante3" class="form-control"
+                                                                name="integrante3">
                                                             <option selected>Integrante 3</option>
                                                             @foreach($aprendices as $aprendiz)
 
@@ -435,7 +438,8 @@
 
                                                     <!-- Select integrante 4 -->
                                                     <div class="form-group col-md-6">
-                                                        <select id="integrante4" class="form-control" name="integrante">
+                                                        <select id="integrante4" class="form-control"
+                                                                name="integrante4">
                                                             <option selected>Integrante 4</option>
                                                             @foreach($aprendices as $aprendiz)
 
@@ -448,10 +452,13 @@
                                                         </select>
                                                         @if(session('message'))
                                                             <strong class="text-danger">{{session('message')}}</strong>
-                                                    @endif
+                                                        @endif
+
                                                     <!--Input ID de la ficha-->
                                                         <input type="hidden" value="{{$fich->IdFicha}}" name="idFicha">
                                                     </div>
+                                                    <strong
+                                                        class="text-danger">{{$errors->first('integrante1')}}</strong>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-cerrar-modal"
