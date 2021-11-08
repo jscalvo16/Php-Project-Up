@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EntregableRequest;
 use App\Models\Entregable;
 use App\Models\Fase;
 use App\Models\Ficha;
 use App\Models\GrupoDeProyecto;
 use App\Models\Usuario;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EntregableController extends Controller
 {
@@ -52,7 +55,7 @@ class EntregableController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EntregableRequest $request)
     {
 
         // Sección para crear el entregable
@@ -71,7 +74,8 @@ class EntregableController extends Controller
         //Validar si se subio un archivo y subir la ruta del archivo
         if($request->hasFile('archivo')){
             $nombre = $request->file('archivo')->getClientOriginalName();
-            $nuevoEntre->ArchEntre = $request->file('archivo')->storeAs('entregables', $nombre);
+            $nuevoEntre->rutaArchivoEntre = $request->file('archivo')->storeAs('entregables', $nombre);
+            $nuevoEntre->ArchEntre = $nombre;
         }
 
         $nuevoEntre->save();
@@ -105,7 +109,21 @@ class EntregableController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Buscar entregable por id
+        $entregable = Entregable::find($id);
+
+        // Consultar las fases
+        $fases = Fase::all();
+
+        // Consultar fichas para elegir
+        $fichas = Ficha::all();
+
+        // Consultar los instructores de la ficha
+        $instructores = Usuario::select('IdUsua', 'NombUsua','ApelUsua')->
+        where('FkIdRol','=','2')->
+        get();
+
+        return view('entregables.editarEntregable', compact('entregable', 'fases', 'fichas', 'instructores'));
     }
 
     /**
@@ -115,9 +133,36 @@ class EntregableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EntregableRequest $request, $id)
     {
-        //
+        // Sección para editar el entregable
+        $editEntre = Entregable::find($id);
+
+        $editEntre->TituEntre = $request->input('tituloEntre');
+        $editEntre->TrimEntre = $request->input('trimestre');
+        $editEntre->DescEntre = $request->input('descEntre');
+        $editEntre->FechIniEntre = $request->input('fechaInicio');
+        $editEntre->FechFin = $request->input('fechaFin');
+        $editEntre->IdInstruSeg = $request->input('instructor');
+        $editEntre->FkIdFase = $request->input('fases');
+
+        //Validar si se subio un archivo y subir la ruta del archivo
+        if($request->hasFile('archivo')){
+            $nombre = $request->file('archivo')->getClientOriginalName();
+            $request->file('archivo')->storeAs('entregables', $nombre);
+            $editEntre->ArchEntre = $nombre;
+        }
+
+        $editEntre->save();
+
+        // Sección para vicular las fichas a los entregables
+        $ficha = Ficha::find($request->input('fichas'));
+        foreach ($ficha as $f){
+            $f->entregables()->attach($editEntre);
+            $f->save();
+        }
+
+        return redirect('entregable')->with('mensaje', 'Entregable editado y asignado correctamente');
     }
 
     /**
@@ -144,6 +189,19 @@ class EntregableController extends Controller
         $entregable = Entregable::find($idEntre);
 
         return view('avances.nuevoAvance', compact('ficha', 'grupo', 'entregable'));
+    }
+
+    // Método para descargar el entregable
+    public function descargarArchivo($id){
+        $entregable = Entregable::find($id);
+        $nombreArchivo = $entregable->ArchEntre;
+        $rutaArchivo = $entregable->rutaArchivoEntre;
+
+        $headers = [
+            'Content-Type' => 'archivodeapoyo',
+        ];
+
+        return Storage::download($rutaArchivo, $nombreArchivo, $headers);
     }
 
     // *--- Fin métodos personalizados ---*

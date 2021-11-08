@@ -260,7 +260,7 @@
                                                 @endif
                                                 <td>{{ $ficha->NumbFich }}</td>
                                                 <td>
-                                                    <a class="btn btn-info" href="#" title="Modificar">
+                                                    <a class="btn btn-info" href="{{ url('entregable/'. $entre->IdEntre. '/edit') }}" title="Modificar">
                                                         <i class="anticon anticon-form" title="Modificar"></i>
                                                     </a>
                                                 </td>

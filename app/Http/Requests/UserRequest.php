@@ -25,8 +25,8 @@ class UserRequest extends FormRequest
     {
         return [
             // Reglas de validación
-            "nombres" => "required|regex:/^[a-zA-Z\s]+$/u|max:30",
-            "apellidos" => "required|regex:/^[a-zA-Z\s]+$/u|max:30",
+            "nombres" => "required|regex:/^[a-zA-ZÁÉÍÓÚÑáéíóúñ\s]+$/u|max:30",
+            "apellidos" => "required|regex:/^[a-zA-ZÁÉÍÓÚÑáéíóúñ\s]+$/u|max:30",
             "tipoDoc" => "required",
             "numerodoc" => "required|numeric",
             "fechaNacimiento" => "required",
@@ -42,9 +42,7 @@ class UserRequest extends FormRequest
         return [
             // Mensajes personalizados
             'nombres.required' => "El campo no puede estar vacío",
-            'nombres.alpha' => "El campo solo puede tener caracteres",
             'apellidos.required' => "El campo no puede estar vacío",
-            'apellidos.alpha' => "El campo solo puede tener caracteres",
             'tipoDoc.required' => "El campo no puede estar vacío",
             'numerodoc.required' => "El campo no puede estar vacío",
             'numerodoc.numeric' => "El campo debe tener solo caracteres numericos",

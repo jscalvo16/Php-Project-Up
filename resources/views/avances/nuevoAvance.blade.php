@@ -188,7 +188,9 @@
                                     @if ($entregable->ArchEntre == null)
                                         <strong>No hay adjuntos compartidos</strong>
                                     @elseif ($entregable->ArchEntre != null)
-                                        <strong>{{ $entregable->ArchEntre }}</strong>
+                                        <a href="{{ url('descargar/'.$entregable->IdEntre) }}" style="color: #525252">
+                                            <strong>{{ $entregable->ArchEntre }}</strong>
+                                        </a>
                                     @endif
                                 </div>
                                 <div class="col-md-5 ml-auto">
@@ -238,14 +240,14 @@
                                                     <h2>Subir avance</h2>
                                                 </div>
                                                 <div class="col-md-1 ml-auto">
-                                                    <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Solo se permite la carga de un archivo, si se desea subir más de uno puede subir un comprimido (.zip, .rar) <br> No se permite la carga individual de archivos ejectutables (.php, .java, .cs, .py, .exe, ...) Estos solo se permiten en archivos comprimidos"></i>
+                                                    <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Solo se permite la carga de un archivo, si se desea subir más de uno puede subir un comprimido (.zip, .rar) <br> No se permite la carga individual de archivos ejectutables (.php, .java, .cs, .py, .exe, ...) Estos solo se permiten en archivos comprimidos <br><br> Tipos de archivos permitidos: docx, doc, docm, xls, xlsm, pptx, ppt, zip, rar, jpeg, jpg, png, txt."></i>
                                                 </div>
                                             </div>
                                             <form action="#" method="POST">
                                                 <div class="form-row">
                                                     <!-- Textarea descripción del avance -->
-                                                    <div class="form-group col-md-7">
-                                                        <label for="descAvance"><sup class="obligatorio">*</sup>Descripción del documento</label>
+                                                    <div class="form-group col-md-8">
+                                                        <label for="descAvance">Descripción del documento</label>
                                                         <textarea class="form-control textarea" rows="6" cols="30" name="descAvance" id="descAvance"></textarea>
                                                     </div>
 

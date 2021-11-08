@@ -42,3 +42,5 @@ Route::get('ficha/{idFicha}/grupo/{idGrupo}', 'App\Http\Controllers\GrupoControl
 Route::resource('entregable', 'App\Http\Controllers\EntregableController');
 Route::get('ficha/{idFicha}/grupo/{idGrupo}/entregable/{idEntre}', 'App\Http\Controllers\EntregableController@mostarEntregables');
 
+// Ruta para descargar un entregable
+Route::get('descargar/{idEntre}', 'App\Http\Controllers\EntregableController@descargarArchivo');
