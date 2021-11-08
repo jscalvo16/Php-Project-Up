@@ -457,19 +457,23 @@
                                                     <!--Input ID de la ficha-->
                                                         <input type="hidden" value="{{$fich->IdFicha}}" name="idFicha">
                                                     </div>
-                                                    <strong
-                                                        class="text-danger">{{$errors->first('integrante1')}}</strong>
+                                                    <strong class="text-danger">{{$errors->first('integrante1')}}</strong>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-cerrar-modal"
                                                             data-dismiss="modal">Cerrar
                                                     </button>
-                                                    <input type="submit" class="btn btn-crear" value="Crear">
+                                                    <input type="submit" class="btn btn-crear" name="crearGrupo" value="Crear">
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
+                                @if ($errors->any())
+                                    <script>
+                                        $('#modalGrupos').modal('show');
+                                    </script>
+                                @endif
                             </div>
                             <!-- Fin formulario modal para crear un grupo de proyecto -->
                         </div>
