@@ -220,8 +220,7 @@
                                     <div class="card-body file-manager-content-body">
                                         <div class="file-manager-content-details">
                                             <div class="content-details">
-                                                <div
-                                                    class="d-flex justify-content-between align-items-center border-bottom">
+                                                <div class="d-flex justify-content-between align-items-center border-bottom">
                                                     <h4 class="m-b-5">{{ $avan->ArchAvan }}</h4>
                                                     <button class="btn btn-icon m-b-5" title="Descargar">
                                                         <a class="text-gray h3" href="{{ url('descargarAvance/'.$avan->IdAvan) }}" title="Descargar">
@@ -244,6 +243,9 @@
                                                             <i class="anticon anticon-file-excel text-success"></i>
                                                         @endif
                                                         @if (str_ends_with($avan->ArchAvan , '.xlsm'))
+                                                            <i class="anticon anticon-file-excel text-success"></i>
+                                                        @endif
+                                                        @if (str_ends_with($avan->ArchAvan , '.xlsx'))
                                                             <i class="anticon anticon-file-excel text-success"></i>
                                                         @endif
                                                         @if (str_ends_with($avan->ArchAvan , '.pptx'))
@@ -294,6 +296,9 @@
                                                             <dd class="col-7">Excel</dd>
                                                         @endif
                                                         @if (str_ends_with($avan->ArchAvan , '.xlsm'))
+                                                            <dd class="col-7">Excel</dd>
+                                                        @endif
+                                                        @if (str_ends_with($avan->ArchAvan , '.xlsx'))
                                                             <dd class="col-7">Excel</dd>
                                                         @endif
                                                         @if (str_ends_with($avan->ArchAvan , '.pptx'))

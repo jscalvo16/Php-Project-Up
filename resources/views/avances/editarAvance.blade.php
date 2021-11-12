@@ -168,7 +168,7 @@
                             <nav class="breadcrumb breadcrumb-dash">
                                 <a href="index.html" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
                                 <a class="breadcrumb-item" href="{{ url('avance') }}">Documentos</a>
-                                <span class="breadcrumb-item active">{{ $avance->ArchAvan }}</span>
+                                <span class="breadcrumb-item active">Modificar documento</span>
                             </nav>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                                                     <h2>Modificar avance</h2>
                                                 </div>
                                                 <div class="col-md-1 ml-auto">
-                                                    <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Solo se permite la carga de un archivo, si se desea subir más de uno puede subir un comprimido (.zip, .rar) <br> No se permite la carga individual de archivos ejectutables (.php, .java, .cs, .py, .exe, ...) Estos solo se permiten en archivos comprimidos <br><br> Tipos de archivos permitidos: docx, doc, docm, xls, xlsm, pptx, ppt, pdf, zip, rar, jpeg, jpg, png, txt."></i>
+                                                    <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Solo se permite la carga de un archivo, si se desea subir más de uno puede subir un comprimido (.zip, .rar) <br> No se permite la carga individual de archivos ejectutables (.php, .java, .cs, .py, .exe, ...) Estos solo se permiten en archivos comprimidos <br><br> Tipos de archivos permitidos: docx, doc, docm, xls, xlsm, xlsx, pptx, ppt, pdf, zip, rar, jpeg, jpg, png, txt."></i>
                                                 </div>
                                             </div>
                                             <form action="{{url('avance/'.$avance->IdAvan)}}" method="POST" enctype="multipart/form-data">
@@ -196,12 +196,14 @@
                                                     <div class="form-group col-md-8">
                                                         <label for="descAvance">Descripción del documento</label>
                                                         <textarea class="form-control textarea" rows="6" cols="30" name="descAvance" id="descAvance">{{ $avance->DescAvan }}</textarea>
+                                                        <strong class="text-danger">{{$errors->first('descAvance')}}</strong>
                                                     </div>
 
                                                     <!-- Input para subir el avance -->
                                                     <div class="form-group col-md-8">
                                                         <label for="avance"><sup class="obligatorio">*</sup>Avance</label>
                                                         <input type="file" class="form-control" name="avance" id="avance" placeholder="Documento de evidencia">
+                                                        <strong class="text-danger">{{$errors->first('avance')}}</strong>
                                                     </div>
 
                                                     <input type="hidden" name="entregable" value="{{ $avance->FkIdEntre }}">
@@ -238,6 +240,9 @@
                                                                 <i class="anticon anticon-file-excel text-success"></i>
                                                             @endif
                                                             @if (str_ends_with($avance->ArchAvan , '.xlsm'))
+                                                                <i class="anticon anticon-file-excel text-success"></i>
+                                                            @endif
+                                                            @if (str_ends_with($avance->ArchAvan , '.xlsx'))
                                                                 <i class="anticon anticon-file-excel text-success"></i>
                                                             @endif
                                                             @if (str_ends_with($avance->ArchAvan , '.pptx'))
@@ -288,6 +293,9 @@
                                                                 <dd class="col-7">Excel</dd>
                                                             @endif
                                                             @if (str_ends_with($avance->ArchAvan , '.xlsm'))
+                                                                <dd class="col-7">Excel</dd>
+                                                            @endif
+                                                            @if (str_ends_with($avance->ArchAvan , '.xlsx'))
                                                                 <dd class="col-7">Excel</dd>
                                                             @endif
                                                             @if (str_ends_with($avance->ArchAvan , '.pptx'))

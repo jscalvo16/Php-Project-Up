@@ -259,7 +259,7 @@
                                                     <h2>Subir avance</h2>
                                                 </div>
                                                 <div class="col-md-1 ml-auto">
-                                                    <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Solo se permite la carga de un archivo, si se desea subir más de uno puede subir un comprimido (.zip, .rar) <br> No se permite la carga individual de archivos ejectutables (.php, .java, .cs, .py, .exe, ...) Estos solo se permiten en archivos comprimidos <br><br> Tipos de archivos permitidos: docx, doc, docm, xls, xlsm, pptx, ppt, pdf, zip, rar, jpeg, jpg, png, txt."></i>
+                                                    <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Solo se permite la carga de un archivo, si se desea subir más de uno puede subir un comprimido (.zip, .rar) <br> No se permite la carga individual de archivos ejectutables (.php, .java, .cs, .py, .exe, ...) Estos solo se permiten en archivos comprimidos <br><br> Tipos de archivos permitidos: docx, doc, docm, xls, xlsm, xlsx, pptx, ppt, pdf, zip, rar, jpeg, jpg, png, txt."></i>
                                                 </div>
                                             </div>
                                             <form action="{{url('avance')}}" method="POST" enctype="multipart/form-data">
@@ -268,13 +268,15 @@
                                                     <!-- Textarea descripción del avance -->
                                                     <div class="form-group col-md-8">
                                                         <label for="descAvance">Descripción del documento</label>
-                                                        <textarea class="form-control textarea" rows="6" cols="30" name="descAvance" id="descAvance"></textarea>
+                                                        <textarea class="form-control textarea" rows="6" cols="30" name="descAvance" id="descAvance">{{ old('descAvance') }}</textarea>
+                                                        <strong class="text-danger">{{$errors->first('descAvance')}}</strong>
                                                     </div>
 
                                                     <!-- Input para subir el avance -->
                                                     <div class="form-group col-md-8">
                                                         <label for="avance"><sup class="obligatorio">*</sup>Avance</label>
                                                         <input type="file" class="form-control" name="avance" id="avance" placeholder="Documento de evidencia">
+                                                        <strong class="text-danger">{{$errors->first('avance')}}</strong>
                                                     </div>
 
                                                     <input type="hidden" name="entregable" value="{{ $entregable->IdEntre }}">
@@ -318,6 +320,9 @@
                                                                 <i class="anticon anticon-file-excel text-success"></i>
                                                             @endif
                                                             @if (str_ends_with($avan->ArchAvan , '.xlsm'))
+                                                                <i class="anticon anticon-file-excel text-success"></i>
+                                                            @endif
+                                                            @if (str_ends_with($avan->ArchAvan , '.xlsx'))
                                                                 <i class="anticon anticon-file-excel text-success"></i>
                                                             @endif
                                                             @if (str_ends_with($avan->ArchAvan , '.pptx'))
@@ -368,6 +373,9 @@
                                                                 <dd class="col-7">Excel</dd>
                                                             @endif
                                                             @if (str_ends_with($avan->ArchAvan , '.xlsm'))
+                                                                <dd class="col-7">Excel</dd>
+                                                            @endif
+                                                            @if (str_ends_with($avan->ArchAvan , '.xlsx'))
                                                                 <dd class="col-7">Excel</dd>
                                                             @endif
                                                             @if (str_ends_with($avan->ArchAvan , '.pptx'))

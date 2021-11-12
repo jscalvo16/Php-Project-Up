@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AvanceRequest;
 use App\Models\Avance;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,6 @@ class AvanceController extends Controller
      */
     public function index()
     {
-
         // Consultar el avance y lo relacionado a este
         $avances = DB::table('avance')
         ->join('grupodeproyecto', 'grupodeproyecto.IdGrupo', '=', 'avance.FkIdGrupo')
@@ -45,7 +45,7 @@ class AvanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AvanceRequest $request)
     {
         $maxId = Avance::all()->max('IdAvan');
         $maxId++;
@@ -97,6 +97,16 @@ class AvanceController extends Controller
     {
         $avance = Avance::find($id);
 
+        // Consultar el avance y lo relacionado a este por id
+        /*$avance = DB::table('avance')
+        ->join('grupodeproyecto', 'grupodeproyecto.IdGrupo', '=', 'avance.FkIdGrupo')
+        ->join('ficha', 'ficha.IdFicha', '=', 'grupodeproyecto.FkIdFicha')
+        ->select('grupodeproyecto.IdGrupo', 'grupodeproyecto.NombGrupo', 'grupodeproyecto.FkIdFicha', 'avance.FkIdEntre',
+        'avance.IdAvan', 'avance.DescAvan', 'avance.FechAvan', 'avance.ArchAvan', 'avance.rutaArchivoAvan', 'ficha.NumbFich')
+        ->where('avance.IdAvan', '=', $id)
+        ->get();
+        */
+
         return view('avances.editarAvance')->with('avance', $avance);
     }
 
@@ -107,7 +117,7 @@ class AvanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AvanceRequest $request, $id)
     {
         $modificarAvan = Avance::find($id);
 

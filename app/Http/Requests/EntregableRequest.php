@@ -32,27 +32,27 @@ class EntregableRequest extends FormRequest
             "trimestre" => "required|not_in:0",
             "fases" => "required|not_in:0",
             "instructor" => "required|not_in:0",
-            "archivo" => "mimes:docx,doc,docm,xls,xlsm,pptx,ppt,zip,rar,jpeg,jpg,png,txt,pdf",
+            "archivo" => "mimes:docx,doc,docm,xls,xlsm,xlsx,pptx,ppt,zip,rar,jpeg,jpg,png,txt,pdf",
             "fichas" => "required|array"
         ];
     }
 
     public function messages()
-{
-    return [
-        // Mensajes personalizados
-        "tituloEntre.required" => "El título del entregables es obligatorio",
-        "tituloEntre.regex" => "Solo se permiten números y letras y algunos carácteres especiales",
-        "tituloEntre.max" => "El campo no puede superar los 50 carácteres",
-        "descEntre.regex" => "Solo se permiten números y letras y algunos carácteres especiales",
-        "fechaInicio.required" => "La fecha de inicio es obligatoria",
-        "fechaFin.required" => "La fecha de cierre es obligatoria",
-        "fechaFin.after_or_equal" => "La fecha de cierre no puede ser anterior a la fecha de inicio",
-        "trimestre.not_in" => "Debes seleccionar un trimestre",
-        "fases.not_in" => "Debes seleccionar una fase",
-        "instructor.not_in" => "Debes seleccionar un instructor",
-        "archivo.mimes" => "El tipo de archivo suministrado no es permitido",
-        "fichas.required" => "Debes seleccionar una o más fichas"
-    ];
-}
+    {
+        return [
+            // Mensajes personalizados
+            "tituloEntre.required" => "El título del entregables es obligatorio",
+            "tituloEntre.regex" => "Solo se permiten números y letras y algunos carácteres especiales",
+            "tituloEntre.max" => "El campo no puede superar los 50 carácteres",
+            "descEntre.regex" => "Solo se permiten números y letras y algunos carácteres especiales",
+            "fechaInicio.required" => "La fecha de inicio es obligatoria",
+            "fechaFin.required" => "La fecha de cierre es obligatoria",
+            "fechaFin.after_or_equal" => "La fecha de cierre no puede ser anterior a la fecha de inicio",
+            "trimestre.not_in" => "Debes seleccionar un trimestre",
+            "fases.not_in" => "Debes seleccionar una fase",
+            "instructor.not_in" => "Debes seleccionar un instructor",
+            "archivo.mimes" => "El tipo de archivo suministrado no es permitido",
+            "fichas.required" => "Debes seleccionar una o más fichas"
+        ];
+    }
 }
