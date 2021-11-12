@@ -32,7 +32,7 @@ class EntregableRequest extends FormRequest
             "trimestre" => "required|not_in:0",
             "fases" => "required|not_in:0",
             "instructor" => "required|not_in:0",
-            "archivo" => "mimes:docx,doc,docm,xls,xlsm,pptx,ppt,zip,rar,jpeg,jpg,png,txt",
+            "archivo" => "mimes:docx,doc,docm,xls,xlsm,pptx,ppt,zip,rar,jpeg,jpg,png,txt,pdf",
             "fichas" => "required|array"
         ];
     }

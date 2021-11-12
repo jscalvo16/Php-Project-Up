@@ -43,4 +43,10 @@ Route::resource('entregable', 'App\Http\Controllers\EntregableController');
 Route::get('ficha/{idFicha}/grupo/{idGrupo}/entregable/{idEntre}', 'App\Http\Controllers\EntregableController@mostarEntregables');
 
 // Ruta para descargar un entregable
-Route::get('descargar/{idEntre}', 'App\Http\Controllers\EntregableController@descargarArchivo');
+Route::get('descargarEntre/{idEntre}', 'App\Http\Controllers\EntregableController@descargarArchivo');
+
+// Ruta para descargar un avance
+Route::get('descargarAvance/{idAvan}', 'App\Http\Controllers\AvanceController@descargarAvance');
+
+// Ruta REST para la gestión de los avances
+Route::resource('avance', 'App\Http\Controllers\AvanceController');

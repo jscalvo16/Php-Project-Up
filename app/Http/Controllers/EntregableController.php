@@ -8,6 +8,7 @@ use App\Models\Fase;
 use App\Models\Ficha;
 use App\Models\GrupoDeProyecto;
 use App\Models\Usuario;
+use App\Models\Avance;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -71,7 +72,7 @@ class EntregableController extends Controller
         $nuevoEntre->IdInstruSeg = $request->input('instructor');
         $nuevoEntre->FkIdFase = $request->input('fases');
 
-        //Validar si se subio un archivo y subir la ruta del archivo
+        //Validar si se subio un archivo
         if($request->hasFile('archivo')){
             $nombre = $request->file('archivo')->getClientOriginalName();
             $nuevoEntre->rutaArchivoEntre = $request->file('archivo')->storeAs('entregables', $nombre);
@@ -188,7 +189,15 @@ class EntregableController extends Controller
         // Consultar el entregable al que se accede
         $entregable = Entregable::find($idEntre);
 
-        return view('avances.nuevoAvance', compact('ficha', 'grupo', 'entregable'));
+        // Consultar los avances del grupo y del entregable
+        $avance = Avance::select('IdAvan', 'DescAvan', 'FechAvan', 'ArchAvan', 'FkIdEntre', 'FkIdGrupo')->
+        where('FkIdEntre', '=', $idEntre)->
+        where('FkIdGrupo', '=', $idGrupo)->
+        orderBy('IdAvan', 'desc')->
+        limit(1)->
+        get();
+
+        return view('avances.nuevoAvance', compact('ficha', 'grupo', 'entregable', 'avance'));
     }
 
     // Método para descargar el entregable

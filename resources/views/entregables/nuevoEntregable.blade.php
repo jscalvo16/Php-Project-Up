@@ -265,7 +265,7 @@
 
                                     <!-- Info para el tipo de archivo permitido -->
                                     <div class="form-group col-md-0">
-                                        <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Tipos de archivos permitidos: docx, doc, docm, xls, xlsm, pptx, ppt, zip, rar, jpeg, jpg, png, txt."></i>
+                                        <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Tipos de archivos permitidos: docx, doc, docm, xls, xlsm, pptx, ppt, pdf, zip, rar, jpeg, jpg, png, txt."></i>
                                     </div>
 
                                     <!-- Input archivo de apoyo -->
