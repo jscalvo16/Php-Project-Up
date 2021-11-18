@@ -36,7 +36,8 @@ class AvanceRequest extends FormRequest
             "descAvance.regex" => "Solo se permiten números y letras y algunos carácteres especiales",
             "descAvance.max" => "La descripción no puede superar los 80 carácteres",
             "avance.required" => "Se requiere un documento como avance",
-            "avance.mimes" => "El tipo de archivo suministrado no es permitido"
+            "avance.mimes" => "El tipo de archivo suministrado no es permitido",
+            "avance.max" => "El nombre del archivo es muy largo"
         ];
     }
 }

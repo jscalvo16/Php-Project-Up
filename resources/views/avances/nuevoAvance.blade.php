@@ -412,7 +412,11 @@
                                                         </dl>
                                                         <dl class="row m-b-5">
                                                             <dt class="col-5 text-dark">Descripción:</dt>
-                                                            <dd class="col-7">{{ $avan->DescAvan }}</dd>
+                                                            @if ($avan->DescAvan == NULL)
+                                                                <dd class="col-7">Sin descripción</dd>
+                                                            @elseif ($avan->DescAvan)
+                                                                <dd class="col-7">{{ $avan->DescAvan }}</dd>
+                                                            @endif
                                                         </dl>
                                                         <dl class="row m-b-5">
                                                             <dt class="col-5 text-dark">Grupo:</dt>

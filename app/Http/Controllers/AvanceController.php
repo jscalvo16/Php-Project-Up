@@ -155,6 +155,7 @@ class AvanceController extends Controller
 
     // *--- Métodos personalizados ---*
 
+    // Método para descargar un avance
     public function descargarAvance($idAvan) {
         $avance = Avance::find($idAvan);
         $nombreArchivo = $avance->ArchAvan;
