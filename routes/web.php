@@ -56,3 +56,6 @@ Route::resource('observaciones', 'App\Http\Controllers\ObservacionController');
 
 // Ruta para abrir chat para las observaciones de un avance en específico
 Route::get('observacion/{idAvance}', 'App\Http\Controllers\ObservacionController@mostrarObservaciones');
+
+// Ruta para acceder a la página de reportes
+Route::get('reportes', 'App\Http\Controllers\ReportesController@mostrarVista');
