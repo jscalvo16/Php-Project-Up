@@ -338,10 +338,10 @@
                                                 </div>
                                             </div>
                                             <div class="conversation-body">
-                                                <div class="msg justify-content-center">
-                                                    <div class="font-weight-semibold font-size-12"> 7:57PM
-                                                    </div>
-                                                </div>
+
+
+                                                @foreach($observaciones as $observacion)
+
                                                 <div class="msg msg-recipient">
                                                     <div class="m-r-10">
                                                         <div class="avatar avatar-image">
@@ -351,76 +351,39 @@
                                                     </div>
                                                     <div class="bubble">
                                                         <div class="bubble-wrapper">
-                                                            <span>Falto la portada...</span>
+                                                            <span>{{$observacion->ContObser}}</span>
                                                         </div>
                                                         <small class="text-muted">Erin Gonzales</small>
                                                     </div>
                                                 </div>
+                                                @endforeach
+
+                                                @foreach($respuestas as $respuesta)
+
+
+
                                                 <div class="msg msg-sent">
                                                     <div class="bubble">
                                                         <div class="bubble-wrapper">
-                                                            <span>Ya lo corregimos instructor</span>
+                                                            <span>{{$respuesta->ContResp}}</span>
                                                         </div>
                                                         <small class="text-muted">Nicolas Rosero</small>
                                                     </div>
                                                 </div>
-                                                <div class="msg msg-recipient">
-                                                    <div class="m-r-10">
-                                                        <div class="avatar avatar-image">
-                                                            <img src=" {{ asset('assets/img/avatars/logo-sena.png') }} "
-                                                                alt="Logo SENA">
-                                                        </div>
-                                                    </div>
-                                                    <div class="bubble">
-                                                        <div class="bubble-wrapper">
-                                                            <span>Vale</span>
-                                                        </div>
-                                                        <small class="text-muted">Erin Gonzales</small>
-                                                    </div>
-                                                </div>
-                                                <div class="msg msg-sent">
-                                                    <div class="bubble">
-                                                        <div class="bubble-wrapper">
-                                                            <span>Listo, documento actualizado</span>
-                                                        </div>
-                                                        <small class="text-muted">Juan Sebastian calvo</small>
-                                                    </div>
-                                                </div>
-                                                <div class="msg msg-recipient">
-                                                    <div class="m-r-10">
-                                                        <div class="avatar avatar-image">
-                                                            <img src=" {{ asset('assets/img/avatars/logo-sena.png') }} "
-                                                                alt="Logo SENA">
-                                                        </div>
-                                                    </div>
-                                                    <div class="bubble">
-                                                        <div class="bubble-wrapper">
-                                                            <span>Listo, muy buen trabajo</span>
-                                                        </div>
-                                                        <small class="text-muted">Erin Gonzales</small>
-                                                    </div>
-                                                </div>
-                                                <div class="msg msg-sent">
-                                                    <div class="bubble">
-                                                        <div class="bubble-wrapper">
-                                                            <span>Gracias instructor</span>
-                                                        </div>
-                                                        <small class="text-muted">Nicolas Rosero</small>
-                                                    </div>
-                                                </div>
+                                                @endforeach
+
+
+
                                             </div>
                                             <div class="conversation-footer">
                                                 <input class="chat-input" type="text"
-                                                    placeholder="Mensaje">
+                                                    placeholder="Mensaje" id="mensaje" wire:model="mensaje">
                                                 <ul class="list-inline d-flex align-items-center m-b-0">
                                                     <li class="list-inline-item">
-                                                        <a class="d-none d-md-block btn btn-enviar" href="#" title="Enviar">
+                                                        <button class="d-none d-md-block btn btn-enviar"  title="Enviar" wire:click="enviar" >
                                                             <i class="far fa-paper-plane"></i>
-                                                        </a>
-                                                        <a href="javascript:void(0);"
-                                                            class="text-gray font-size-20 d-md-none d-block">
-                                                            <i class="far fa-paper-plane"></i>
-                                                        </a>
+                                                        </button>
+
                                                     </li>
                                                 </ul>
                                             </div>

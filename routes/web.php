@@ -55,4 +55,7 @@ Route::resource('avance', 'App\Http\Controllers\AvanceController');
 Route::resource('observaciones', 'App\Http\Controllers\ObservacionController');
 
 // Ruta para abrir chat para las observaciones de un avance en específico
-Route::get('observacion/{idAvance}', 'App\Http\Controllers\ObservacionController@mostrarObservaciones');
+//Route::get('observacion/{idAvance}', 'App\Http\Controllers\ObservacionController@mostrarObservaciones');
+
+Route::get('observacion/{idAvance}', 'App\Http\livewire\ChatForm@mostrarObservaciones');
+
