@@ -124,7 +124,13 @@ class EntregableController extends Controller
         where('FkIdRol','=','2')->
         get();
 
-        return view('entregables.editarEntregable', compact('entregable', 'fases', 'fichas', 'instructores'));
+        // Consultar las fichas en donde pertenece el entregable
+        $fichaEntre = Entregable::find($id)->
+        fichas()->
+        select('NumbFich')->
+        get();
+
+        return view('entregables.editarEntregable', compact('entregable', 'fases', 'fichas', 'instructores', 'fichaEntre'));
     }
 
     /**
@@ -151,6 +157,7 @@ class EntregableController extends Controller
         if($request->hasFile('archivo')){
             $nombre = $request->file('archivo')->getClientOriginalName();
             $request->file('archivo')->storeAs('entregables', $nombre);
+            $editEntre->rutaArchivoEntre = $request->file('archivo')->storeAs('entregables', $nombre);
             $editEntre->ArchEntre = $nombre;
         }
 

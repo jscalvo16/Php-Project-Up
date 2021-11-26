@@ -191,7 +191,7 @@
                                 </div>
                             </div>
                             <br>
-                            <form action="{{ url('entregable'.$entregable->IdEntre) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('entregable/'.$entregable->IdEntre) }}" method="POST" enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
                                 <div class="form-row">
@@ -292,8 +292,21 @@
                                             <strong class="text-danger">{{$errors->first('fichas')}}</strong>
                                         @endif
                                     </div>
+                                    <br>
+                                    <div class="col-md-9">
+                                        <span class="h3 text-warning"><strong>Precaución</strong></span>
+                                        <br>
+                                        <span>El entregable pertenece a las siguientes fichas:</span>
+                                        <br>
+                                        @foreach ($fichaEntre as $ef)
+                                            <span class="text-muted">
+                                               - {{ $ef->NumbFich }} <br>
+                                            </span>
+                                        @endforeach
+                                        <span>Puede seleccionar una nueva ficha.</span>
+                                    </div>
                                 </div>
-                                <input type="submit" class="btn btn-enviar" value="Crear">
+                                <input type="submit" class="btn btn-enviar" value="Modificar">
                             </form>
                         </div>
                     </div>
