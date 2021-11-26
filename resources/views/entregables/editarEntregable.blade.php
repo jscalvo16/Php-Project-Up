@@ -227,13 +227,13 @@
                                         <label><sup class="obligatorio">*</sup>Trimestre</label>
                                         <select id="trimestre" class="form-control" name="trimestre">
                                             <option selected value="0">Elige</option>
-                                            <option value="Trimestre I">Trimestre I</option>
-                                            <option value="Trimestre II">Trimestre II</option>
-                                            <option value="Trimestre III">Trimestre III</option>
-                                            <option value="Trimestre IV">Trimestre IV</option>
-                                            <option value="Trimestre V">Trimestre V</option>
-                                            <option value="Trimestre VI">Trimestre VI</option>
-                                            <option value="Trimestre VII">Trimestre VII</option>
+                                            <option value="Trimestre I" {{ $entregable->TrimEntre == 'Trimestre I' ? 'selected' : '' }}>Trimestre I</option>
+                                            <option value="Trimestre II" {{ $entregable->TrimEntre == 'Trimestre II' ? 'selected' : '' }}>Trimestre II</option>
+                                            <option value="Trimestre III" {{ $entregable->TrimEntre == 'Trimestre III' ? 'selected' : '' }}>Trimestre III</option>
+                                            <option value="Trimestre IV" {{ $entregable->TrimEntre == 'Trimestre IV' ? 'selected' : '' }}>Trimestre IV</option>
+                                            <option value="Trimestre V" {{ $entregable->TrimEntre == 'Trimestre V' ? 'selected' : '' }}>Trimestre V</option>
+                                            <option value="Trimestre VI" {{ $entregable->TrimEntre == 'Trimestre VI' ? 'selected' : '' }}>Trimestre VI</option>
+                                            <option value="Trimestre VII" {{ $entregable->TrimEntre == 'Trimestre VII' ? 'selected' : '' }}>Trimestre VII</option>
                                         </select>
                                         <strong class="text-danger">{{$errors->first('trimestre')}}</strong>
                                     </div>
@@ -244,7 +244,7 @@
                                         <select class="form-control" name="fases" id="fases">
                                             <option selected value="0">Elige</option>
                                             @foreach ($fases as $fase)
-                                                <option value="{{ $fase->IdFase }}" {{ old('fases') == 0 ? 'selected' : '' }}>
+                                                <option value="{{ $fase->IdFase }}" {{ $entregable->FkIdFase == $fase->IdFase ? 'selected' : '' }}>
                                                     {{ $fase->NombFase }}
                                                 </option>
                                             @endforeach
@@ -258,7 +258,7 @@
                                         <select class="form-control" name="instructor" id="instructor">
                                             <option selected value="0">Elige</option>
                                             @foreach ($instructores as $inctructor)
-                                                <option value="{{ $inctructor->NombUsua }} {{ $inctructor->ApelUsua }}" {{ old('instructor') == 0 ? 'selected' : '' }}>
+                                                <option value="{{ $inctructor->NombUsua }} {{ $inctructor->ApelUsua }}" {{ $entregable->IdInstruSeg ==  $inctructor->NombUsua. ' ' . $inctructor->ApelUsua  ? 'selected' : '' }}>
                                                     {{ $inctructor->NombUsua }} {{ $inctructor->ApelUsua }}
                                                 </option>
                                             @endforeach
