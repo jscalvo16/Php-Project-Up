@@ -338,10 +338,7 @@
                                                 </div>
                                             </div>
                                             <div class="conversation-body">
-
-
                                                 @foreach($observaciones as $observacion)
-
                                                 <div class="msg msg-recipient">
                                                     <div class="m-r-10">
                                                         <div class="avatar avatar-image">
@@ -359,21 +356,17 @@
                                                 @endforeach
 
                                                 @foreach($respuestas as $respuesta)
-
-
-
-                                                <div class="msg msg-sent">
-                                                    <div class="bubble">
-                                                        <div class="bubble-wrapper">
-                                                            <span>{{$respuesta->ContResp}}</span>
+                                                    @foreach ($respuesta as $rp)
+                                                    <div class="msg msg-sent">
+                                                        <div class="bubble">
+                                                            <div class="bubble-wrapper">
+                                                                <span>{{$rp->ContResp}}</span>
+                                                            </div>
+                                                            <small class="text-muted">Nicolas Rosero</small>
                                                         </div>
-                                                        <small class="text-muted">Nicolas Rosero</small>
                                                     </div>
-                                                </div>
+                                                    @endforeach
                                                 @endforeach
-
-
-
                                             </div>
                                             <div class="conversation-footer">
                                                 <input class="chat-input" type="text"
