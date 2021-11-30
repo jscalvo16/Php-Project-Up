@@ -96,7 +96,7 @@
             <div class="side-nav-inner">
                 <ul class="side-nav-menu scrollable">
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="usuarios.html">
+                        <a class="dropdown-toggle" href="{{url('users')}}">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-user"></i>
                                 </span>

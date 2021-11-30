@@ -49,5 +49,8 @@ Route::post('reset-password', "App\Http\Controllers\Auth\ResetPasswordController
 Route::get('cambiarContrasena/{idUser}', 'App\Http\Controllers\Auth\CambiarContrasenaController@mostrarFormCambiarPass');
 Route::post('cambiarContrasena/{idUser}', 'App\Http\Controllers\Auth\CambiarContrasenaController@cambiarContrasena');
 
+//ruta para la carga masiva
+Route::post('carga','App\Http\Controllers\CargaMasivaController@cargaM');
 
+Route::resource('asignacion','App\Http\Controllers\AsignacionController');
 

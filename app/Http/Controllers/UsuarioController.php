@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
+
+use App\Http\Requests\EditarUsuariosRequest;
 use App\Mail\CambiarContrasenaMail;
 use App\Models\Usuario;
 use App\Models\Rol;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsuarioController extends Controller
 {
@@ -41,8 +43,9 @@ class UsuarioController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
+
         $maxVal = Usuario::all()->max('IdUsua');
         $maxVal++;
 
@@ -99,17 +102,19 @@ class UsuarioController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(EditarUsuariosRequest $request, $id)
     {
         $User = Usuario::find($id);
+        // Generar contraseña aleatoria
+        $contrasena = Str::random(12);
 
         $User->NombUsua = $request->input("nombres");
         $User->ApelUsua = $request->input("apellidos");
         $User->TipoDocUsua = $request->input("tipoDoc");
         $User->NumbDocUsua = $request->input("numerodoc");
         $User->FechNaciUsua = $request->input("fechaNacimiento");
-        $User->CorrUsua = $request->input("email");
-        $User->ContraUsua = $request->input("contraseña");
+        $User->email = $request->input("email");
+        $User->password = Hash::make($contrasena);
         $User->FkIdRol = $request->input("rol");
         $User->EstaUsua = $request->input("estado");
 
@@ -148,5 +153,11 @@ class UsuarioController extends Controller
         }
         return redirect('users');
     }
-
+    /*
+    public  function cargaM(CargaMasivaRequest $request){
+        $carga = ($request->file('archivo'));
+        Excel::import(new UsuariosCarga(), $carga);
+        return redirect('users')->with("mensaje", "Carga Exitosa");
+    }
+    */
 }

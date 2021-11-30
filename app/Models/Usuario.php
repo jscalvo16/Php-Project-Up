@@ -12,13 +12,25 @@ class Usuario extends Model
     protected $primaryKey = "IdUsua";
     public $timestamps = false;
 
-    public function respuestas(){
+    protected $guarded = [];
 
-        return $this->hasMany('App\Respuesta','FkIdUsua');
+    public function respuestas()
+    {
+
+        return $this->hasMany('App\Respuesta', 'FkIdUsua');
     }
 
-    public function observaciones(){
+    public function observaciones()
+    {
 
-        return $this->hasMany('App\Observacion','FkIdUsua');
+        return $this->hasMany('App\Observacion', 'FkIdUsua');
+    }
+
+    public function intermedio(){
+        return $this->belongsToMany(Usuario::class, 'usuafich', 'FkIdUsua', 'FkIdFicha', 'IdUsua', 'IdFich');
+    }
+
+    public function usuaFicha(){
+        return $this->hasMany('App\UsuaFichPivo', 'FkIdUsua');
     }
 }

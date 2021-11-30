@@ -134,7 +134,7 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="asignarUsuarios.html">
+                        <a class="dropdown-toggle" href="{{url('asignacion')}}">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-usergroup-add"></i>
                                 </span>
@@ -252,20 +252,23 @@
                                                 @case(null)
                                                 <strong>Sin estado</strong>
                                                 <button class="btn btn-warning" title="Activar">
-                                                    <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}" title="Activar">
+                                                    <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}"
+                                                       title="Activar">
                                                         <i class="anticon anticon-poweroff"></i>
                                                     </a>
                                                 </button>
                                                 @break
                                                 @case(1)
                                                 <strong class="text-success">Activo</strong>
-                                                <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}" class="btn btn-danger" title="Inactivar">
+                                                <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}"
+                                                   class="btn btn-danger" title="Inactivar">
                                                     <i class="anticon anticon-stop"></i>
                                                 </a>
                                                 @break
                                                 @case(2)
                                                 <strong class="text-danger">Inhactivo</strong>
-                                                <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}" class="btn btn-success" title="Activar">
+                                                <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}"
+                                                   class="btn btn-success" title="Activar">
                                                     <i class="anticon anticon-poweroff"></i>
                                                 </a>
                                                 @break
@@ -306,7 +309,8 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="#" method="POST">
+                                        <form method="POST" enctype="multipart/form-data" action="{{url('carga')}}">
+                                            @csrf
                                             <div class="form-row">
                                                 <!-- Input cargar arcivo -->
                                                 <div class="form-group col-md-10">
@@ -315,6 +319,7 @@
                                                             class="anticon anticon-file-excel text-success"></i>)</label>
                                                     <input type="file" class="form-control" name="archivo"
                                                            id="archivo" placeholder="Archivo Excel">
+                                                    <strong class="text-danger">{{$errors->first("archivo")}}</strong>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

@@ -21,4 +21,7 @@ class Ficha extends Model
 
         return $this->hasMany('App\GrupoDeProyecto','FkIdFicha');
     }
+    public function fichaUsua(){
+        return $this->hasMany('App\UsuaFichPivo','FkIdFicha');
+    }
 }

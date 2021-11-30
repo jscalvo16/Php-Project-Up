@@ -257,7 +257,6 @@
                                     <strong class="text-danger">{{$errors->first('estado')}}</strong>
                                 </div>
                             </div>
-
                             <input type="submit" class="btn btn-enviar" value="Registrar">
                         </form>
                     </div>
