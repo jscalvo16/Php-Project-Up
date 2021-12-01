@@ -11,22 +11,21 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class UsuariosCarga implements ToModel, WithHeadingRow
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
 
     public function model(array $row)
     {
         return new Usuario([
             'IdUsua' => $row["id"],
             'NombUSua' => $row["nombre"],
-            'ApelUsua' =>$row["apellido"],
-            'TipoDocUsua' => $row["doc"],
-            'NumbDocUsua' => $row["numero"],
-            'FechNaciUsua' =>Carbon::parse($row["fecha"])->format('Y-m-d'),
+            'ApelUsua' => $row["apellido"],
+            'TipoDocUsua' => $row['NumbDocUsua'],
+            'FechNaciUsua' => Carbon::parse($row["fecha"])->format('Y-m-d'),
             'email' => $row["email"],
-            'password' => Hash::make($row["numero"]),
+            'password' => Hash::make($row["numedoc"]),
             'EstaUsua' => $row["estado"],
             'FkIdRol' => $row["rol"]
         ]);

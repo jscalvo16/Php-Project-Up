@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CambiarContrasenaMail;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
-use PHPExcel_IOFactory;
+use Illuminate\Support\Carbon;
+
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-require_once 'Classes/PHPExcel.php';
 
 class CargaMasivaController extends Controller
 {
     public function cargaM(Request $request)
     {
 
-
         $archivo = $request->file('archivo');
-        $excel = PHPExcel_IOFactory::load($archivo);
+        $excel = IOFactory::load($archivo);
 
         $excel -> setActiveSheetIndex(0);
 
@@ -30,15 +32,16 @@ class CargaMasivaController extends Controller
             $user -> ApelUsua = $excel->getActiveSheet()->getCell('B'.$i)->getValue();
             $user -> TipoDocUsua = $excel->getActiveSheet()->getCell('C'.$i)->getValue();
             $user -> NumbDocUsua = $excel->getActiveSheet()->getCell('D'.$i)->getValue();
-            $user -> FechNaciUsua = $excel->getActiveSheet()->getCell('E'.$i)->getValue();
+            $user -> FechNaciUsua = Carbon::parse($excel->getActiveSheet()->getCell('E'.$i)->getValue())->format('Y-m-d');
             $user -> email = $excel->getActiveSheet()->getCell('F'.$i)->getValue();
-            $user -> password = $excel->getActiveSheet()->getCell('D'.$i)->getValue();
+            $user -> password = Hash::make($excel->getActiveSheet()->getCell('D'.$i)->getValue());
             $user -> FkIdRol = $excel->getActiveSheet()->getCell('G'.$i)->getValue();
             $user -> EstaUsua = $excel->getActiveSheet()->getCell('H'.$i)->getValue();
 
+            Mail::to($excel->getActiveSheet()->getCell('F'.$i)->getValue())->send(new CambiarContrasenaMail($maxVal));
             $user->save();
 
-
+            return redirect('users')->with("mensaje", "Carga Exitosa");
         }
     }
 }

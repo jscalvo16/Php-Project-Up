@@ -153,11 +153,11 @@ class UsuarioController extends Controller
         }
         return redirect('users');
     }
-    /*
+
     public  function cargaM(CargaMasivaRequest $request){
         $carga = ($request->file('archivo'));
         Excel::import(new UsuariosCarga(), $carga);
         return redirect('users')->with("mensaje", "Carga Exitosa");
     }
-    */
+
 }
