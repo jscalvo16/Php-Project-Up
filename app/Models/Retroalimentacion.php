@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Observacion extends Model
+class Retroalimentacion extends Model
 {
     // Establecer los campos de la tabla
-    protected $table = "observacion";
-    protected $primaryKey = "IdObser";
+    protected $table = "retroalimentacion";
+    protected $primaryKey = "IdMensaje";
     public $timestamps = false;
 
     public function respuestas(){

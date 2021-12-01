@@ -51,11 +51,8 @@ Route::get('descargarAvance/{idAvan}', 'App\Http\Controllers\AvanceController@de
 // Ruta REST para la gestión de los avances
 Route::resource('avance', 'App\Http\Controllers\AvanceController');
 
-// Ruta REST para la gestión de observaciones
-Route::resource('observaciones', 'App\Http\Controllers\ObservacionController');
-
 // Ruta para abrir chat para las observaciones de un avance en específico
-//Route::get('observacion/{idAvance}', 'App\Http\Controllers\ObservacionController@mostrarObservaciones');
+Route::get('observacion/{idAvance}', 'App\Http\Controllers\MensajesController@mostrarChat');
 
-Route::get('observacion/{idAvance}', 'App\Http\livewire\ChatForm@mostrarObservaciones');
-
+// Ruta para enviar el mensaje
+Route::post('enviar', 'App\Http\Controllers\MensajesController@enviar');

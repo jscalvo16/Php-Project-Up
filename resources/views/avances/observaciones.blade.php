@@ -12,6 +12,9 @@
     <!-- Core css -->
     <link href=" {{ asset('css/app.min.css') }} " rel="stylesheet">
 
+    @livewireStyles
+
+    @livewireScripts
 </head>
 
 <body>
@@ -338,7 +341,8 @@
                                                 </div>
                                             </div>
                                             <div class="conversation-body">
-                                                @foreach($observaciones as $observacion)
+                                                @foreach ($mensajes as $msj)
+                                                @if ($msj->FkIdRol == 2)
                                                 <div class="msg msg-recipient">
                                                     <div class="m-r-10">
                                                         <div class="avatar avatar-image">
@@ -348,37 +352,45 @@
                                                     </div>
                                                     <div class="bubble">
                                                         <div class="bubble-wrapper">
-                                                            <span>{{$observacion->ContObser}}</span>
+                                                            <span>{{$msj->Mensaje}}</span>
                                                         </div>
-                                                        <small class="text-muted">Erin Gonzales</small>
+                                                        <small class="text-muted" style="float: left">
+                                                            {{$msj->NombUsua}} {{$msj->ApelUsua}}
+                                                        </small>
                                                     </div>
                                                 </div>
-                                                @endforeach
-
-                                                @foreach($respuestas as $respuesta)
-                                                    @foreach ($respuesta as $rp)
-                                                    <div class="msg msg-sent">
-                                                        <div class="bubble">
-                                                            <div class="bubble-wrapper">
-                                                                <span>{{$rp->ContResp}}</span>
-                                                            </div>
-                                                            <small class="text-muted">Nicolas Rosero</small>
+                                                @elseif ($msj->FkIdRol == 1)
+                                                <div class="msg msg-sent">
+                                                    <div class="bubble">
+                                                        <div class="bubble-wrapper">
+                                                            <span>{{$msj->Mensaje}}</span>
                                                         </div>
+                                                        <small class="text-muted" style="float: right">
+                                                            {{$msj->NombUsua}} {{$msj->ApelUsua}}
+                                                        </small>
                                                     </div>
-                                                    @endforeach
+                                                </div>
+                                                @endif
                                                 @endforeach
                                             </div>
                                             <div class="conversation-footer">
-                                                <input class="chat-input" type="text"
-                                                    placeholder="Mensaje" id="mensaje" wire:model="mensaje">
-                                                <ul class="list-inline d-flex align-items-center m-b-0">
-                                                    <li class="list-inline-item">
-                                                        <button class="d-none d-md-block btn btn-enviar"  title="Enviar" wire:click="enviar" >
-                                                            <i class="far fa-paper-plane"></i>
-                                                        </button>
-
-                                                    </li>
-                                                </ul>
+                                                <form action="{{url('enviar')}}" method="POST" style="width: 100%">
+                                                    @csrf
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-8">
+                                                            <input class="chat-input" type="text" placeholder="Mensaje" id="mensaje" name="mensaje" value="{{old('mensaje')}}">
+                                                        </div>
+                                                        <input type="hidden" id="usuario" name="usuario" value="1">
+                                                        @foreach ($avance as $avan)
+                                                            <input type="hidden" id="avance" name="avance" value="{{$avan->IdAvan}}">
+                                                        @endforeach
+                                                        <div class="form-group ml-auto m-t-20">
+                                                            <button class="d-none d-md-block btn btn-enviar" type="submit" title="Enviar">
+                                                                <i class="far fa-paper-plane"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
