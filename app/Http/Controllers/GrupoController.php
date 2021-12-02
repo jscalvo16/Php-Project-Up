@@ -47,7 +47,7 @@ class GrupoController extends Controller
 
         //Sección crear grupo
 
-       $nuevoGrupo = new GrupoDeProyecto;
+        $nuevoGrupo = new GrupoDeProyecto;
         $nuevoGrupo->NombGrupo = $request->input('nombreProyecto');
         $nuevoGrupo->DescriGrupo = $request->input('descProyecto');
         $nuevoGrupo->AlcanGrupo = $request->input('alcProyecto');
@@ -75,7 +75,7 @@ class GrupoController extends Controller
         $usuarioCuatro->FkIdGrupo = $idGrupo;
         $usuarioCuatro->save();
 
-        //validacion de select´s
+        // Validacion de select´s
 
         if ($request->input('integrante1') == $request->input('integrante2') && $request->input('integrante1') == $request->input('integrante3') && $request->input('integrante1') == $request->input('integrante4')) {
             $message = "El aprendiz ya ha sido seleccionado";
