@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class UserEditarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,9 +28,9 @@ class UserRequest extends FormRequest
             "nombres" => "required|regex:/^[a-zA-ZÁÉÍÓÚÑáéíóúñ\s]+$/u|max:30",
             "apellidos" => "required|regex:/^[a-zA-ZÁÉÍÓÚÑáéíóúñ\s]+$/u|max:30",
             "tipoDoc" => "required",
-            "numerodoc" => "required|numeric|unique:usuario,NumbDocUsua",
+            "numerodoc" => "required|numeric",
             "fechaNacimiento" => "required",
-            "email" => "required|email|max:115|unique:usuario,email|regex:/(.)@misena\.edu\.co/i",
+            "email" => "required|email|max:115|regex:/(.)@misena\.edu\.co/i",
             "rol" => "required"
         ];
     }
@@ -45,14 +45,11 @@ class UserRequest extends FormRequest
             'apellidos.max' => "El campo no puede sobrepasar los 30 caracteres",
             'tipoDoc.required' => "El campo no puede estar vacío",
             'numerodoc.required' => "El campo no puede estar vacío",
-            'numerodoc.unique' => "El número ya registrado",
             'numerodoc.numeric' => "El campo debe tener solo caracteres numericos",
             "fechaNacimiento.required" => "El capo no puede estar vacío",
             'email.required' => "El campo no puede estar vacío",
             'email.email' => "El campo debe ser un correo",
-            'email.unique' => "El correo ya se encuentra registrado",
             "email.regex" => "El correo debe ser misena"
         ];
     }
-
 }

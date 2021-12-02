@@ -9,7 +9,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href=" {{ asset('assets/img/logo/icono.svg') }} ">
 
-    <!-- page css -->
+    <!-- data-table css -->
+    <link href=" {{ asset('lib/vendors/datatables/dataTables.bootstrap.min.css') }} " rel="stylesheet">
 
     <!-- Core css -->
     <link href=" {{ asset('css/app.min.css') }} " rel="stylesheet">
@@ -50,14 +51,14 @@
                         <li class="dropdown dropdown-animated scale-left">
                             <div class="pointer" data-toggle="dropdown">
                                 <div class="avatar avatar-image  m-h-10 m-r-15">
-                                    <img src="assets/images/avatars/logo-sena.png"  alt="Logo SENA">
+                                    <img src="{{ asset('assets/img/avatars/logo-sena.png') }}"  alt="Logo SENA">
                                 </div>
                             </div>
                             <div class="p-b-15 p-t-20 dropdown-menu pop-profile">
                                 <div class="p-h-20 p-b-15 m-b-10 border-bottom">
                                     <div class="d-flex m-r-50">
                                         <div class="avatar avatar-lg avatar-image">
-                                            <img src="assets/images/avatars/logo-sena.png" alt="Logo SENA">
+                                            <img src="{{ asset('assets/img/avatars/logo-sena.png') }}" alt="Logo SENA">
                                         </div>
                                         <div class="m-l-10">
                                             <p class="m-b-0 text-dark font-weight-semibold">Nicolas Rosero</p>
@@ -171,9 +172,7 @@
 
 
                 <!-- Content Wrapper START -->
-                <div class="main-content">
-                    @yield('contenido')
-                </div>
+                @yield('contenido')
                 <!-- Content Wrapper END -->
 
                 <!-- Footer START -->
@@ -193,13 +192,19 @@
         </div>
     </div>
 
+<!-- Core Vendors JS -->
+<script src=" {{ asset('js/vendors.min.js') }} "></script>
 
-    <!-- Core Vendors JS -->
-    <script src=" {{ asset('js/vendors.min.js') }} "></script>
+<!-- data-table js -->
+<script src=" {{ asset('lib/vendors/datatables/jquery.dataTables.min.js') }} "></script>
+<script src=" {{ asset('lib/vendors/datatables/dataTables.bootstrap.min.js') }} "></script>
+<script src=" {{ asset('js/pages/datatables.js') }} "></script>
 
-    <!-- Core JS -->
-    <script src=" {{ asset('js/app.min.js') }} "></script>
+<!-- Core JS -->
+<script src=" {{ asset('js/app.min.js') }} "></script>
+
+<!-- Cerrar toast js -->
+<script src=" {{ asset('js/toastAlert.js') }} "></script>
 
 </body>
-
 </html>

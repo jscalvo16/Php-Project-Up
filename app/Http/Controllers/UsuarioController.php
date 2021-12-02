@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserEditarRequest;
 use App\Http\Requests\UserRequest;
 use App\Mail\CambiarContrasenaMail;
 use App\Models\Usuario;
@@ -99,7 +100,7 @@ class UsuarioController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(UserEditarRequest $request, $id)
     {
         $User = Usuario::find($id);
 
@@ -109,7 +110,6 @@ class UsuarioController extends Controller
         $User->NumbDocUsua = $request->input("numerodoc");
         $User->FechNaciUsua = $request->input("fechaNacimiento");
         $User->email = $request->input("email");
-        $User->password = $request->input("contraseña");
         $User->FkIdRol = $request->input("rol");
         $User->EstaUsua = $request->input("estado");
 
