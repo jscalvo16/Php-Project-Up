@@ -27,19 +27,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 
   <!-- Main Stylesheet File -->
-  <link href=" {{ asset('css/login.css') }} " rel="stylesheet">
+  <link href=" {{ asset('css/login2.css') }} " rel="stylesheet">
 </head>
 
 <body>
-  <div class="container">
+    <div class="container">
+
+    <div class="cards">
+
     <div class="imgChida">
-      <img src="{{ asset('assets/img/FDS.svg') }} " alt="Asignación de tareas en un tablero">
+
     </div>
     <div class="login-content">
-      <form action="{{url('login')}}" method="POST" >
+      <form action="{{url('enviar-link')}}" method="POST" >
         @csrf
-        <img class="loginImg" src=" {{ asset('assets/img/Logo_login.png') }} " alt="Logo PROJECTUP">
-        <h3 class="title">INICIAR SESIÓN</h3>
+        <p style="text-align: center"><img class="loginImg" src=" {{ asset('assets/img/Logo_login.png') }} " alt="Logo PROJECTUP"></p>
+        <br>
+        <h3 class="title">Podemos ayudarte a restablecer tu contraseña, primero escribe tu correo y sigue las instrucciones</h3>
+        <br>
         @if (session("credenciales_invalidas"))
         <strong class="">{{session('credenciales_invalidas')}}</strong>
         @endif
@@ -49,26 +54,28 @@
             <i class="fas fa-user"></i>
           </div>
           <div class="div">
-            <h5>Usuario</h5>
-            <input type="text" class="input" id="usuario" name="correo">
+            <h5>Email</h5>
+            <input type="text" class="input" id="usuario" name="email">
+
           </div>
+
         </div>
-        <div class="input-div pass">
-          <div class="i">
-            <i class="fas fa-lock"></i>
+        <strong class="text-danger">{{ $errors->first('email') }}</strong>
+
+        <br>
+
+        <input type="submit" class="btn" value="ENVIAR">
+
+        </form>
+    </div>
+    </div>
+    </div>
           </div>
-          <div class="div">
-            <h5>Contraseña</h5>
-            <input type="password" class="input" id="contrasena" name="contrasena">
-          </div>
-        </div>
-        <a href="{{url('recuperar-password')}}">Olvidaste la contraseña?</a>
-        <input type="submit" class="btn" value="INGRESAR">
-        <p id="error" style="color: black;"></p>
-      </form>
+
     </div>
   </div>
   <script src=" {{ asset('js/formLogin.js') }} "></script>
 </body>
+</div>
 
 </html>

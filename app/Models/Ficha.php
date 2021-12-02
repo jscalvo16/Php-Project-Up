@@ -10,7 +10,7 @@ class Ficha extends Model
 {
     // Establecer los campos de la tabla
     protected $table = "ficha";
-    protected $primaryKey = "Idficha";
+    protected $primaryKey = "IdFicha";
     public $timestamps = false;
 
     public function usuarios(){
@@ -19,6 +19,6 @@ class Ficha extends Model
 
     public function gruposDeProyecto(){
 
-        return $this->hasMany('App\GrupoDeProyecto','FkIdficha');
+        return $this->hasMany('App\GrupoDeProyecto','FkIdFicha');
     }
 }

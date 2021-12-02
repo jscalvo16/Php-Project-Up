@@ -1,10 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\UserRequest;
+use App\Mail\CambiarContrasenaMail;
 use App\Models\Usuario;
 use App\Models\Rol;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class UsuarioController extends Controller
 {
@@ -27,13 +32,13 @@ class UsuarioController extends Controller
     public function create()
     {
         $rol = Rol::all();
-        return view('usuarios.nuevoUsuario',compact('rol'));
+        return view('usuarios.nuevoUsuario', compact('rol'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request)
@@ -41,26 +46,32 @@ class UsuarioController extends Controller
         $maxVal = Usuario::all()->max('IdUsua');
         $maxVal++;
 
+        // Generar contraseña aleatoria
+        $contrasena = Str::random(12);
+
+        // Crear al usuario
         $newUser = new Usuario;
         $newUser->NombUsua = $request->input("nombres");
         $newUser->ApelUsua = $request->input("apellidos");
         $newUser->TipoDocUsua = $request->input("tipoDoc");
         $newUser->NumbDocUsua = $request->input("numerodoc");
         $newUser->FechNaciUsua = $request->input("fechaNacimiento");
-        $newUser->CorrUsua = $request->input("email");
-        $newUser->ContraUsua = $request->input("contraseña");
+        $newUser->email = $request->input("email");
+        $newUser->password = Hash::make($contrasena);
         $newUser->FkIdRol = $request->input("rol");
         $newUser->EstaUsua = $request->input("estado");
-
         $newUser->save();
 
-        return redirect('users')->with("mensaje","Usuario registrado correctamente");
+        // Enviar correo para el cambio de contraseña
+        Mail::to($request->input("email"))->send(new CambiarContrasenaMail($maxVal));
+
+        return redirect('users')->with("mensaje", "Usuario registrado correctamente");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -71,21 +82,21 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $User = Usuario::find($id);
         $rol = Rol::all();
-        return view('usuarios.editarUsuario',compact('rol'))->with('usuario',$User);
+        return view('usuarios.editarUsuario', compact('rol'))->with('usuario', $User);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UserRequest $request, $id)
@@ -104,17 +115,38 @@ class UsuarioController extends Controller
 
         $User->save();
 
-        return redirect('users')->with("mensaje","Información modificada correctamente");
+        return redirect('users')->with("mensaje", "Información modificada correctamente");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
     }
+
+    public function manejoEstado($id)
+    {
+        $user = Usuario::find($id);
+        $msg = "";
+        switch ($user->EstaUsua) {
+            case null:
+                $user->EstaUsua = 1;
+                $user->save();
+                break;
+            case 1:
+                $user->EstaUsua = 2;
+                $user->save();
+                break;
+            case 2:
+                $user->EstaUsua = 1;
+                $user->save();
+        }
+        return redirect('users');
+    }
+
 }

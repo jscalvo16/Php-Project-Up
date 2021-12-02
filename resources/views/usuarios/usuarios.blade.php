@@ -114,11 +114,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="gestionFichas.html">Gestión de fichas</a>
+                                <a href="{{'ficha'}}">Gestión de fichas</a>
                             </li>
+
                             <li>
-                                <a href="fichas.html">2242753</a>
+                                <a href="fichas.html">0212121</a>
                             </li>
+
                             <li>
                                 <a href="#">2242745</a>
                             </li>
@@ -178,23 +180,24 @@
                 <div class="card">
                     <div class="card-body">
                         @if (session("mensaje"))
-                        <div class="notification-toast top-right" id="notification-toast" data-delay="3000">
-                            <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
-                                <div class="alert alert-success m-b-0">
-                                    <button type="button" class="ml-2 close" data-dismiss="toast" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <div class="d-flex justify-content-start">
+                            <div class="notification-toast top-right" id="notification-toast" data-delay="3000">
+                                <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+                                    <div class="alert alert-success m-b-0">
+                                        <button type="button" class="ml-2 close" data-dismiss="toast"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="d-flex justify-content-start">
                                         <span class="alert-icon m-r-20 font-size-30">
                                             <i class="anticon anticon-check-circle text-success"></i>
                                         </span>
-                                        <div class="m-t-10">
-                                            <p>{{ session("mensaje") }}</p>
+                                            <div class="m-t-10">
+                                                <p>{{ session("mensaje") }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endif
                         <h4>Usuarios</h4>
                         <div class="row">
@@ -218,7 +221,6 @@
                                     <th>Apellidos</th>
                                     <th>Tipo documento</th>
                                     <th>Número identificación</th>
-                                    <th>Fecha nacimiento</th>
                                     <th>Correo</th>
                                     <th>Rol</th>
                                     <th>Estado</th>
@@ -232,8 +234,7 @@
                                         <td>{{$usuario -> ApelUsua}}</td>
                                         <td>{{$usuario -> TipoDocUsua}}</td>
                                         <td>{{$usuario -> NumbDocUsua}}</td>
-                                        <td>{{$usuario -> FechNaciUsua}}</td>
-                                        <td>{{$usuario -> CorrUsua}}</td>
+                                        <td>{{$usuario -> email}}</td>
                                         @if($usuario -> FkIdRol == 1)
                                             <td>Aprendiz</td>
                                         @endif
@@ -246,11 +247,33 @@
                                         @if($usuario -> FkIdRol == 4)
                                             <td>Administrador</td>
                                         @endif
-                                        @if($usuario->EstaUsua ==1)
-                                            <td>Activo</td>
-                                        @endif
+                                        <td class="text-center">
+                                            @switch($usuario->EstaUsua)
+                                                @case(null)
+                                                <strong>Sin estado</strong>
+                                                <button class="btn btn-warning" title="Activar">
+                                                    <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}" title="Activar">
+                                                        <i class="anticon anticon-poweroff"></i>
+                                                    </a>
+                                                </button>
+                                                @break
+                                                @case(1)
+                                                <strong class="text-success">Activo</strong>
+                                                <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}" class="btn btn-danger" title="Inactivar">
+                                                    <i class="anticon anticon-stop"></i>
+                                                </a>
+                                                @break
+                                                @case(2)
+                                                <strong class="text-danger">Inhactivo</strong>
+                                                <a href="{{url('users/'.$usuario->IdUsua.'/manejoEstado')}}" class="btn btn-success" title="Activar">
+                                                    <i class="anticon anticon-poweroff"></i>
+                                                </a>
+                                                @break
+                                            @endswitch
+                                        </td>
                                         <td>
-                                            <a class="btn btn-info" href="{{url('users/'.$usuario->IdUsua.'/edit')}}" title="Modificar">
+                                            <a class="btn btn-info" href="{{url('users/'.$usuario->IdUsua.'/edit')}}"
+                                               title="Modificar">
                                                 <i class="anticon anticon-form" title="Modificar"></i>
                                             </a>
                                         </td>
@@ -263,10 +286,9 @@
                                     <th>Apellidos</th>
                                     <th>Tipo documento</th>
                                     <th>Número identificación</th>
-                                    <th>Fecha nacimiento</th>
                                     <th>Correo</th>
-                                    <th>Estado</th>
                                     <th>Rol</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                                 </tfoot>

@@ -28,12 +28,10 @@ class UserRequest extends FormRequest
             "nombres" => "required|regex:/^[a-zA-Z\s]+$/u|max:30",
             "apellidos" => "required|regex:/^[a-zA-Z\s]+$/u|max:30",
             "tipoDoc" => "required",
-            "numerodoc" => "required|numeric",
+            "numerodoc" => "required|numeric|unique:usuario,NumbDocUsua",
             "fechaNacimiento" => "required",
-            "email" => "required|email|max:115",
-            "contraseña" => "required",
-            "rol" => "required",
-            "estado" => "required"
+            "email" => "required|email|max:115|unique:usuario,email|regex:/(.)@misena\.edu\.co/i",
+            "rol" => "required"
         ];
     }
 
@@ -42,15 +40,20 @@ class UserRequest extends FormRequest
         return [
             // Mensajes personalizados
             'nombres.required' => "El campo no puede estar vacío",
+            'nombres.max' => "El campo no puede sobrepasar los 30 caractes",
             'nombres.alpha' => "El campo solo puede tener caracteres",
             'apellidos.required' => "El campo no puede estar vacío",
+            'apellidos.max' => "El campo no puede sobrepasar los 30 caracteres",
             'apellidos.alpha' => "El campo solo puede tener caracteres",
             'tipoDoc.required' => "El campo no puede estar vacío",
             'numerodoc.required' => "El campo no puede estar vacío",
+            'numerodoc.unique' => "El campo ya registrado",
             'numerodoc.numeric' => "El campo debe tener solo caracteres numericos",
+            "fechaNacimiento.required" => "El capo no puede estar vacío",
             'email.required' => "El campo no puede estar vacío",
             'email.email' => "El campo debe ser un correo",
-            'contraseña' => "El campo no puede estar vacío"
+            'email.unique' => "El correo ya se encuentra registrado",
+            "email.regex" => "El correo debe ser misena"
         ];
     }
 

@@ -88,7 +88,7 @@ body{
 }
 
 .loginImg {
-	width: 58%;
+	width: 50%;
 }
 
 .login-content{
@@ -104,6 +104,7 @@ body{
 
 form{
 	width: 360px;
+    margin-left: 185px;
 }
 
 .login-content h3{
@@ -279,7 +280,5 @@ a:hover{
     width: 768px;
     height: 550px;
     position: absolute;
-    display: flex;
-    align-items: flex-end;
     padding: 30px;
   }

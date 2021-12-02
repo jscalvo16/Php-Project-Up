@@ -22,8 +22,7 @@
             <div class="logo logo-dark">
                 <a href="index.html">
                     <img src=" {{ asset('assets/img/logo/logo-medio.svg') }} " alt="Logo ProjectUp">
-                    <img class="logo-fold" src=" {{ asset('assets/img/logo/icono.svg') }} " alt="Icono ProjectUp"
-                         width="60px" height="60px">
+                    <img class="logo-fold" src=" {{ asset('assets/img/logo/icono.svg') }} " alt="Icono ProjectUp"  width="60px" height="60px">
                 </a>
             </div>
             <div class="logo logo-white">
@@ -49,7 +48,7 @@
                     <li class="dropdown dropdown-animated scale-left">
                         <div class="pointer" data-toggle="dropdown">
                             <div class="avatar avatar-image  m-h-10 m-r-15">
-                                <img src="{{asset('assets/img/avatars/logo-sena.png ')}}" alt="Logo SENA">
+                                <img src="{{asset('assets/img/avatars/logo-sena.png ')}}"  alt="Logo SENA">
                             </div>
                         </div>
                         <div class="p-b-15 p-t-20 dropdown-menu pop-profile">
@@ -168,22 +167,23 @@
                     <div class="header-sub-title">
                         <nav class="breadcrumb breadcrumb-dash">
                             <a href="index.html" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-                            <span class="breadcrumb-item active">Crear ficha</span>
+                            <span class="breadcrumb-item active">Modificar ficha</span>
                         </nav>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h2>Crear una nueva ficha</h2>
+                        <h2>Modificar ficha</h2>
                         <br>
-                        <form action="{{url('ficha')}}" method="POST">
+                        <form action="{{url('ficha/'.$ficha->IdFicha)}}" method="POST" >
+                            @method('PUT')
                             @csrf
                             <div class="form-row">
                                 <!-- Input número ficha -->
                                 <div class="form-group col-md-6">
                                     <label for="numFicha"><sup class="obligatorio">*</sup>Número de ficha</label>
-                                    <input type="text" class="form-control" name="numFicha" id="numFicha"
-                                           placeholder="Número de ficha" value="{{old('numFicha')}}">
+                                    <input type="text" class="form-control" name="numFicha" id="numFicha" placeholder="Número de ficha"
+                                    value="{{$ficha->NumbFich}}">
                                     <strong class="text-danger">{{$errors->first('numFicha')}}</strong>
                                 </div>
 
@@ -192,33 +192,29 @@
                                     <label><sup class="obligatorio">*</sup>Jornada</label>
                                     <select id="inputState" class="form-control" name="jornada">
                                         <option selected>Elige</option>
-                                        <option value="Diurna">Jornada Mañana</option>
-                                        <option value="Mixta">Jornada Tarde</option>
-                                        <option value="Nocturna">Jornada Noche</option>
+                                        <option value="Diurna">Jornada Diurna</option>
+                                        <option value="Mixta">Jornada Mixta</option>
+                                        <option value="Nocturna">Jornada Nocturna</option>
                                         <strong class="text-danger">{{$errors->first('jornada')}}</strong>
                                     </select>
                                 </div>
 
                                 <!-- Input Fecha inicio etapa lectiva -->
                                 <div class="form-group col-md-6">
-                                    <label for="inicioEtapa"><sup class="obligatorio">*</sup>Fecha inicio de etapa
-                                        lectiva</label>
-                                    <input type="date" class="form-control" name="inicioEtapa" id="inicioEtapa"
-                                           value="{{old('inicioEtapa')}}">
+                                    <label for="inicioEtapa"><sup class="obligatorio">*</sup>Fecha inicio de etapa lectiva</label>
+                                    <input type="date" class="form-control" name="inicioEtapa" id="inicioEtapa" value="{{$ficha->InicEtapElec}}">
                                     <strong class="text-danger">{{$errors->first('inicioEtapa')}}</strong>
                                 </div>
 
                                 <!-- Input Fecha fin etapa lectiva -->
                                 <div class="form-group col-md-6">
-                                    <label for="finEtapa"><sup class="obligatorio">*</sup>Fecha fin de etapa
-                                        lectiva</label>
-                                    <input type="date" class="form-control" name="finEtapa" id="finEtapa"
-                                           value="{{old('finEtapa')}}">
+                                    <label for="finEtapa"><sup class="obligatorio">*</sup>Fecha fin de etapa lectiva</label>
+                                    <input type="date" class="form-control" name="finEtapa" id="finEtapa" value="{{$ficha->FinEtapElec}}">
                                     <strong class="text-danger">{{$errors->first('finEtapa')}}</strong>
                                 </div>
                             </div>
 
-                            <input type="submit" class="btn btn-enviar" value="Crear">
+                            <input type="submit" class="btn btn-enviar" value="Modificar">
                         </form>
                     </div>
                 </div>
@@ -229,9 +225,9 @@
                     <div class="footer-content">
                         <p class="m-b-0">Copyright © 2021 PROJECTUP. Todos los derechos reservados.</p>
                         <span>
-                            <a href="" class="text-gray m-r-15">Term &amp; Conditions</a>
-                            <a href="" class="text-gray">Privacy &amp; Policy</a>
-                        </span>
+                                <a href="" class="text-gray m-r-15">Term &amp; Conditions</a>
+                                <a href="" class="text-gray">Privacy &amp; Policy</a>
+                            </span>
                     </div>
                 </footer>
                 <!-- Footer END -->
