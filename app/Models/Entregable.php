@@ -15,4 +15,8 @@ class Entregable extends Model
 
         return $this->hasMany('App\Avance','FkIdEntre');
     }
+
+    public function fichas(){
+        return $this->belongsToMany(Ficha::class, 'entregable_ficha', 'FkIdEntregable', 'FkIdFicha', 'IdEntre', 'IdFicha');
+    }
 }
