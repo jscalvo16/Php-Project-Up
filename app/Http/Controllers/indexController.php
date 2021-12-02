@@ -10,9 +10,4 @@ class indexController extends Controller
     public function mostrarIndex() {
         return view('index');
     }
-
-    // Prueba
-    public function mostrarPagina() {
-        return view('usuarios/usuarios');
-    }
 }

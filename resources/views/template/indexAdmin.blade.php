@@ -164,7 +164,7 @@
 
                 <!-- Content Wrapper START -->
                 <div class="main-content">
-                    <h1>Plantillas de los modulos</h1>
+                    @yield('contenido')
                 </div>
                 <!-- Content Wrapper END -->
 
