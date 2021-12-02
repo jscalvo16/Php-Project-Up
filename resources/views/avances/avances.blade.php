@@ -339,7 +339,11 @@
                                                     </dl>
                                                     <dl class="row m-b-5">
                                                         <dt class="col-5 text-dark">Descripción:</dt>
-                                                        <dd class="col-7">{{ $avan->DescAvan }}</dd>
+                                                        @if ($avan->DescAvan == NULL)
+                                                            <dd class="col-7">Sin descripción</dd>
+                                                        @elseif ($avan->DescAvan)
+                                                            <dd class="col-7">{{ $avan->DescAvan }}</dd>
+                                                        @endif
                                                     </dl>
                                                     <dl class="row m-b-5">
                                                         <dt class="col-5 text-dark">Grupo:</dt>
@@ -352,7 +356,7 @@
                                     <!-- Footer de la tarjeta -->
                                     <div class="card-footer">
                                         <div class="row">
-                                            <a class="btn btn-cerrar-modal col-md-7" href="observaciones.html">Observaciones</a>
+                                            <a class="btn btn-cerrar-modal col-md-7" href="{{ url('observacion/'.$avan->IdAvan) }}">Observaciones</a>
                                             <a class="btn btn-ver-mas col-md-2 ml-auto" href="{{ url('ficha/'.$avan->FkIdFicha.'/grupo/'.$avan->IdGrupo.'/entregable/'.$avan->FkIdEntre) }}" title="Ver más">
                                                 <i class="anticon anticon-plus" title="Ver más"></i>
                                             </a>

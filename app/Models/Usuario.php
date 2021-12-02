@@ -12,13 +12,8 @@ class Usuario extends Model
     protected $primaryKey = "IdUsua";
     public $timestamps = false;
 
-    public function respuestas(){
+    public function retroalimentaciones(){
 
-        return $this->hasMany('App\Respuesta','FkIdUsua');
-    }
-
-    public function observaciones(){
-
-        return $this->hasMany('App\Observacion','FkIdUsua');
+        return $this->hasMany('App\Retroalimentacion','FkIdUsua');
     }
 }

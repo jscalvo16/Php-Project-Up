@@ -330,6 +330,14 @@
                                                             <dt class="col-5 text-dark">Subido:</dt>
                                                             <dd class="col-7">{{ $avance->FechAvan }}</dd>
                                                         </dl>
+                                                        <dl class="row m-b-5">
+                                                            <dt class="col-5 text-dark">Descripción:</dt>
+                                                            @if ($avance->DescAvan == NULL)
+                                                                <dd class="col-7">Sin descripción</dd>
+                                                            @elseif ($avance->DescAvan)
+                                                                <dd class="col-7">{{ $avance->DescAvan }}</dd>
+                                                            @endif
+                                                        </dl>
                                                     </div>
                                                 </div>
                                             </div>
