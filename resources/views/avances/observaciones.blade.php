@@ -354,7 +354,7 @@
                                                         <div class="bubble-wrapper">
                                                             <span>{{$msj->Mensaje}}</span>
                                                         </div>
-                                                        <small class="text-muted" style="float: left">
+                                                        <small class="text-muted" style="float: l">
                                                             {{$msj->NombUsua}} {{$msj->ApelUsua}}
                                                         </small>
                                                     </div>
@@ -378,11 +378,11 @@
                                                     @csrf
                                                     <div class="form-row">
                                                         <div class="form-group col-md-8">
-                                                            <input class="chat-input" type="text" placeholder="Mensaje" id="mensaje" name="mensaje" value="{{old('mensaje')}}">
+                                                            <input class="chat-input" type="text" placeholder="Mensaje" id="mensaje" name="mensaje">
                                                         </div>
-                                                        <input type="hidden" id="usuario" name="usuario" value="1">
+                                                        <input type="hidden" id="mensaje" name="usuario" value="18">
                                                         @foreach ($avance as $avan)
-                                                            <input type="hidden" id="avance" name="avance" value="{{$avan->IdAvan}}">
+                                                            <input type="hidden" id="mensaje" name="avance" value="{{$avan->IdAvan}}">
                                                         @endforeach
                                                         <div class="form-group ml-auto m-t-20">
                                                             <button class="d-none d-md-block btn btn-enviar" type="submit" title="Enviar">
