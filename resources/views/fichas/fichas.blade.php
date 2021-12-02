@@ -243,9 +243,9 @@
                                     </div>
                                     <!-- Crear grupo y entregables (botones) -->
                                     <div class="col-md-2 ml-auto">
-                                        <button class="btn btn-crear" data-toggle="modal" data-target=".modal-grupo">
+                                        <a class="btn btn-crear" href="{{url('ficha/'.$fich->IdFicha.'/creargrupo')}}">
                                             <i class="anticon anticon-plus"></i> Crear grupo
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="m-t-25">
@@ -327,151 +327,6 @@
                                 </div>
                             </div>
                             <!-- Fin grupos de proyecto -->
-
-                            <!-- Modales -->
-                            <!-- Formulario modal para crear un grupo de proyecto -->
-                            <div class="modal fade modal-grupo" id="modalGrupos">
-                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title" id="modalGruposLabel">Crear un grupo de
-                                                proyecto</h1>
-                                            <button type="button" class="close" data-dismiss="modal">
-                                                <i class="anticon anticon-close"></i>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="{{url('grupo')}}" method="POST">
-                                                @csrf
-                                                <div class="form-row">
-                                                    <!-- Input Nombre del proyecto -->
-                                                    <div class="form-group col-md-12">
-                                                        <label for="nombreProyecto"><sup class="obligatorio">*</sup>Nombre
-                                                            del proyecto</label>
-                                                        <input type="text" class="form-control" name="nombreProyecto"
-                                                               id="nombreProyecto" placeholder="Nombre del proyecto">
-                                                        <strong
-                                                            class="text-danger">{{$errors->first('nombreProyecto')}}</strong>
-                                                    </div>
-
-                                                    <!-- Textarea descripción del proyecto -->
-                                                    <div class="form-group col-md-6">
-
-                                                        <label for="descProyecto"><sup class="obligatorio">*</sup>Descripción
-                                                            del proyecto</label>
-                                                        <textarea class="form-control textarea" name="descProyecto"
-                                                                  id="descProyecto"></textarea>
-                                                        <strong
-                                                            class="text-danger">{{$errors->first('descProyecto')}}</strong>
-
-                                                    </div>
-
-                                                    <!-- Textarea descripción del proyecto -->
-                                                    <div class="form-group col-md-6">
-
-                                                        <label for="alcProyecto"><sup class="obligatorio">*</sup>Alcance
-                                                            del proyecto</label>
-                                                        <textarea class="form-control textarea" name="alcProyecto"
-                                                                  id="alcProyecto"></textarea>
-                                                        <strong
-                                                            class="text-danger">{{$errors->first('alcProyecto')}}</strong>
-
-                                                    </div>
-
-                                                    <h4 class="col-md-12"><sup class="obligatorio">*</sup>Integrantes
-                                                    </h4>
-                                                    <!-- Select integrante 1 -->
-                                                    <div class="form-group col-md-6">
-                                                        <select id="integrante1" class="form-control"
-                                                                name="integrante1">
-                                                            <option selected value="0">Integrante 1</option>
-                                                            @foreach($aprendices as $aprendiz)
-                                                                @if($aprendiz->FkIdGrupo==null)
-                                                                    <option value="{{$aprendiz->IdUsua}}">
-                                                                        {{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}
-                                                                    </option>
-                                                                @endif
-                                                            @endforeach
-                                                        </select>
-                                                        @if(session('message'))
-                                                            <strong class="text-danger">{{session('message')}}</strong>
-                                                        @endif
-                                                    </div>
-
-                                                    <!-- Select integrante 2 -->
-                                                    <div class="form-group col-md-6">
-                                                        <select id="integrante2" class="form-control"
-                                                                name="integrante2">
-                                                            <option selected>Integrante 2</option>
-                                                            @foreach($aprendices as $aprendiz)
-                                                                @if($aprendiz->FkIdGrupo==null)
-                                                                    <option value="{{$aprendiz->IdUsua}}">
-                                                                        {{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}
-                                                                    </option>
-
-                                                                @endif
-                                                            @endforeach
-                                                        </select>
-                                                        @if(session('message'))
-                                                            <strong class="text-danger">{{session('message')}}</strong>
-                                                        @endif
-                                                    </div>
-
-                                                    <!-- Select integrante 3 -->
-                                                    <div class="form-group col-md-6">
-                                                        <select id="integrante3" class="form-control"
-                                                                name="integrante3">
-                                                            <option selected>Integrante 3</option>
-                                                            @foreach($aprendices as $aprendiz)
-
-                                                                @if($aprendiz->FkIdGrupo==null)
-                                                                    <option value="{{$aprendiz->IdUsua}}">
-                                                                        {{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}
-                                                                    </option>
-                                                                @endif
-                                                            @endforeach
-                                                        </select>
-                                                        @if(session('message'))
-                                                            <strong class="text-danger">{{session('message')}}</strong>
-                                                        @endif
-                                                    </div>
-
-                                                    <!-- Select integrante 4 -->
-                                                    <div class="form-group col-md-6">
-                                                        <select id="integrante4" class="form-control"
-                                                                name="integrante4">
-                                                            <option selected>Integrante 4</option>
-                                                            @foreach($aprendices as $aprendiz)
-
-                                                                @if($aprendiz->FkIdGrupo==null)
-                                                                    <option value="{{$aprendiz->IdUsua}}">
-                                                                        {{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}
-                                                                    </option>
-                                                                @endif
-                                                            @endforeach
-                                                        </select>
-                                                        @if(session('message'))
-                                                            <strong class="text-danger">{{session('message')}}</strong>
-                                                        @endif
-
-                                                    <!--Input ID de la ficha-->
-                                                        <input type="hidden" value="{{$fich->IdFicha}}" name="idFicha">
-                                                    </div>
-                                                    <strong
-                                                        class="text-danger">{{$errors->first('integrante1')}}</strong>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-cerrar-modal"
-                                                            data-dismiss="modal">Cerrar
-                                                    </button>
-                                                    <input type="submit" class="btn btn-crear" value="Crear">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Fin formulario modal para crear un grupo de proyecto -->
                         </div>
                     </div>
                 </div>

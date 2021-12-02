@@ -30,7 +30,7 @@ class GrupoController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -85,8 +85,7 @@ class GrupoController extends Controller
             $message = "El aprendiz ya ha sido seleccionado";
         }
 
-        return redirect('ficha/' . $request->input('idFicha'))->with('mensaje', 'Grupo creado exitosamente')
-            ->with('message', $message);
+        return redirect('ficha/' . $request->input('idFicha'))->with('mensaje', 'Grupo creado exitosamente');
 
     }
 
@@ -160,8 +159,7 @@ class GrupoController extends Controller
             $message = "El aprendiz ya ha sido seleccionado";
         }
 
-        return redirect('ficha/' . $request->input('idFicha').'/grupo/'.$Grupo->IdGrupo)->with('mensaje', 'Grupo actualizado exitosamente')
-            ->with('message', $message);
+        return redirect('ficha/' . $request->input('idFicha').'/grupo/'.$Grupo->IdGrupo)->with('mensaje', 'Grupo actualizado exitosamente');
     }
 
     /**
@@ -193,10 +191,49 @@ class GrupoController extends Controller
         where('FkIdGrupo', '=', $idGrupo)->
         get();
 
+        $aprendices = Ficha::find($idFicha)->usuarios()->
+        select('IdUsua','NombUsua','ApelUsua','email','NumbDocUsua','FechNaciUsua','EstaUsua','FkIdGrupo')->
+        where('FkIdRol','=','1')->
+        get();
+
         //Consultar la ficha
         $ficha = Ficha::find($idFicha);
 
-        return view('fichas.integrantes', compact('grupo', 'entregables', 'integrantesGrupo', 'ficha'));
+        return view('fichas.integrantes', compact('grupo', 'entregables', 'integrantesGrupo', 'ficha','aprendices'));
+    }
+
+    public function crearGrupo($idFicha){
+        $aprendices = Ficha::find($idFicha)->usuarios()->
+        select('IdUsua','NombUsua','ApelUsua','email','NumbDocUsua','FechNaciUsua','EstaUsua','FkIdGrupo')->
+        where('FkIdRol','=','1')->
+        get();
+
+        $ficha=Ficha::find($idFicha);
+
+        return view("grupos.nuevoGrupo",compact("aprendices","ficha"));
+
+
+    }
+
+    public function editarGrupo($idFicha,$idGrupo){
+        $aprendices = Ficha::find($idFicha)->usuarios()->
+        select('IdUsua','NombUsua','ApelUsua','email','NumbDocUsua','FechNaciUsua','EstaUsua','FkIdGrupo')->
+        where('FkIdRol','=','1')->
+        get();
+
+        $ficha=Ficha::find($idFicha);
+
+        $grupo=GrupoDeProyecto::find($idGrupo);
+
+        // Consultar los usuarios que pertenecen al grupo
+        $integrantesGrupo = Usuario::select('NombUsua', 'ApelUsua')->
+        where('FkIdRol', '=', '1')->
+        where('FkIdGrupo', '=', $idGrupo)->
+        get();
+
+        return view("grupos.editarGrupo",compact("aprendices","ficha","grupo","integrantesGrupo"));
+
+
     }
 
     // *--- Fin métodos personalizados ---*

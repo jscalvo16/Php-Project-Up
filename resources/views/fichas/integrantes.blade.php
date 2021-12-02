@@ -182,10 +182,9 @@
                                 <h1> {{$grupo->NombGrupo}}</h1>
                             </div>
                             <div class="col-md-1 ml-auto">
-                                <button class="btn btn-crear" data-toggle="modal" data-target=".modal-grupo"
-                                        title="Modificar">
+                                <a class="btn btn-crear" title="Modificar" href="{{url('ficha/'.$ficha->IdFicha.'/grupo/'.$grupo->IdGrupo.'/editargrupo')}}">
                                     <i class="anticon anticon-form" title="Modificar"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
@@ -225,119 +224,7 @@
                     </div>
                 </div>
 
-                <!-- Modales -->
-                <!-- Formulario modal para modificar un grupo de proyecto -->
-                <div class="modal fade modal-grupo" id="modalGrupos">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title" id="modalGruposLabel">Modificar un grupo de
-                                    proyecto</h1>
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <i class="anticon anticon-close"></i>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{url('grupo/'.$grupo->IdGrupo)}}" method="POST">
-                                    @method('PUT')
-                                    @csrf
-                                    <div class="form-row">
-                                        <!-- Input Nombre del proyecto -->
-                                        <div class="form-group col-md-12">
-                                            <label for="nombreProyecto"><sup class="obligatorio">*</sup>Nombre
-                                                del proyecto</label>
-                                            <input type="text" class="form-control" name="nombreProyecto"
-                                                   id="nombreProyecto" placeholder="Nombre del proyecto"
-                                                   value="{{$grupo->NombGrupo}}">
-                                            <strong
-                                                class="text-danger">{{$errors->first('nombreProyecto')}}</strong>
-                                        </div>
 
-                                        <!-- Textarea descripción del proyecto -->
-                                        <div class="form-group col-md-6">
-                                            <label for="descProyecto"><sup class="obligatorio">*</sup>Descripción
-                                                del proyecto</label>
-                                            <textarea class="form-control textarea" name="descProyecto"
-                                                      id="descProyecto">{{$grupo->DescriGrupo}}</textarea>
-                                            <strong
-                                                class="text-danger">{{$errors->first('descProyecto')}}</strong>
-                                        </div>
-
-                                        <!-- Textarea descripción del proyecto -->
-                                        <div class="form-group col-md-6">
-                                            <label for="alcProyecto"><sup class="obligatorio">*</sup>Alcance
-                                                del proyecto</label>
-                                            <textarea class="form-control textarea" name="alcProyecto"
-                                                      id="alcProyecto">{{$grupo->AlcanGrupo}}</textarea>
-                                            <strong
-                                                class="text-danger">{{$errors->first('alcProyecto')}}</strong>
-
-                                        </div>
-
-                                        <h4 class="col-md-12"><sup class="obligatorio">*</sup>Integrantes
-                                        </h4>
-                                        <!-- Select integrante 1 -->
-                                        <div class="form-group col-md-6">
-                                            <select id="integrante1" class="form-control" name="integrante1">
-                                                <option selected value="">Integrante 1</option>
-
-                                            </select>
-                                            @if(session('message'))
-                                                <strong class="text-danger">{{session('message')}}</strong>
-                                            @endif
-
-                                        </div>
-
-                                        <!-- Select integrante 2 -->
-                                        <div class="form-group col-md-6">
-                                            <select id="integrante2" class="form-control" name="integrante2">
-                                                <option selected>Integrante 2</option>
-
-                                            </select>
-                                            @if(session('message'))
-                                                <strong class="text-danger">{{session('message')}}</strong>
-                                            @endif
-
-
-                                        </div>
-
-                                        <!-- Select integrante 3 -->
-                                        <div class="form-group col-md-6">
-                                            <select id="integrante3" class="form-control" name="integrante3">
-                                                <option selected>Integrante 3</option>
-
-                                            </select>
-                                            @if(session('message'))
-                                                <strong class="text-danger">{{session('message')}}</strong>
-                                            @endif
-
-                                        </div>
-
-                                        <!-- Select integrante 4 -->
-                                        <div class="form-group col-md-6">
-                                            <select id="integrante4" class="form-control" name="integrante4">
-                                                <option selected>Integrante 4</option>
-
-                                            </select>
-                                            @if(session('message'))
-                                                <strong class="text-danger">{{session('message')}}</strong>
-                                        @endif
-
-                                        <!--Input ID de la ficha-->
-                                            <input type="hidden" value="{{$grupo->FkIdFicha}}" name="idFicha">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-cerrar-modal"
-                                                data-dismiss="modal">Cerrar
-                                        </button>
-                                        <input type="submit" class="btn btn-crear" value="Crear">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="card">
                     <div class="card-body">
                         <!-- Sección de los entregables  -->
