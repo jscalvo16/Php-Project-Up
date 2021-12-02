@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ficha;
+use App\Models\GrupoDeProyecto;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Http\Requests\FichaRequest;
@@ -38,7 +39,7 @@ class fichaController extends Controller
      */
     public function store(FichaRequest $request)
     {
-        $valorMax = Ficha::all()->max('IdFicha');
+        $valorMax = Ficha::all()->max('IdFich a');
         $valorMax++;
 
         $newFich = new Ficha;
@@ -61,7 +62,31 @@ class fichaController extends Controller
     public function show($id)
     {
         $fich = Ficha::find($id);
-        return view('fichas.fichas')->with("fich", $fich);
+
+        // Consulta para los grupos de proyecto de la ficha
+        $gruposFicha = GrupoDeProyecto::select('IdGrupo', 'NombGrupo', 'DescriGrupo')->
+        where('FkIdFicha', '=', $id)->
+        get();
+
+        //Consulta para los instructores de la ficha
+        $instructores = Ficha::find($id)->usuarios()->
+        select('NombUsua','ApelUsua')->where('FkIdRol','=','2')->
+        get();
+
+        //Consulta para los aprendices de la ficha
+        $aprendices = Ficha::find($id)->usuarios()->
+        select('IdUsua','NombUsua','ApelUsua','email','NumbDocUsua','FechNaciUsua','EstaUsua','FkIdGrupo')->
+        where('FkIdRol','=','1')->
+        get();
+
+        //Consulta para los coordinadores de la ficha
+        $coordinador = Ficha::find($id)->usuarios()->
+        select('NombUsua','ApelUsua')->
+        where('FkIdRol','=','3')->
+        get();
+
+        return view('fichas.fichas', compact('gruposFicha', 'instructores', 'aprendices', 'coordinador'))->with("fich", $fich);
+
     }
 
     /**
@@ -93,9 +118,9 @@ class fichaController extends Controller
         $fich->FinEtapElec = $request->input("finEtapa");
         $fich->JornFicha = $request->input("jornada");
 
-        $fich ->save();
+        $fich->save();
 
-        return redirect("ficha")->with("MensajeFicha","Información actualizada correctamente");
+        return redirect("ficha")->with("MensajeFicha", "Información actualizada correctamente");
     }
 
     /**

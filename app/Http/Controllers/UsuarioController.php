@@ -108,8 +108,8 @@ class UsuarioController extends Controller
         $User->TipoDocUsua = $request->input("tipoDoc");
         $User->NumbDocUsua = $request->input("numerodoc");
         $User->FechNaciUsua = $request->input("fechaNacimiento");
-        $User->CorrUsua = $request->input("email");
-        $User->ContraUsua = $request->input("contraseña");
+        $User->email = $request->input("email");
+        $User->password = $request->input("contraseña");
         $User->FkIdRol = $request->input("rol");
         $User->EstaUsua = $request->input("estado");
 

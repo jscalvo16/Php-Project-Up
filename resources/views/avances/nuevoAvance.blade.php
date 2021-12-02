@@ -163,41 +163,62 @@
                 <!-- Content Wrapper (subir un avance) START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Grupos</h2>
+                        <h2 class="header-title">Entregables</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
                                 <a href="index.html" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-                                <a class="breadcrumb-item" href="fichas.html">Ficha 2242753</a>
-                                <a class="breadcrumb-item" href="integrantes.html">S.I. Para la gestión de residentes en el CR La Aurora</a>
-                                <span class="breadcrumb-item active">Análisis de requisitos</span>
+                                <a class="breadcrumb-item" href="{{ url('ficha/'.$ficha->IdFicha) }}">Ficha {{ $ficha->NumbFich }}</a>
+                                <a class="breadcrumb-item" href="{{ url('ficha/'.$ficha->IdFicha.'/grupo/'.$grupo->IdGrupo) }}">{{ $grupo->NombGrupo }}</a>
+                                <span class="breadcrumb-item active">{{ $entregable->TituEntre }}</span>
                             </nav>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h1>Análisis de requisitos</h1>
+                            <h1>{{ $entregable->TituEntre }}</h1>
                             <br>
                             <!-- Descripción completa del entregable -->
                             <div class="row ">
                                 <div class="col-md-5">
                                     <h4>Descripción</h4>
                                     <p>
-                                        Subir un documento con los requisitos que han propuesto durante el levantamiento de información.
+                                        {{ $entregable->DescEntre }}
                                     </p>
+                                    <br>
+                                    @if ($entregable->ArchEntre == null)
+                                        <strong>No hay adjuntos compartidos</strong>
+                                    @elseif ($entregable->ArchEntre != null)
+                                        <strong>{{ $entregable->ArchEntre }}</strong>
+                                    @endif
                                 </div>
                                 <div class="col-md-5 ml-auto">
-                                    <h5>Fase de desarrollo</h5>
-                                    <p>
-                                        Análisis de requisitos
-                                    </p>
                                     <h5>Fecha de creación del espacio</h5>
                                     <p>
-                                        24/03/2020
+                                        {{ $entregable->FechIniEntre }}
                                     </p>
                                     <h5>Fecha de cierre del espacio</h5>
                                     <p>
-                                        05/04/2020
+                                        {{ $entregable->FechFin }}
                                     </p>
+                                    <h5>Fase de desarrollo</h5>
+                                    <p>
+                                        @if ($entregable->FkIdFase == 1)
+                                            Análisis de requisitos
+                                        @endif
+                                        @if ($entregable->FkIdFase == 2)
+                                            Diseño del sistema
+                                        @endif
+                                        @if ($entregable->FkIdFase == 3)
+                                            Implementación o Desarrollo
+                                        @endif
+                                        @if ($entregable->FkIdFase == 4)
+                                            Verificación
+                                        @endif
+                                        @if ($entregable->FkIdFase == 5)
+                                            Mantenimiento
+                                        @endif
+                                    </p>
+                                    <p>{{ $entregable->TrimEntre }}</p>
                                 </div>
                             </div>
                             <!-- Fin descripción completa -->
@@ -217,7 +238,7 @@
                                                     <h2>Subir avance</h2>
                                                 </div>
                                                 <div class="col-md-1 ml-auto">
-                                                    <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Solo se permite la carga de un archivo, si se desea subir más de uno puede subir un comprimido (.zip, .rar) <br> No se permite la carga individual de archivos ejectutables (.php, .java, .cs, .py, ...) Estos solo se permiten en archivos comprimidos"></i>
+                                                    <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Solo se permite la carga de un archivo, si se desea subir más de uno puede subir un comprimido (.zip, .rar) <br> No se permite la carga individual de archivos ejectutables (.php, .java, .cs, .py, .exe, ...) Estos solo se permiten en archivos comprimidos"></i>
                                                 </div>
                                             </div>
                                             <form action="#" method="POST">

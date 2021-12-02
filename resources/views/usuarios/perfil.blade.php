@@ -206,7 +206,7 @@
                                                     </li>
                                                     <li class="row">
                                                         <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
-                                                            <i class="m-r-10 inforPerfil anticon anticon-contacts"></i>
+                                                            <i class="m-r-10 inforPerfil anticon anticon-idcard"></i>
                                                             <span>Identificación: </span>
                                                         </p>
                                                         <p class="col font-weight-semibold"> T.I. - 1000856839</p>

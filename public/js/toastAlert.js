@@ -1,3 +1,3 @@
 setTimeout(function () {
     $('#notification-toast .toast:first-child').remove();
-}, 3000);
+}, 5000);

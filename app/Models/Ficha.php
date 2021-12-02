@@ -18,7 +18,10 @@ class Ficha extends Model
     }
 
     public function gruposDeProyecto(){
-
         return $this->hasMany('App\GrupoDeProyecto','FkIdFicha');
+    }
+
+    public function entregables(){
+        return $this->belongsToMany(Entregable::class, 'entregable_ficha', 'FkIdFicha', 'FkIdEntregable', 'IdFicha', 'IdEntre');
     }
 }
