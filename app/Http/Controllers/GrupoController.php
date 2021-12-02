@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\GrupoEditarRequest;
 use App\Http\Requests\GrupoRequest;
 
 use App\Models\Ficha;
@@ -118,45 +118,23 @@ class GrupoController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(GrupoRequest $request, $id)
+    public function update(GrupoEditarRequest $request, $id)
     {
         $Grupo = GrupoDeProyecto::find($id);
 
         //Sección actualizar  grupo
-
-
         $Grupo->NombGrupo = $request->input('nombreProyecto');
         $Grupo->DescriGrupo = $request->input('descProyecto');
         $Grupo->AlcanGrupo = $request->input('alcProyecto');
         $Grupo->FkIdFicha = $request->input('idFicha');
         $Grupo->save();
         $idGrupo = $Grupo->IdGrupo;
+
         //Sección actualizar usuario que lo vincula al grupo
-
-        $usuarioUno = Usuario::find($request->input('integrante1'));
-        $usuarioUno->FkIdGrupo = $idGrupo;
-        $usuarioUno->save();
-
-        $usuarioDos = Usuario::find($request->input('integrante2'));
-        $usuarioDos->FkIdGrupo = $idGrupo;
-        $usuarioDos->save();
-
-        $usuarioTres = Usuario::find($request->input('integrante3'));
-        $usuarioTres->FkIdGrupo = $idGrupo;
-        $usuarioTres->save();
-
-        $usuarioCuatro = Usuario::find($request->input('integrante4'));
-        $usuarioCuatro->FkIdGrupo = $idGrupo;
-        $usuarioCuatro->save();
-
-        //validacion de select´s
-
-        if ($request->input('integrante1') == $request->input('integrante2') && $request->input('integrante1') == $request->input('integrante3') && $request->input('integrante1') == $request->input('integrante4')) {
-            $message = "El aprendiz ya ha sido seleccionado";
-        } elseif ($request->input('integrante2') == $request->input('integrante3') && $request->input('integrante2') == $request->input('integrante4')) {
-            $message = "El aprendiz ya ha sido seleccionado";
-        } elseif ($request->input('integrante3') == $request->input('integrante4')) {
-            $message = "El aprendiz ya ha sido seleccionado";
+        if($request->input('integrante') != 'Ninguno'){
+            $usuarioUno = Usuario::find($request->input('integrante'));
+            $usuarioUno->FkIdGrupo = $idGrupo;
+            $usuarioUno->save();
         }
 
         return redirect('ficha/' . $request->input('idFicha').'/grupo/'.$Grupo->IdGrupo)->with('mensaje', 'Grupo actualizado exitosamente');
@@ -174,6 +152,7 @@ class GrupoController extends Controller
     }
 
     // *--- Métodos personalizados ---*
+
     public function mostrarGrupoFicha($idFicha, $idGrupo)
     {
         // Consultar el grupo de proyecto
@@ -186,7 +165,7 @@ class GrupoController extends Controller
         get();
 
         // Consultar los usuarios que pertenecen al grupo
-        $integrantesGrupo = Usuario::select('NombUsua', 'ApelUsua')->
+        $integrantesGrupo = Usuario::select('IdUsua', 'NombUsua', 'ApelUsua')->
         where('FkIdRol', '=', '1')->
         where('FkIdGrupo', '=', $idGrupo)->
         get();
@@ -202,28 +181,35 @@ class GrupoController extends Controller
         return view('fichas.integrantes', compact('grupo', 'entregables', 'integrantesGrupo', 'ficha','aprendices'));
     }
 
-    public function crearGrupo($idFicha){
+    public function crearGrupo($idFicha)
+    {
+        // Consultar aprendices en general
         $aprendices = Ficha::find($idFicha)->usuarios()->
         select('IdUsua','NombUsua','ApelUsua','email','NumbDocUsua','FechNaciUsua','EstaUsua','FkIdGrupo')->
         where('FkIdRol','=','1')->
         get();
 
-        $ficha=Ficha::find($idFicha);
+        // Consultar la ficha
+        $ficha = Ficha::find($idFicha);
 
         return view("grupos.nuevoGrupo",compact("aprendices","ficha"));
 
 
     }
 
-    public function editarGrupo($idFicha,$idGrupo){
+    public function editarGrupo($idFicha, $idGrupo)
+    {
+        // Consultar aprendices en general
         $aprendices = Ficha::find($idFicha)->usuarios()->
         select('IdUsua','NombUsua','ApelUsua','email','NumbDocUsua','FechNaciUsua','EstaUsua','FkIdGrupo')->
         where('FkIdRol','=','1')->
         get();
 
-        $ficha=Ficha::find($idFicha);
+        // Consultar la ficha
+        $ficha = Ficha::find($idFicha);
 
-        $grupo=GrupoDeProyecto::find($idGrupo);
+        // Consultar el grupo
+        $grupo = GrupoDeProyecto::find($idGrupo);
 
         // Consultar los usuarios que pertenecen al grupo
         $integrantesGrupo = Usuario::select('NombUsua', 'ApelUsua')->
@@ -232,8 +218,21 @@ class GrupoController extends Controller
         get();
 
         return view("grupos.editarGrupo",compact("aprendices","ficha","grupo","integrantesGrupo"));
+    }
 
+    public function desvincular(Request $request, $idIntegrante)
+    {
+        // Consultar el integrante
+        $integrante = Usuario::find($idIntegrante);
 
+        // Desvincular al integrante del grupo
+        $integrante->FkIdGrupo = NULL;
+        $integrante->save();
+
+        $ficha = $request->input('ficha');
+        $grupo = $request->input('grupo');
+
+        return redirect('ficha/' .$ficha.'/grupo/'.$grupo)->with('mensaje', 'Usuario desvinculado');
     }
 
     // *--- Fin métodos personalizados ---*

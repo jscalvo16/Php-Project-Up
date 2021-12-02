@@ -227,20 +227,14 @@
                                               id="alcProyecto">{{$grupo->AlcanGrupo}}</textarea>
                                     <strong
                                         class="text-danger">{{$errors->first('alcProyecto')}}</strong>
-
                                 </div>
 
-                                <h4 class="col-md-12"><sup class="obligatorio">*</sup>Integrantes
+                                <h4 class="col-md-12">Asignar nuevo integrantes
                                 </h4>
-                                <!-- Select integrante 1 -->
+                                <!-- Select integrantes -->
                                 <div class="form-group col-md-6">
-                                    <select id="integrante1" class="form-control" name="integrante1">
-
-                                        @foreach($integrantesGrupo as $integrante)
-                                            <option
-                                                value="{{$integrante->IdUsua}}" {{$integrante->FkIdGrupo == $grupo->IdGrupo ? "selected":""}}>{{$integrante->NombUsua}} {{$integrante->ApelUsua}}</option>
-                                        @endforeach
-
+                                    <select class="form-control" name="integrante">
+                                        <option value="Ninguno">Elige</option>
                                         @foreach($aprendices as $aprendiz)
                                             @if($aprendiz->FkIdGrupo==null)
                                                 <option value="{{$aprendiz->IdUsua}}">
@@ -248,83 +242,10 @@
                                                 </option>
                                             @endif
                                         @endforeach
-                                        <option value="0">Integrante 1</option>
                                     </select>
-
-
-                                </div>
-
-                                <!-- Select integrante 2 -->
-                                <div class="form-group col-md-6">
-                                    <select id="integrante2" class="form-control" name="integrante2">
-
-                                        @foreach($integrantesGrupo as $integrante)
-                                            <option
-                                                value="{{$integrante->IdUsua}}" {{$integrante->FkIdGrupo == $grupo->IdGrupo ? "selected":""}}>{{$integrante->NombUsua}} {{$integrante->ApelUsua}}</option>
-                                        @endforeach
-
-                                        @foreach($aprendices as $aprendiz)
-                                            @if($aprendiz->FkIdGrupo==null)
-                                                <option value="{{$aprendiz->IdUsua}}">
-                                                    {{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}
-                                                </option>
-                                            @endif
-                                        @endforeach
-
-                                        <option value="0">Integrante 2</option>
-                                    </select>
-
-
-                                </div>
-
-                                <!-- Select integrante 3 -->
-                                <div class="form-group col-md-6">
-                                    <select id="integrante3" class="form-control" name="integrante3">
-
-                                        @foreach($integrantesGrupo as $integrante)
-                                            <option
-                                                value="{{$integrante->IdUsua}}" {{$integrante->FkIdGrupo == $grupo->IdGrupo ? "selected":""}}>{{$integrante->NombUsua}} {{$integrante->ApelUsua}} </option>
-                                        @endforeach
-
-                                        @foreach($aprendices as $aprendiz)
-                                            @if($aprendiz->FkIdGrupo==null)
-                                                <option value="{{$aprendiz->IdUsua}}">
-                                                    {{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}
-                                                </option>
-                                            @endif
-                                        @endforeach
-
-                                        <option value="0">Integrante 3</option>
-                                    </select>
-
-
-                                </div>
-
-                                <!-- Select integrante 4 -->
-                                <div class="form-group col-md-6">
-                                    <select id="integrante4" class="form-control" name="integrante4">
-
-                                        @foreach($integrantesGrupo as $integrante)
-                                            <option
-                                                value="{{$integrante->IdUsua}}" {{$integrante->FkIdGrupo == $grupo->IdGrupo ? "selected":""}}>{{$integrante->NombUsua}} {{$integrante->ApelUsua}} </option>
-                                        @endforeach
-
-                                        @foreach($aprendices as $aprendiz)
-                                            @if($aprendiz->FkIdGrupo==null)
-                                                <option value="{{$aprendiz->IdUsua}}">
-                                                    {{$aprendiz->NombUsua}} {{$aprendiz->ApelUsua}}
-                                                </option>
-                                            @endif
-                                        @endforeach
-
-                                        <option value="0">Integrante 4</option>
-                                    </select>
-
-
-                                    <!--Input ID de la ficha-->
-                                    <input type="hidden" value="{{$grupo->FkIdFicha}}" name="idFicha">
                                 </div>
                             </div>
+                            <input type="hidden" name="idFicha" value="{{$ficha->IdFicha}}">
                             <input type="submit" class="btn btn-enviar" value="Editar">
                         </form>
                     </div>

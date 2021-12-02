@@ -34,15 +34,18 @@ Route::resource('ficha','App\Http\Controllers\fichaController');
 // Rutas para la gestión de los grupos de proyecto y relacionados
 // Ruta REST para la gestión  de grupos de proyecto
 Route::resource('grupo','App\Http\Controllers\GrupoController');
-//
+
+// Ruta para crear un grupo
 Route::get('ficha/{idFicha}/creargrupo','App\Http\Controllers\GrupoController@crearGrupo');
 
-//editar grupo
+// Ruta para editar un grupo
 Route::get('ficha/{idFicha}/grupo/{idGrupo}/editargrupo','App\Http\Controllers\GrupoController@editarGrupo');
 
 // Ruta para mostrar la información de grupo y los entregables de la ficha
 Route::get('ficha/{idFicha}/grupo/{idGrupo}', 'App\Http\Controllers\GrupoController@mostrarGrupoFicha');
 
+// Ruta para desvincular a un integrante de un grupo
+Route::post('desvincular/{idIntegrante}', 'App\Http\Controllers\GrupoController@desvincular');
 
 // Rutas para la gestión de los entregables y relacionados
 // Ruta REST para la gestión de entregables

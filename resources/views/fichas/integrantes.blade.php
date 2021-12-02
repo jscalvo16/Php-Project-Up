@@ -176,6 +176,25 @@
                     </div>
                 </div>
                 <div class="card">
+                    @if (session("mensaje"))
+                        <div class="notification-toast top-right" id="notification-toast" data-delay="3000">
+                            <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="alert alert-success m-b-0">
+                                    <button type="button" class="ml-2 close" data-dismiss="toast" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <div class="d-flex justify-content-start">
+                                <span class="alert-icon m-r-20 font-size-30">
+                                    <i class="anticon anticon-check-circle text-success"></i>
+                                </span>
+                                        <div class="m-t-10">
+                                            <p>{{ session("mensaje") }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-10">
@@ -214,10 +233,9 @@
 
                         <div class="row d-flex justify-content-center">
                             @foreach($integrantesGrupo as $integrante)
-
-                                <p class="col-md-3 integrante"><i class="anticon anticon-check-circle"></i>
+                                <button class="col-md-3 integrante m-lg-1 btn btn-default" data-toggle="modal" data-target="#desvincular{{$integrante->IdUsua}}"><i class="anticon anticon-check-circle"></i>
                                     {{$integrante->NombUsua}} {{$integrante->ApelUsua}}
-                                </p>
+                                </button>
                             @endforeach
                         </div>
                         <!-- Fin integrantes -->
@@ -231,21 +249,6 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <h2>Entregables</h2>
-                            </div>
-                            <div class="col-md-7 ml-auto">
-                                <form action="">
-                                    <div class="form-row">
-                                        <!-- Select Jornada de la ficha -->
-                                        <label class="col-md-1 ml-auto">Filtro: </label>
-                                        <div class="col-md-5">
-                                            <select id="trimestre" class="form-control"
-                                                    name="trimestre">
-                                                <option selected>Elige</option>
-                                                <option>Trimestres</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                         <!-- Entregables -->
@@ -291,6 +294,38 @@
                             @endforeach
                         </div>
                     </div>
+                    <!-- Modal para desvincular a un usuario -->
+                    @foreach ($integrantesGrupo as $integrante)
+                    <div class="modal fade" id="desvincular{{$integrante->IdUsua}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Desvincular usuario</h5>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <i class="anticon anticon-close"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <br>
+                                    <br>
+                                    <i class="anticon anticon-warning display-1 text-warning"></i>
+                                    <br>
+                                    <br>
+                                    <span>¿Desea desvincular a <strong>{{$integrante->NombUsua}}  {{$integrante->ApelUsua}}</strong>?</span>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    <form action="{{url('desvincular/'.$integrante->IdUsua)}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="ficha" value="{{$ficha->IdFicha}}">
+                                        <input type="hidden" name="grupo" value="{{$grupo->IdGrupo}}">
+                                        <input type="submit" class="btn btn-enviar" value="Desvincular">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
                 <!-- Content Wrapper (información del grupo seleccionado) END -->
 
@@ -318,6 +353,9 @@
 
     <!-- Core JS -->
     <script src=" {{ asset('js/app.min.js') }} "></script>
+
+    <!-- Cerrar toast js -->
+    <script src=" {{ asset('js/toastAlert.js') }} "></script>
 </body>
 
 </html>
