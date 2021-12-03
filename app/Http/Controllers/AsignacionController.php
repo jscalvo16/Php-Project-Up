@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use App\Models\Ficha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AsignacionController extends Controller
 {
@@ -15,23 +16,25 @@ class AsignacionController extends Controller
      */
     public function index()
     {
-
+        $Fichas = Ficha::all();
         //consulta para traer a los usuarios con rol instructor
         $instructor = Usuario::select('IdUsua', 'NombUsua', 'ApelUsua', 'FkIdRol')->
         where('FkIdRol', '=', 2)->
-        orderBy("NombUsua","asc")->
+        orderBy("NombUsua", "asc")->
         get();
 
         //consulta para traer a los usuarios con rol aprendiz
-        $apren = Usuario::select('IdUsua', 'NombUsua', 'ApelUsua', 'FkIdRol')->
-        where('FkIdRol', '=', 1)->
-        orderBy("NombUsua","asc")->
-        get();
-
+        $apren = DB::table('usuario')->
+            leftJoin('usuafich', 'usuafich.FkIdUsua', '=', 'usuario.IdUsua')->
+            select('usuario.IdUsua as IdUsuario', 'usuario.NombUsua as Nombre',
+            'usuario.ApelUsua as Apellido')->
+            where('FkIdUsua', '=', null)->
+            where('FkIdRol', '=', 1)->
+            get();
         //consulta para traer todas las fichas
         $fich = Ficha::select('IdFicha', 'NumbFich')->
         get();
-        return view('usuarios.asignarUsuarios', compact('instructor', 'apren', 'fich'));
+        return view('usuarios.asignarUsuarios', compact('instructor', 'apren', 'fich','Fichas'));
     }
 
     /**
@@ -65,7 +68,7 @@ class AsignacionController extends Controller
             $ins->intermedio()->attach($fich);
             $ins->save();
         }
-        return redirect('asignacion')->with('mensaje',"Usuarios asignados a la ficha con exito!");
+        return redirect('asignacion')->with('mensaje', "Usuarios asignados a la ficha con exito!");
     }
 
     /**

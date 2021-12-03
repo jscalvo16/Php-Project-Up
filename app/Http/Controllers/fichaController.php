@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EditarFichaRequest;
 use App\Models\Ficha;
-use App\Models\Usuario;
-use Illuminate\Http\Request;
 use App\Http\Requests\FichaRequest;
 
 class fichaController extends Controller

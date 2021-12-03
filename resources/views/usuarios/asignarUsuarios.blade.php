@@ -229,8 +229,8 @@
                                     <select id="inputState" class="form-control" name="apren[]" multiple>
                                         <option selected>Elige</option>
                                         @foreach($apren as $estu)
-                                            <option value="{{$estu->IdUsua}}">
-                                                {{$estu->NombUsua}} {{$estu->ApelUsua}}
+                                            <option value="{{$estu->IdUsuario}}">
+                                                {{$estu->Nombre}} {{$estu->Apellido}}
                                             </option>
                                         @endforeach
                                     </select>
