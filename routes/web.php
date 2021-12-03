@@ -80,3 +80,13 @@ Route::resource('asignacion','App\Http\Controllers\AsignacionController');
 
 // Ruta para enviar el mensaje
 Route::post('enviar', 'App\Http\Controllers\MensajesController@enviar');
+
+// Ruta para acceder a la página de reportes
+Route::get('reportes', 'App\Http\Controllers\ReportesController@mostrarVista');
+
+// Ruta para acceder al pdf
+Route::post('PDF', 'App\Http\Controllers\PDFController@informe');
+
+//Ruta para acceder al excel
+Route::post('E', 'App\Http\Controllers\ExcelController@export');
+

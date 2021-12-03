@@ -148,7 +148,7 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="reportes.html">
+                            <a class="dropdown-toggle" href="{{url('reportes')}}">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-snippets"></i>
                                 </span>
