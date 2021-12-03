@@ -32,13 +32,13 @@ Route::get('prueba-email',function(){
 });
 
 // Rutas para el cambio de contraseña por solicitud del usuario
-Route::get('recuperar-password', "App\Http\Controllers\Auth\ResetPasswordController@emailform")->middleware('auth');
+Route::get('recuperar-password', "App\Http\Controllers\Auth\ResetPasswordController@emailform");
 Route::post('enviar-link',"App\Http\Controllers\Auth\ResetPasswordController@submitlink");
-Route::get('reset-password/{token}', "App\Http\Controllers\Auth\ResetPasswordController@resetform")->middleware('auth');
+Route::get('reset-password/{token}', "App\Http\Controllers\Auth\ResetPasswordController@resetform");
 Route::post('reset-password', "App\Http\Controllers\Auth\ResetPasswordController@resetpassword");
 
 // Rutas para cambio de contraseña cuando se crea un usuario
-Route::get('cambiarContrasena/{idUser}', 'App\Http\Controllers\Auth\CambiarContrasenaController@mostrarFormCambiarPass')->middleware('auth');
+Route::get('cambiarContrasena/{idUser}', 'App\Http\Controllers\Auth\CambiarContrasenaController@mostrarFormCambiarPass');
 Route::post('cambiarContrasena/{idUser}', 'App\Http\Controllers\Auth\CambiarContrasenaController@cambiarContrasena');
 
 // Ruta REST para la gestión de fichas de caracterización
