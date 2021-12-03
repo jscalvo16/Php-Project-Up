@@ -39,6 +39,22 @@
                                     </select>
                                 </div>
 
+                                <!-- Select trimestre -->
+                                <div class="form-group col-md-6">
+                                    <label><sup class="obligatorio">*</sup>Trimestre</label>
+                                    <select id="trimestre" class="form-control" name="trimestre">
+                                        <option selected value="0">Elige</option>
+                                        <option value="Trimestre I" {{ $ficha->Trimestre == 'Trimestre I' ? 'selected' : '' }}>Trimestre I</option>
+                                        <option value="Trimestre II" {{ $ficha->Trimestre == 'Trimestre II' ? 'selected' : '' }}>Trimestre II</option>
+                                        <option value="Trimestre III" {{ $ficha->Trimestre == 'Trimestre III' ? 'selected' : '' }}>Trimestre III</option>
+                                        <option value="Trimestre IV" {{ $ficha->Trimestre == 'Trimestre IV' ? 'selected' : '' }}>Trimestre IV</option>
+                                        <option value="Trimestre V" {{ $ficha->Trimestre == 'Trimestre V' ? 'selected' : '' }}>Trimestre V</option>
+                                        <option value="Trimestre VI" {{ $ficha->Trimestre == 'Trimestre VI' ? 'selected' : '' }}>Trimestre VI</option>
+                                        <option value="Trimestre VII" {{ $ficha->Trimestre == 'Trimestre VII' ? 'selected' : '' }}>Trimestre VII</option>
+                                    </select>
+                                    <strong class="text-danger">{{$errors->first('trimestre')}}</strong>
+                                </div>
+
                                 <!-- Input Fecha inicio etapa lectiva -->
                                 <div class="form-group col-md-6">
                                     <label for="inicioEtapa"><sup class="obligatorio">*</sup>Fecha inicio de etapa lectiva</label>

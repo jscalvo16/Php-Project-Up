@@ -70,6 +70,7 @@ class fichaController extends Controller
         $newFich->InicEtapElec = $request->input("inicioEtapa");
         $newFich->FinEtapElec = $request->input("finEtapa");
         $newFich->JornFicha = $request->input("jornada");
+        $newFich->Trimestre = $request->input("trimestre");
         $newFich->save();
 
         return redirect("ficha")->with("MensajeFicha", "Ficha creada correctamente ");
@@ -159,6 +160,7 @@ class fichaController extends Controller
         $fich->InicEtapElec = $request->input("inicioEtapa");
         $fich->FinEtapElec = $request->input("finEtapa");
         $fich->JornFicha = $request->input("jornada");
+        $fich->Trimestre = $request->input("trimestre");
 
         $fich->save();
 

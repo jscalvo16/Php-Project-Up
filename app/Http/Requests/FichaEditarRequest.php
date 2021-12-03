@@ -27,7 +27,8 @@ class FichaEditarRequest extends FormRequest
             "numFicha" => "required|regex:/^[A-Z0-9\s]+$/u|max:11",
             "inicioEtapa" => "required|date",
             "finEtapa" => "required|date",
-            "jornada" => "required"
+            "jornada" => "required|not_in:0",
+            "trimestre" => "required|not_in:0",
         ];
     }
 
@@ -37,7 +38,9 @@ class FichaEditarRequest extends FormRequest
             "numFicha.required" => "El campo no puede estar vacío",
             "numFicha.max" => "El valor maximo debe ser 11 caracteres",
             "inicioEtapa.required" => "La fecha no puede estar vacía",
-            "finEtapa.required" => "La fecha no puede estar vacía"
+            "finEtapa.required" => "La fecha no puede estar vacía",
+            "jornada.not_in" => "Debes seleccionar una jornada",
+            "trimestre.not_in" => "Debes seleccionar una ficha",
         ];
     }
 }
