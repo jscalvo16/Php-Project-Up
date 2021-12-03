@@ -7,6 +7,7 @@ use App\Models\Retroalimentacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\Ficha;
 
 class MensajesController extends Controller
 {
@@ -52,7 +53,9 @@ class MensajesController extends Controller
         ->limit(15)
         ->get();
 
-        return view('avances.observaciones', compact('avance', 'mensajes'));
+        $fichas = Ficha::all();
+
+        return view('avances.observaciones', compact('avance', 'mensajes', 'fichas'));
     }
 
     // Registrar un mensaje en la base de datos

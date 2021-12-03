@@ -93,7 +93,7 @@
             <div class="side-nav">
                 <div class="side-nav-inner">
                     <ul class="side-nav-menu scrollable">
-                        <li class="nav-item dropdown open">
+                        <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="usuarios.html">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-user"></i>
@@ -115,18 +115,11 @@
                                     <li>
                                         <a href="gestionFichas.html">Gestión de fichas</a>
                                     </li>
+                                    @foreach($fichas as $f)
                                     <li>
-                                        <a href="fichas.html">2242753</a>
+                                        <a href="{{url('ficha/'.$f->IdFicha)}}">{{$f->NumbFich}}</a>
                                     </li>
-                                    <li>
-                                        <a href="#">2242745</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">2242742</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">2242756</a>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </a>
                         </li>

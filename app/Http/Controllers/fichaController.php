@@ -28,7 +28,8 @@ class fichaController extends Controller
      */
     public function create()
     {
-        return view('fichas.nuevaFicha');
+        $fichas = Ficha::all();
+        return view('fichas.nuevaFicha', compact('fichas'));
     }
 
     /**
@@ -85,7 +86,9 @@ class fichaController extends Controller
         where('FkIdRol','=','3')->
         get();
 
-        return view('fichas.fichas', compact('gruposFicha', 'instructores', 'aprendices', 'coordinador'))->with("fich", $fich);
+        $fichas = Ficha::all();
+
+        return view('fichas.fichas', compact('gruposFicha', 'instructores', 'aprendices', 'coordinador', 'fichas'))->with("fich", $fich);
 
     }
 
@@ -99,7 +102,9 @@ class fichaController extends Controller
     {
         $fich = Ficha::find($id);
 
-        return view('fichas.editarFicha')->with("ficha", $fich);
+        $fichas = Ficha::all();
+
+        return view('fichas.editarFicha', compact('fichas'))->with("ficha", $fich);
     }
 
     /**

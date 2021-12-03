@@ -26,7 +26,8 @@ class EntregableController extends Controller
         $fichaEntre = Ficha::with('entregables')->
         get();
 
-        return view('entregables.gestionEntregables')->with('infoEntre', $fichaEntre);
+        $fichas = Ficha::all();
+        return view('entregables.gestionEntregables', compact('fichas'))->with('infoEntre', $fichaEntre);
     }
 
     /**
@@ -204,7 +205,9 @@ class EntregableController extends Controller
         limit(1)->
         get();
 
-        return view('avances.nuevoAvance', compact('ficha', 'grupo', 'entregable', 'avance'));
+        $fichas = Ficha::all();
+
+        return view('avances.nuevoAvance', compact('ficha', 'grupo', 'entregable', 'avance', 'fichas'));
     }
 
     // Método para descargar el entregable

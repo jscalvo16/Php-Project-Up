@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use App\Models\Ficha;
 
 class UsuarioController extends Controller
 {
@@ -22,7 +23,8 @@ class UsuarioController extends Controller
     public function index()
     {
         $User = Usuario::all();
-        return view('usuarios.usuarios')->with('users', $User);
+        $fichas = Ficha::all();
+        return view('usuarios.usuarios', compact('fichas'))->with('users', $User);
     }
 
     /**
@@ -33,7 +35,8 @@ class UsuarioController extends Controller
     public function create()
     {
         $rol = Rol::all();
-        return view('usuarios.nuevoUsuario', compact('rol'));
+        $fichas = Ficha::all();
+        return view('usuarios.nuevoUsuario', compact('rol', 'fichas'));
     }
 
     /**
@@ -90,7 +93,8 @@ class UsuarioController extends Controller
     {
         $User = Usuario::find($id);
         $rol = Rol::all();
-        return view('usuarios.editarUsuario', compact('rol'))->with('usuario', $User);
+        $fichas = Ficha::all();
+        return view('usuarios.editarUsuario', compact('rol', 'fichas'))->with('usuario', $User);
     }
 
     /**

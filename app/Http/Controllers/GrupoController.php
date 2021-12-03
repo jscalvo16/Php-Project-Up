@@ -178,7 +178,9 @@ class GrupoController extends Controller
         //Consultar la ficha
         $ficha = Ficha::find($idFicha);
 
-        return view('fichas.integrantes', compact('grupo', 'entregables', 'integrantesGrupo', 'ficha','aprendices'));
+        $fichas = Ficha::all();
+
+        return view('fichas.integrantes', compact('grupo', 'entregables', 'integrantesGrupo', 'ficha','aprendices', 'fichas'));
     }
 
     public function crearGrupo($idFicha)
@@ -192,7 +194,9 @@ class GrupoController extends Controller
         // Consultar la ficha
         $ficha = Ficha::find($idFicha);
 
-        return view("grupos.nuevoGrupo",compact("aprendices","ficha"));
+        $fichas = Ficha::all();
+
+        return view("grupos.nuevoGrupo",compact("aprendices", "ficha", "fichas"));
 
 
     }
@@ -217,7 +221,9 @@ class GrupoController extends Controller
         where('FkIdGrupo', '=', $idGrupo)->
         get();
 
-        return view("grupos.editarGrupo",compact("aprendices","ficha","grupo","integrantesGrupo"));
+        $fichas = Ficha::all();
+
+        return view("grupos.editarGrupo",compact("aprendices", "ficha", "grupo", "integrantesGrupo", "fichas"));
     }
 
     public function desvincular(Request $request, $idIntegrante)
