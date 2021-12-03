@@ -6,6 +6,7 @@ use App\Mail\CambiarContrasenaMail;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -18,9 +19,11 @@ class CargaMasivaController extends Controller
         $archivo = $request->file('archivo');
         $excel = IOFactory::load($archivo);
 
-        $excel -> setActiveSheetIndex(0);
+        // $excel -> setActiveSheetIndex(0);
 
         $filaNumb = $excel->setActiveSheetIndex(0)->getHighestRow();
+
+        // dd($filaNumb);
 
         for($i=2;$i<=$filaNumb;$i++){
             $maxVal = Usuario::all()->max('IdUsua');
@@ -39,9 +42,9 @@ class CargaMasivaController extends Controller
 
             Mail::to($excel->getActiveSheet()->getCell('F'.$i)->getValue())->send(new CambiarContrasenaMail($maxVal));
             $user->save();
-
-            return redirect('users')->with("mensaje", "Carga Exitosa");
         }
+
+        return redirect('users')->with("mensaje", "Carga Exitosa");
     }
 }
 
