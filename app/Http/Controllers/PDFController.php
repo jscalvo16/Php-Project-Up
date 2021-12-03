@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PDFrequest;
 use App\Models\Avance;
 use Illuminate\Http\Request;
 use Crabbly\Fpdf\Fpdf;
@@ -10,7 +11,7 @@ use PDF;
 
 class PDFController extends Controller
 {
-    public function informe(Request $request){
+    public function informe(PDFrequest $request){
 
 
         $idFicha=$request->input('fichas');

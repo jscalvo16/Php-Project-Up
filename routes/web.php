@@ -88,5 +88,5 @@ Route::get('reportes', 'App\Http\Controllers\ReportesController@mostrarVista');
 Route::post('PDF', 'App\Http\Controllers\PDFController@informe');
 
 //Ruta para acceder al excel
-Route::post('E', 'App\Http\Controllers\ExcelController@export');
+Route::post('EXCEL', 'App\Http\Controllers\ExcelController@export');
 
