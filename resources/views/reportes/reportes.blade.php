@@ -175,19 +175,43 @@
                         <div class="card-body">
                             <h2>Generar un reporte</h2>
                             <br>
-                            <form action="#" method="GET">
+                            <form action="{{url('PDF')}}" method="POST">
+                                @csrf
                                 <div class="form-row">
                                     <!-- Select fichas -->
                                     <div class="form-group col-md-6">
-                                        <label><sup class="obligatorio">*</sup>Ficha</label>
-                                        <select id="inputState" class="form-control">
-                                            <option selected>Elige</option>
-                                            <option>Muchas fichas...</option>
+                                        <label><sup class="obligatorio">*</sup>Ficha(PDF)</label>
+                                        <select id="fichas" name="fichas" class="form-control">
+                                            <option selected value="0">Elige</option>
+                                            @foreach ( $fichas as $ficha )
+                                             <option value="{{$ficha->IdFicha}}">{{$ficha->NumbFich}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
                                     <div class="form-group col-md-1 ml-auto m-t-25">
-                                        <input type="submit" class="btn btn-enviar" value="Generar">
+                                        <input type="submit" class="btn btn-enviar" value="Generar PDF">
+
+                                    </div>
+                                </div>
+                            </form>
+                            <form action="{{url('E')}}" method="POST">
+                                @csrf
+                                <div class="form-row">
+                                    <!-- Select fichas -->
+                                    <div class="form-group col-md-6">
+                                        <label><sup class="obligatorio">*</sup>Ficha(Excel)</label>
+                                        <select id="fichas" name="fichas" class="form-control">
+                                            <option selected value="0">Elige</option>
+                                            @foreach ( $fichas as $ficha )
+                                             <option value="{{$ficha->IdFicha}}">{{$ficha->NumbFich}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-1 ml-auto m-t-25">
+                                        <input type="submit" class="btn btn-enviar" value="Generar Excel">
+
                                     </div>
                                 </div>
                             </form>

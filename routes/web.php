@@ -59,3 +59,10 @@ Route::get('observacion/{idAvance}', 'App\Http\Controllers\ObservacionController
 
 // Ruta para acceder a la página de reportes
 Route::get('reportes', 'App\Http\Controllers\ReportesController@mostrarVista');
+
+// Ruta para acceder al pdf
+Route::get('listado','App\Http\Controllers\PDFController@informe');
+Route::post('PDF', 'App\Http\Controllers\PDFController@informe');
+
+//Ruta para acceder al excel
+Route::post('E', 'App\Http\Controllers\ExcelController@export');
