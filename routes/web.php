@@ -90,3 +90,5 @@ Route::post('PDF', 'App\Http\Controllers\PDFController@informe');
 //Ruta para acceder al excel
 Route::post('EXCEL', 'App\Http\Controllers\ExcelController@export');
 
+// Ruta para descargar la plantilla
+Route::get('descargarplantilla', 'App\Http\Controllers\PlantillaController@descargarAvance');

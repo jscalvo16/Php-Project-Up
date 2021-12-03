@@ -148,8 +148,11 @@
                                                 <!-- Input cargar arcivo -->
                                                 <div class="form-group col-md-10">
                                                     <label for="archivo"><sup class="obligatorio">*</sup>Archivo
-                                                        (Excel <i
-                                                            class="anticon anticon-file-excel text-success"></i>)</label>
+                                                        (Excel <i class="anticon anticon-file-excel text-success"></i>)
+                                                    </label>
+                                                    <a href="{{ url('descargarplantilla') }}" style="color: #525252">
+                                                        <strong><u>Descargra plantilla de apoyo</u></strong>
+                                                    </a>
                                                     <input type="file" class="form-control" name="archivo"
                                                            id="archivo" placeholder="Archivo Excel">
                                                     <strong class="text-danger">{{$errors->first("archivo")}}</strong>
