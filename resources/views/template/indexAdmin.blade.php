@@ -124,7 +124,7 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="asignarUsuarios.html">
+                            <a class="dropdown-toggle" href="{{url('asignacion')}}">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-usergroup-add"></i>
                                 </span>

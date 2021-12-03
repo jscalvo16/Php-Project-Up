@@ -72,5 +72,11 @@ Route::resource('avance', 'App\Http\Controllers\AvanceController');
 // Ruta para abrir chat para las observaciones de un avance en específico
 Route::get('observacion/{idAvance}', 'App\Http\Controllers\MensajesController@mostrarChat');
 
+// Ruta para la carga masiva
+Route::post('carga','App\Http\Controllers\CargaMasivaController@cargaM');
+
+// Ruta REST para la asignación
+Route::resource('asignacion','App\Http\Controllers\AsignacionController');
+
 // Ruta para enviar el mensaje
 Route::post('enviar', 'App\Http\Controllers\MensajesController@enviar');

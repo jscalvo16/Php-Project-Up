@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\UserEditarRequest;
 use App\Http\Requests\UserRequest;
 use App\Mail\CambiarContrasenaMail;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\Ficha;
+// use Maatwebsite\Excel\Facades\Excel;
+
 
 class UsuarioController extends Controller
 {
@@ -47,6 +50,7 @@ class UsuarioController extends Controller
      */
     public function store(UserRequest $request)
     {
+
         $maxVal = Usuario::all()->max('IdUsua');
         $maxVal++;
 
@@ -152,5 +156,13 @@ class UsuarioController extends Controller
         }
         return redirect('users');
     }
+
+    /*
+    public  function cargaM(CargaMasivaRequest $request){
+        $carga = ($request->file('archivo'));
+        Excel::import(new UsuariosCarga(), $carga);
+        return redirect('users')->with("mensaje", "Carga Exitosa");
+    }
+    */
 
 }

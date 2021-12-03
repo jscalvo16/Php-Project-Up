@@ -12,8 +12,17 @@ class Usuario extends Model
     protected $primaryKey = "IdUsua";
     public $timestamps = false;
 
-    public function retroalimentaciones(){
+    protected $guarded = [];
 
+    public function retroalimentaciones(){
         return $this->hasMany('App\Retroalimentacion','FkIdUsua');
+    }
+
+    public function intermedio(){
+        return $this->belongsToMany(Usuario::class, 'usuafich', 'FkIdUsua', 'FkIdFicha', 'IdUsua', 'IdFich');
+    }
+
+    public function usuaFicha(){
+        return $this->hasMany('App\UsuaFichPivo', 'FkIdUsua');
     }
 }
