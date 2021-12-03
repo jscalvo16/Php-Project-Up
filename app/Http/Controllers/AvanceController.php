@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AvanceRequest;
 use App\Models\Avance;
+use App\Models\Ficha;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -26,7 +27,9 @@ class AvanceController extends Controller
         'avance.IdAvan', 'avance.DescAvan', 'avance.FechAvan', 'avance.ArchAvan', 'avance.rutaArchivoAvan', 'ficha.NumbFich')
         ->get();
 
-        return view('avances.avances')->with('avances', $avances);
+        $fichas = Ficha::all();
+
+        return view('avances.avances', compact('fichas'))->with('avances', $avances);
     }
 
     /**
@@ -107,7 +110,9 @@ class AvanceController extends Controller
         ->get();
         */
 
-        return view('avances.editarAvance')->with('avance', $avance);
+        $fichas = Ficha::all();
+
+        return view('avances.editarAvance', compact('fichas'))->with('avance', $avance);
     }
 
     /**
