@@ -5,7 +5,7 @@
                         <h2 class="header-title">Entregables</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
-                                <a href="index.html" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
+                                <span class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</span>
                                 <a class="breadcrumb-item" href="{{ url('avance') }}">Documentos</a>
                                 <span class="breadcrumb-item active">Modificar documento</span>
                             </nav>

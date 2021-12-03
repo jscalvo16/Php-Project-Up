@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FichaEditarRequest;
 use App\Models\Ficha;
 use App\Models\GrupoDeProyecto;
 use App\Models\Usuario;
@@ -114,7 +115,7 @@ class fichaController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FichaRequest $request, $id)
+    public function update(FichaEditarRequest $request, $id)
     {
         $fich = Ficha::find($id);
 

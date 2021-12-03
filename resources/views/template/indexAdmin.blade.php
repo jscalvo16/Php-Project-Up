@@ -94,7 +94,7 @@
                 <div class="side-nav-inner">
                     <ul class="side-nav-menu scrollable">
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="usuarios.html">
+                            <a class="dropdown-toggle" href="{{url('users')}}">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-user"></i>
                                 </span>
@@ -113,7 +113,7 @@
                             </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="gestionFichas.html">Gestión de fichas</a>
+                                        <a href="{{url('ficha')}}">Gestión de fichas</a>
                                     </li>
                                     @foreach($fichas as $f)
                                     <li>
@@ -140,7 +140,7 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="avances.html">
+                            <a class="dropdown-toggle" href="{{url('avance')}}">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-file-done"></i>
                                 </span>

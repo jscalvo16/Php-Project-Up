@@ -5,7 +5,7 @@
                     <h2 class="header-title">Fichas</h2>
                     <div class="header-sub-title">
                         <nav class="breadcrumb breadcrumb-dash">
-                            <a href="index.html" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
+                            <span class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</span>
                             <a class="breadcrumb-item" href="{{url('ficha')}}">Fichas</a>
                             <span class="breadcrumb-item active">Modificar ficha</span>
                         </nav>
@@ -32,9 +32,9 @@
                                     <label><sup class="obligatorio">*</sup>Jornada</label>
                                     <select id="inputState" class="form-control" name="jornada">
                                         <option selected>Elige</option>
-                                        <option value="Diurna">Jornada Diurna</option>
-                                        <option value="Mixta">Jornada Mixta</option>
-                                        <option value="Nocturna">Jornada Nocturna</option>
+                                        <option value="Diurna" {{ $ficha->JornFicha == 'Diurna' ? 'selected' : '' }}>Jornada Diurna</option>
+                                        <option value="Tarde" {{ $ficha->JornFicha == 'Tarde' ? 'selected' : '' }}>Jornada Tarde</option>
+                                        <option value="Nocturna" {{ $ficha->JornFicha == 'Nocturna' ? 'selected' : '' }}>Jornada Nocturna</option>
                                         <strong class="text-danger">{{$errors->first('jornada')}}</strong>
                                     </select>
                                 </div>
