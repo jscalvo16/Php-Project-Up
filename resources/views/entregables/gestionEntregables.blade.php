@@ -35,11 +35,13 @@
                                 <div class="col-md-4">
                                     <h2>Espacios de entregable</h2>
                                 </div>
+                                @if ( Auth::user()->FkIdRol == 2 )
                                 <div class="col-md-3 ml-auto">
                                     <a class="btn btn-agregar-usuario" href="{{ url('entregable/create') }}">
                                         <i class="anticon anticon-plus"></i> Crear entregable
                                     </a>
                                 </div>
+                                @endif
                             </div>
                             <div class="m-t-25">
                                 <table id="data-table" class="table">
@@ -53,7 +55,9 @@
                                             <th>Instructor</th>
                                             <th>Fase</th>
                                             <th>Ficha</th>
+                                            @if ( Auth::user()->FkIdRol == 2 )
                                             <th>Acciones</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -86,11 +90,13 @@
                                                     <td>Mantenimiento</td>
                                                 @endif
                                                 <td>{{ $ficha->NumbFich }}</td>
+                                                @if ( Auth::user()->FkIdRol == 2 )
                                                 <td>
                                                     <a class="btn btn-info" href="{{ url('entregable/'. $entre->IdEntre. '/edit') }}" title="Modificar">
                                                         <i class="anticon anticon-form" title="Modificar"></i>
                                                     </a>
                                                 </td>
+                                                @endif
                                             </tr>
                                             @endforeach
                                         @endforeach
@@ -104,7 +110,9 @@
                                             <th>Adjunto</th>
                                             <th>Instructor</th>
                                             <th>Fase</th>
+                                            @if ( Auth::user()->FkIdRol == 2 )
                                             <th>Acciones</th>
+                                            @endif
                                         </tr>
                                     </tfoot>
                                 </table>

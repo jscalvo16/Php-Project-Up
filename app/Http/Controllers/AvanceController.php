@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class AvanceController extends Controller
 {
@@ -27,7 +28,15 @@ class AvanceController extends Controller
         'avance.IdAvan', 'avance.DescAvan', 'avance.FechAvan', 'avance.ArchAvan', 'avance.rutaArchivoAvan', 'ficha.NumbFich')
         ->get();
 
-        $fichas = Ficha::all();
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
 
         return view('avances.avances', compact('fichas'))->with('avances', $avances);
     }
@@ -110,7 +119,15 @@ class AvanceController extends Controller
         ->get();
         */
 
-        $fichas = Ficha::all();
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
 
         return view('avances.editarAvance', compact('fichas'))->with('avance', $avance);
     }

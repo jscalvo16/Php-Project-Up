@@ -8,6 +8,8 @@ use App\Models\GrupoDeProyecto;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Http\Requests\FichaRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class fichaController extends Controller
 {
@@ -18,8 +20,17 @@ class fichaController extends Controller
      */
     public function index()
     {
-        $fich = Ficha::all();
-        return view('fichas.gestionFichas')->with('fichas', $fich);
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
+
+        return view('fichas.gestionFichas', compact('fichas'));
     }
 
     /**
@@ -29,7 +40,16 @@ class fichaController extends Controller
      */
     public function create()
     {
-        $fichas = Ficha::all();
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
+
         return view('fichas.nuevaFicha', compact('fichas'));
     }
 
@@ -87,7 +107,15 @@ class fichaController extends Controller
         where('FkIdRol','=','3')->
         get();
 
-        $fichas = Ficha::all();
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
 
         return view('fichas.fichas', compact('gruposFicha', 'instructores', 'aprendices', 'coordinador', 'fichas'))->with("fich", $fich);
 
@@ -103,7 +131,15 @@ class fichaController extends Controller
     {
         $fich = Ficha::find($id);
 
-        $fichas = Ficha::all();
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
 
         return view('fichas.editarFicha', compact('fichas'))->with("ficha", $fich);
     }

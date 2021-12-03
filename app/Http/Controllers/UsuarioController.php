@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\Ficha;
-// use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class UsuarioController extends Controller
@@ -26,7 +27,17 @@ class UsuarioController extends Controller
     public function index()
     {
         $User = Usuario::all();
-        $fichas = Ficha::all();
+
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
+
         return view('usuarios.usuarios', compact('fichas'))->with('users', $User);
     }
 
@@ -38,7 +49,17 @@ class UsuarioController extends Controller
     public function create()
     {
         $rol = Rol::all();
-        $fichas = Ficha::all();
+
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
+
         return view('usuarios.nuevoUsuario', compact('rol', 'fichas'));
     }
 
@@ -97,7 +118,17 @@ class UsuarioController extends Controller
     {
         $User = Usuario::find($id);
         $rol = Rol::all();
-        $fichas = Ficha::all();
+
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
+
         return view('usuarios.editarUsuario', compact('rol', 'fichas'))->with('usuario', $User);
     }
 
@@ -156,13 +187,4 @@ class UsuarioController extends Controller
         }
         return redirect('users');
     }
-
-    /*
-    public  function cargaM(CargaMasivaRequest $request){
-        $carga = ($request->file('archivo'));
-        Excel::import(new UsuariosCarga(), $carga);
-        return redirect('users')->with("mensaje", "Carga Exitosa");
-    }
-    */
-
 }

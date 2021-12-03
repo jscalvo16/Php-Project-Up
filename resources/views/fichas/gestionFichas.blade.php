@@ -36,11 +36,13 @@
                             <div class="col-md-3">
                                 <h2>Fichas</h2>
                             </div>
+                            @if ( Auth::user()->FkIdRol == 4 )
                             <div class="col-md-2 ml-auto">
                                 <a class="btn btn-agregar-usuario" href="{{url('ficha/create')}}">
                                     <i class="anticon anticon-plus"></i> Crear ficha
                                 </a>
                             </div>
+                            @endif
                         </div>
                         <div class="m-t-25">
                             <table id="data-table" class="table">
@@ -50,7 +52,9 @@
                                     <th>Inicio etapa lectiva</th>
                                     <th>Fin etapa lectiva</th>
                                     <th>Jornada</th>
+                                    @if ( Auth::user()->FkIdRol == 4 )
                                     <th>Acciones</th>
+                                    @endif
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -60,11 +64,13 @@
                                         <td>{{$fich -> InicEtapElec}}</td>
                                         <td>{{$fich -> FinEtapElec}}</td>
                                         <td>{{$fich -> JornFicha}}</td>
+                                        @if ( Auth::user()->FkIdRol == 4 )
                                         <td>
                                             <a class="btn btn-info" href="{{url('ficha/'.$fich->IdFicha.'/edit')}}" title="Modificar">
                                                 <i class="anticon anticon-form" title="Modificar"></i>
                                             </a>
                                         </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -74,7 +80,9 @@
                                     <th>Inicio etapa lectiva</th>
                                     <th>Fin etapa lectiva</th>
                                     <th>Jornada</th>
+                                    @if ( Auth::user()->FkIdRol == 4 )
                                     <th>Acciones</th>
+                                    @endif
                                 </tr>
                                 </tfoot>
                             </table>

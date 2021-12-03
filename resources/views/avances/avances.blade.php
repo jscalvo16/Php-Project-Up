@@ -181,13 +181,17 @@
                                     <!-- Footer de la tarjeta -->
                                     <div class="card-footer">
                                         <div class="row">
+                                            @if ( Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2 )
                                             <a class="btn btn-cerrar-modal col-md-7" href="{{ url('observacion/'.$avan->IdAvan) }}">Observaciones</a>
                                             <a class="btn btn-ver-mas col-md-2 ml-auto" href="{{ url('ficha/'.$avan->FkIdFicha.'/grupo/'.$avan->IdGrupo.'/entregable/'.$avan->FkIdEntre) }}" title="Ver más">
                                                 <i class="anticon anticon-plus" title="Ver más"></i>
                                             </a>
+                                            @endif
+                                            @if ( Auth::user()->FkIdRol == 1 )
                                             <a class="btn btn-info col-md-2" href="{{ url('avance/'.$avan->IdAvan.'/edit') }}" title="Modificar">
                                                 <i class="anticon anticon-form" title="Modificar"></i>
                                             </a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

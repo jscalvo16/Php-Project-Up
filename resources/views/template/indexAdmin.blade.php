@@ -57,16 +57,24 @@
                             <div class="p-b-15 p-t-20 dropdown-menu pop-profile">
                                 <div class="p-h-20 p-b-15 m-b-10 border-bottom">
                                     <div class="d-flex m-r-50">
-                                        <div class="avatar avatar-lg avatar-image">
-                                            <img src="{{ asset('assets/img/avatars/logo-sena.png') }}" alt="Logo SENA">
-                                        </div>
-                                        <div class="m-l-10">
-                                            <p class="m-b-0 text-dark font-weight-semibold">Nicolas Rosero</p>
-                                            <p class="m-b-0 opacity-07">UI/UX Desinger</p>
+                                        <div>
+                                            <p class="m-b-0 text-dark font-weight-semibold">{{ Auth::user()->NombUsua }} {{ Auth::user()->ApelUsua }}</p>
+                                            @if (Auth::user()->FkIdRol == 1)
+                                                <p class="m-b-0 opacity-07">Aprendiz</p>
+                                            @endif
+                                            @if (Auth::user()->FkIdRol == 2)
+                                                <p class="m-b-0 opacity-07">Instructor</p>
+                                            @endif
+                                            @if (Auth::user()->FkIdRol == 3)
+                                                <p class="m-b-0 opacity-07">Coordinador</p>
+                                            @endif
+                                            @if (Auth::user()->FkIdRol == 4)
+                                                <p class="m-b-0 opacity-07">Administrador</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                                <a href="perfil.html" class="dropdown-item d-block p-h-15 p-v-10">
+                                <a href="{{ url('perfil') }}" class="dropdown-item d-block p-h-15 p-v-10">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div>
                                             <i class="anticon opacity-04 font-size-16 anticon-user"></i>
@@ -93,6 +101,7 @@
             <div class="side-nav">
                 <div class="side-nav-inner">
                     <ul class="side-nav-menu scrollable">
+                        @if ( Auth::user()->FkIdRol == 4 )
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="{{url('users')}}">
                                 <span class="icon-holder">
@@ -101,6 +110,7 @@
                                 <span class="title">Usuarios</span>
                             </a>
                         </li>
+                        @endif
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="javascript:void(0);">
                                 <span class="icon-holder">
@@ -112,9 +122,11 @@
 								</span>
                             </a>
                                 <ul class="dropdown-menu">
+                                    @if ( Auth::user()->FkIdRol == 4 || Auth::user()->FkIdRol == 3 || Auth::user()->FkIdRol == 2 )
                                     <li>
                                         <a href="{{url('ficha')}}">Gestión de fichas</a>
                                     </li>
+                                    @endif
                                     @foreach($fichas as $f)
                                     <li>
                                         <a href="{{url('ficha/'.$f->IdFicha)}}">{{$f->NumbFich}}</a>
@@ -123,6 +135,7 @@
                                 </ul>
                             </a>
                         </li>
+                        @if ( Auth::user()->FkIdRol == 4 || Auth::user()->FkIdRol == 3 )
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="{{url('asignacion')}}">
                                 <span class="icon-holder">
@@ -131,6 +144,8 @@
                                 <span class="title">Asignación</span>
                             </a>
                         </li>
+                        @endif
+                        @if ( Auth::user()->FkIdRol == 2 || Auth::user()->FkIdRol == 3 )
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="{{ url('entregable') }}">
                                 <span class="icon-holder">
@@ -139,6 +154,7 @@
                                 <span class="title">Entregables</span>
                             </a>
                         </li>
+                        @endif
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="{{url('avance')}}">
                                 <span class="icon-holder">
@@ -147,6 +163,7 @@
                                 <span class="title">Avances</span>
                             </a>
                         </li>
+                        @if (Auth::user()->FkIdRol == 2)
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="{{url('reportes')}}">
                                 <span class="icon-holder">
@@ -155,6 +172,7 @@
                                 <span class="title">Reportes</span>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>

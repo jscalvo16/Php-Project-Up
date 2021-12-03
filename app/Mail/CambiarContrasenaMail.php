@@ -11,15 +11,15 @@ class CambiarContrasenaMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $idUser;
+    public $id;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($idUser)
+    public function __construct($id)
     {
-        $this->idUser = $idUser;
+        $this->id = $id;
     }
 
     /**

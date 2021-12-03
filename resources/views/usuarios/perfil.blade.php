@@ -23,8 +23,19 @@
                                                 </div>
                                             </div>
                                             <div class="text-center text-sm-left m-v-15 p-l-30">
-                                                <h2 class="m-b-5">Nicolas Rosero</h2>
-                                                <p class="text-opacity font-size-13">Aprendiz</p>
+                                                <h2 class="m-b-5">{{ Auth::user()->NombUsua }} {{ Auth::user()->ApelUsua }} </h2>
+                                                @if (Auth::user()->FkIdRol == 1)
+                                                    <p class="m-b-0 opacity-07">Aprendiz</p>
+                                                @endif
+                                                @if (Auth::user()->FkIdRol == 2)
+                                                    <p class="m-b-0 opacity-07">Instructor</p>
+                                                @endif
+                                                @if (Auth::user()->FkIdRol == 3)
+                                                    <p class="m-b-0 opacity-07">Coordinador</p>
+                                                @endif
+                                                @if (Auth::user()->FkIdRol == 4)
+                                                    <p class="m-b-0 opacity-07">Administrador</p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -38,21 +49,21 @@
                                                             <i class="m-r-10 inforPerfil fas fa-birthday-cake"></i>
                                                             <span>Fecha NA: </span>
                                                         </p>
-                                                        <p class="col font-weight-semibold"> 23/10/2003</p>
+                                                        <p class="col font-weight-semibold"> {{ Auth::user()->FechNaciUsua }}</p>
                                                     </li>
                                                     <li class="row">
                                                         <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
                                                             <i class="m-r-10 inforPerfil anticon anticon-idcard"></i>
                                                             <span>Identificación: </span>
                                                         </p>
-                                                        <p class="col font-weight-semibold"> T.I. - 1000856839</p>
+                                                        <p class="col font-weight-semibold"> {{ Auth::user()->TipoDocUsua }} - {{ Auth::user()->NumbDocUsua }}</p>
                                                     </li>
                                                     <li class="row">
                                                         <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
                                                             <i class="m-r-10 inforPerfil anticon anticon-mail"></i>
                                                             <span>Correo: </span>
                                                         </p>
-                                                        <p class="col font-weight-semibold"> nrosero93@misena.edu.co</p>
+                                                        <p class="col font-weight-semibold"> {{ Auth::user()->email }}</p>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -62,44 +73,6 @@
                             </div>
                         </div>
                         <!-- Fin perfil -->
-
-                        <!-- Sección cambio contraseña -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <h2>Cambiar contraseña</h2>
-                                    </div>
-                                    <!-- Formulario -->
-                                    <div class="col-md-12">
-                                        <form action="#" method="POST">
-                                            <div class="form-row">
-                                                <!-- Input contraseña existente -->
-                                                <div class="form-group col-md-6">
-                                                    <label for="passExistente"><sup class="obligatorio">*</sup>Contraseña antigua</label>
-                                                    <input type="password" class="form-control" name="passExistente" id="passExistente" placeholder="Contraseña antigua">
-                                                </div>
-
-                                                <!-- Input contraseña nueva -->
-                                                <div class="form-group col-md-6">
-                                                    <label for="passNueva"><sup class="obligatorio">*</sup>Contraseña nueva</label>
-                                                    <input type="password" class="form-control" name="passNueva" id="passNueva" placeholder="Contraseña nueva">
-                                                </div>
-
-                                                <!-- Input confirmar contraseña -->
-                                                <div class="form-group col-md-6">
-                                                    <label for="confirmPass"><sup class="obligatorio">*</sup>Confirmar contraseña</label>
-                                                    <input type="password" class="form-control" name="confirmPass" id="confirmPass" placeholder="Confirmar contraseña">
-                                                </div>
-                                            </div>
-                                            <input type="submit" class="btn btn-enviar" value="Cambiar">
-                                        </form>
-                                    </div>
-                                    <!-- Fin formularios -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Fin cambio contraseña -->
                     </div>
                 </div>
 @endsection

@@ -56,7 +56,7 @@ class ResetPasswordController extends Controller
         Mail::to($r->input("email"))->send(new ResetPasswordMail($token));
 
         // Retornar al login
-        return view('autenticacion.login');
+        return redirect('login');
     }
 
     // Método para mostrar el formulario para cambiar la contraseña

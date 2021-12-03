@@ -42,6 +42,7 @@
                                     <p>
                                         {{ $entregable->DescEntre }}
                                     </p>
+                                    @if ( Auth::user()->FkIdRol == 1 )
                                     <br>
                                     @if ($entregable->ArchEntre == null)
                                         <strong>No hay adjuntos compartidos</strong>
@@ -49,6 +50,7 @@
                                         <a href="{{ url('descargarEntre/'.$entregable->IdEntre) }}" style="color: #525252">
                                             <strong>{{ $entregable->ArchEntre }}</strong>
                                         </a>
+                                    @endif
                                     @endif
                                 </div>
                                 <div class="col-md-5 ml-auto">
@@ -86,10 +88,10 @@
                             <br>
                             <br>
                             <br>
-
                             <!-- Sección del formulario para subir el avance -->
                             <div class="row">
                                 <!-- Sección del formulario-->
+                                @if ( Auth::user()->FkIdRol == 1 )
                                 <div class="col-md-7">
                                     <div class="card">
                                         <div class="card-body">
@@ -127,9 +129,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                                 <!-- Fin formulario -->
 
                                 <!-- Sección del archivo -->
+                                @if ( Auth::user()->FkIdRol == 2 || Auth::user()->FkIdRol == 1)
                                 @foreach ( $avance as $avan )
                                 <div class="col-md-4 ml-auto">
                                     <div class="card">
@@ -268,6 +272,7 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                @endif
                                 <!-- Fin archivo -->
                             </div>
                         </div>

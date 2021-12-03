@@ -72,6 +72,19 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+                                <!-- Select aprendices -->
+                                <div class="form-group col-md-6">
+                                    <label>Coordinador</label>
+                                    <select id="inputState" class="form-control" name="coordinador">
+                                        <option selected>Elige</option>
+                                        @foreach($coordinador as $co)
+                                            <option value="{{$co->IdUsua}}">
+                                                {{$co->NombUsua}} {{$co->ApelUsua}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <input type="submit" class="btn btn-enviar" value="Asignar">

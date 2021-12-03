@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Ficha;
+use Illuminate\Support\Facades\Auth;
 
 class MensajesController extends Controller
 {
@@ -53,7 +54,15 @@ class MensajesController extends Controller
         ->limit(15)
         ->get();
 
-        $fichas = Ficha::all();
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
 
         return view('avances.observaciones', compact('avance', 'mensajes', 'fichas'));
     }

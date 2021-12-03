@@ -22,7 +22,7 @@
 
     <!-- Footer del mensaje -->
     <div class="email__footer">
-        <a href="{{url('cambiarContrasena/'. $idUser)}}">
+        <a href="{{url('cambiarContrasena/'. $id)}}">
             <button class="footer__button" type="button" value="Read more">
                 Cambiar de contraseña
             </button>

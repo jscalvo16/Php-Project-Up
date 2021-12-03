@@ -77,11 +77,13 @@
                                         <h4>Aprendices</h4>
                                     </div>
                                     <!-- Crear grupo y entregables (botones) -->
+                                    @if ( Auth::user()->FkIdRol == 2 )
                                     <div class="col-md-2 ml-auto">
                                         <a class="btn btn-crear" href="{{url('ficha/'.$fich->IdFicha.'/creargrupo')}}">
                                             <i class="anticon anticon-plus"></i> Crear grupo
                                         </a>
                                     </div>
+                                    @endif
                                 </div>
                                 <div class="m-t-25">
                                     <table id="data-table" class="table">

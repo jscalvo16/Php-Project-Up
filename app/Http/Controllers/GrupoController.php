@@ -10,6 +10,8 @@ use App\Models\GrupoDeProyecto;
 use App\Models\User;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class GrupoController extends Controller
 {
@@ -178,7 +180,15 @@ class GrupoController extends Controller
         //Consultar la ficha
         $ficha = Ficha::find($idFicha);
 
-        $fichas = Ficha::all();
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
 
         return view('fichas.integrantes', compact('grupo', 'entregables', 'integrantesGrupo', 'ficha','aprendices', 'fichas'));
     }
@@ -194,7 +204,15 @@ class GrupoController extends Controller
         // Consultar la ficha
         $ficha = Ficha::find($idFicha);
 
-        $fichas = Ficha::all();
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
 
         return view("grupos.nuevoGrupo",compact("aprendices", "ficha", "fichas"));
 
@@ -221,7 +239,15 @@ class GrupoController extends Controller
         where('FkIdGrupo', '=', $idGrupo)->
         get();
 
-        $fichas = Ficha::all();
+        if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
+            $fichas = DB::table('ficha')->
+            leftJoin('usuafich', 'usuafich.FkIdFicha', '=', 'ficha.IdFicha')->
+            select('ficha.IdFicha as IdFicha', 'ficha.NumbFich as NumbFich', 'ficha.Trimestre as Trimestre', 'ficha.InicEtapElec as InicEtapElec', 'ficha.FinEtapElec as FinEtapElec', 'ficha.JornFicha as JornFicha')->
+            where('usuafich.FkIdUsua', '=', Auth::user()->IdUsua)->
+            get();
+        }else{
+            $fichas = Ficha::all();
+        }
 
         return view("grupos.editarGrupo",compact("aprendices", "ficha", "grupo", "integrantesGrupo", "fichas"));
     }

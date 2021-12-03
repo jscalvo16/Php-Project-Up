@@ -39,11 +39,13 @@
                             <div class="col-md-10">
                                 <h1> {{$grupo->NombGrupo}}</h1>
                             </div>
+                            @if ( Auth::user()->FkIdRol == 2 )
                             <div class="col-md-1 ml-auto">
                                 <a class="btn btn-crear" title="Modificar" href="{{url('ficha/'.$ficha->IdFicha.'/grupo/'.$grupo->IdGrupo.'/editargrupo')}}">
                                     <i class="anticon anticon-form" title="Modificar"></i>
                                 </a>
                             </div>
+                            @endif
                         </div>
 
                         <br>
@@ -71,17 +73,25 @@
                         <h4>Integrantes</h4>
 
                         <div class="row d-flex justify-content-center">
+                            @if ( Auth::user()->FkIdRol == 2 )
                             @foreach($integrantesGrupo as $integrante)
                                 <button class="col-md-3 integrante m-lg-1 btn btn-default" data-toggle="modal" data-target="#desvincular{{$integrante->IdUsua}}"><i class="anticon anticon-check-circle"></i>
                                     {{$integrante->NombUsua}} {{$integrante->ApelUsua}}
                                 </button>
                             @endforeach
+                            @else
+                            @foreach($integrantesGrupo as $integrante)
+                                <span class="col-md-3 integrante m-lg-1"><i class="anticon anticon-check-circle"></i>
+                                    {{$integrante->NombUsua}} {{$integrante->ApelUsua}}
+                                </span>
+                            @endforeach
+                            @endif
                         </div>
                         <!-- Fin integrantes -->
                     </div>
                 </div>
 
-
+                @if ( Auth::user()->FkIdRol == 1 &&  Auth::user()->FkIdGrupo == $grupo->IdGrupo || Auth::user()->FkIdRol == 2 || Auth::user()->FkIdRol == 3 || Auth::user()->FkIdRol == 4 )
                 <div class="card">
                     <div class="card-body">
                         <!-- Sección de los entregables  -->
@@ -121,6 +131,7 @@
                                             </small>
                                         </p>
                                     </div>
+                                    @if ( Auth::user()->FkIdRol == 1 )
                                     <div class="card-footer">
                                         <div class="text-right">
                                             <a class="btn btn-ver-mas"
@@ -129,6 +140,16 @@
                                             </a>
                                         </div>
                                     </div>
+                                    @else
+                                    <div class="card-footer">
+                                        <div class="text-right">
+                                            <a class="btn btn-ver-mas"
+                                               href="{{ url('ficha/'.$ficha->IdFicha.'/grupo/'.$grupo->IdGrupo.'/entregable/'.$infoEntre->IdEntre) }}">
+                                               <i class="anticon anticon-plus"></i> Ver más
+                                            </a>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                             @endforeach
                         </div>
@@ -166,5 +187,6 @@
                     </div>
                     @endforeach
                 </div>
+                @endif
             </div>
 @endsection
