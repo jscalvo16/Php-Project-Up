@@ -160,21 +160,7 @@
                                     <div class="conversation">
                                         <div class="conversation-wrapper">
                                             <div class="conversation-header justify-content-between">
-                                                <div class="media align-items-center">
-                                                    <a href="javascript:void(0);"
-                                                        class="chat-close m-r-20 d-md-none d-block text-dark font-size-18 m-t-5">
-                                                        <i class="anticon anticon-left-circle"></i>
-                                                    </a>
-                                                    <div class="avatar avatar-image">
-                                                        <img src="{{ asset('assets/img/avatars/logo-sena.png') }}" alt="Logo SENA">
-                                                    </div>
-                                                    <div class="p-l-15">
-                                                        <h6 class="m-b-0">Erin Gonzales</h6>
-                                                        <p class="m-b-0 text-muted font-size-13 m-b-0">
-                                                            <span>Instructor</span>
-                                                        </p>
-                                                    </div>
-                                                </div>
+                                                <h3>Observaciones</h3>
                                             </div>
                                             <div class="conversation-body">
                                                 @foreach ($mensajes as $msj)
@@ -216,7 +202,7 @@
                                                         <div class="form-group col-md-8">
                                                             <input class="chat-input" type="text" placeholder="Mensaje" id="mensaje" name="mensaje">
                                                         </div>
-                                                        <input type="hidden" id="mensaje" name="usuario" value="18">
+                                                        <input type="hidden" id="mensaje" name="usuario" value="{{ Auth::user()->IdUsua }}">
                                                         @foreach ($avance as $avan)
                                                             <input type="hidden" id="mensaje" name="avance" value="{{$avan->IdAvan}}">
                                                         @endforeach

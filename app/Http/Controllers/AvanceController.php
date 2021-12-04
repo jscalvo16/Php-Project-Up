@@ -21,12 +21,21 @@ class AvanceController extends Controller
     public function index()
     {
         // Consultar el avance y lo relacionado a este
-        $avances = DB::table('avance')
-        ->join('grupodeproyecto', 'grupodeproyecto.IdGrupo', '=', 'avance.FkIdGrupo')
-        ->join('ficha', 'ficha.IdFicha', '=', 'grupodeproyecto.FkIdFicha')
-        ->select('grupodeproyecto.IdGrupo', 'grupodeproyecto.NombGrupo', 'grupodeproyecto.FkIdFicha', 'avance.FkIdEntre',
-        'avance.IdAvan', 'avance.DescAvan', 'avance.FechAvan', 'avance.ArchAvan', 'avance.rutaArchivoAvan', 'ficha.NumbFich')
-        ->get();
+        if(Auth::user()->FkIdRol == 1) {
+            $avances = DB::table('avance')->
+            join('grupodeproyecto', 'grupodeproyecto.IdGrupo', '=', 'avance.FkIdGrupo')->
+            join('ficha', 'ficha.IdFicha', '=', 'grupodeproyecto.FkIdFicha')->
+            select('grupodeproyecto.IdGrupo', 'grupodeproyecto.NombGrupo', 'grupodeproyecto.FkIdFicha', 'avance.FkIdEntre', 'avance.IdAvan', 'avance.DescAvan', 'avance.FechAvan', 'avance.ArchAvan', 'avance.rutaArchivoAvan', 'ficha.NumbFich')->
+            where('grupodeproyecto.IdGrupo', '=', Auth::user()->FkIdGrupo)->
+            get();
+        }else{
+            $avances = DB::table('avance')
+            ->join('grupodeproyecto', 'grupodeproyecto.IdGrupo', '=', 'avance.FkIdGrupo')
+            ->join('ficha', 'ficha.IdFicha', '=', 'grupodeproyecto.FkIdFicha')
+            ->select('grupodeproyecto.IdGrupo', 'grupodeproyecto.NombGrupo', 'grupodeproyecto.FkIdFicha', 'avance.FkIdEntre',
+            'avance.IdAvan', 'avance.DescAvan', 'avance.FechAvan', 'avance.ArchAvan', 'avance.rutaArchivoAvan', 'ficha.NumbFich')
+            ->get();
+        }
 
         if(Auth::user()->FkIdRol == 1 || Auth::user()->FkIdRol == 2){
             $fichas = DB::table('ficha')->
@@ -85,7 +94,7 @@ class AvanceController extends Controller
         $grupo = $request->input('grupo');
         $entregable = $request->input('entregable');
 
-        return redirect('ficha/'.$ficha.'/grupo/'.$grupo.'/entregable/'.$entregable)->with('mensaje', 'Entregable subido correctamente');
+        return redirect('ficha/'.$ficha.'/grupo/'.$grupo.'/entregable/'.$entregable)->with('mensaje', 'Documento subido correctamente');
     }
 
     /**

@@ -87,9 +87,11 @@ class AsignacionController extends Controller
             $ins->save();
         }
 
-        $coo = Usuario::find($request->input('coordinador'));
-        $coo->intermedio()->attach($fich);
-        $coo->save();
+        if($request->input('coordinador') != 'ninguno'){
+            $coo = Usuario::find($request->input('coordinador'));
+            $coo->intermedio()->attach($fich);
+            $coo->save();
+        }
 
         return redirect('asignacion')->with('mensaje', "Usuarios asignados a la ficha con exito!");
     }

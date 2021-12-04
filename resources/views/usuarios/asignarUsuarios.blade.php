@@ -77,7 +77,7 @@
                                 <div class="form-group col-md-6">
                                     <label>Coordinador</label>
                                     <select id="inputState" class="form-control" name="coordinador">
-                                        <option selected>Elige</option>
+                                        <option selected value="ninguno">Elige</option>
                                         @foreach($coordinador as $co)
                                             <option value="{{$co->IdUsua}}">
                                                 {{$co->NombUsua}} {{$co->ApelUsua}}

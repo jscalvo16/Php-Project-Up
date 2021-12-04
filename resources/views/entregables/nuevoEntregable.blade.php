@@ -80,20 +80,6 @@
                                         <strong class="text-danger">{{$errors->first('fases')}}</strong>
                                     </div>
 
-                                    <!-- Select instructores -->
-                                    <div class="form-group col-md-6">
-                                        <label><sup class="obligatorio">*</sup>Instructor</label>
-                                        <select class="form-control" name="instructor" id="instructor">
-                                            <option selected value="0">Elige</option>
-                                            @foreach ($instructores as $inctructor)
-                                                <option value="{{ $inctructor->NombUsua }} {{ $inctructor->ApelUsua }}">
-                                                    {{ $inctructor->NombUsua }} {{ $inctructor->ApelUsua }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <strong class="text-danger">{{$errors->first('instructor')}}</strong>
-                                    </div>
-
                                     <!-- Info para el tipo de archivo permitido -->
                                     <div class="form-group col-md-0">
                                         <i class="anticon anticon-info-circle text-gray infoArchivo" data-toggle="tooltip" data-placement="left" data-html="true" title="Tipos de archivos permitidos: docx, doc, docm, xls, xlsm, pptx, ppt, pdf, zip, rar, jpeg, jpg, png, txt."></i>
@@ -104,6 +90,9 @@
                                         <label for="archivo">Adjunto de apoyo</label>
                                         <input type="file" class="form-control" name="archivo" id="archivo" placeholder="Adjunto de apoyo"  value="{{ old('archivo') }}">
                                         <strong class="text-danger">{{$errors->first('archivo')}}</strong>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
                                     </div>
 
                                     <!-- Select fichas -->
@@ -122,6 +111,7 @@
                                         @endif
                                     </div>
                                 </div>
+                                <input type="hidden" name="instructor" value="{{ Auth::user()->NombUsua }} {{ Auth::user()->ApelUsua }}">
                                 <input type="submit" class="btn btn-enviar" value="Crear">
                             </form>
                         </div>
