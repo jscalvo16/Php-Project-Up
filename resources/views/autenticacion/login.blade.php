@@ -38,7 +38,9 @@
     <div class="login-content">
       <form action="{{url('login')}}" method="POST" >
         @csrf
-        <img class="loginImg" src=" {{ asset('assets/img/Logo_login.png') }} " alt="Logo PROJECTUP">
+        <a href="{{url('inicio')}}" style="display: inline">
+        <img class="loginImg" src=" {{ asset('assets/img/Logo_login.png') }}" alt="Logo PROJECTUP">
+        </a>
         <h3 class="title">INICIAR SESIÓN</h3>
         @if (session("credenciales_invalidas"))
         <strong class="">{{session('credenciales_invalidas')}}</strong>
