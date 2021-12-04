@@ -15,15 +15,10 @@ class CargaMasivaController extends Controller
 {
     public function cargaM(Request $request)
     {
-
         $archivo = $request->file('archivo');
         $excel = IOFactory::load($archivo);
 
-        // $excel -> setActiveSheetIndex(0);
-
         $filaNumb = $excel->setActiveSheetIndex(0)->getHighestRow();
-
-        // dd($filaNumb);
 
         for($i=2;$i<=$filaNumb;$i++){
             $maxVal = Usuario::all()->max('IdUsua');
@@ -43,7 +38,6 @@ class CargaMasivaController extends Controller
             Mail::to($excel->getActiveSheet()->getCell('F'.$i)->getValue())->send(new CambiarContrasenaMail($maxVal));
             $user->save();
         }
-
         return redirect('users')->with("mensaje", "Carga Exitosa");
     }
 }

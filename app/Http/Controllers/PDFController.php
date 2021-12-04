@@ -19,7 +19,8 @@ class PDFController extends Controller
         $reportes = DB::table('ficha')->
         join('grupodeproyecto', 'grupodeproyecto.FkIdFicha', '=', 'ficha.IdFicha')->
         leftJoin('avance', 'avance.FkIdGrupo', '=', 'grupodeproyecto.IdGrupo')->
-        select('grupodeproyecto.NombGrupo as Grupo', 'grupodeproyecto.DescriGrupo as Descripcion', 'ficha.NumbFich as Ficha', DB::raw('count(avance.IdAvan) as Avances'))->
+        select('grupodeproyecto.NombGrupo as Grupo', 'grupodeproyecto.DescriGrupo as Descripcion', 'ficha.NumbFich as Ficha',
+        DB::raw('count(avance.IdAvan) as Avances'))->
         where('grupodeproyecto.FkIdFicha', '=', $idFicha)->
         groupBy('Grupo', 'Descripcion', 'Ficha')->
         get();

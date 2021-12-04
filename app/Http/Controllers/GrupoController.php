@@ -77,16 +77,6 @@ class GrupoController extends Controller
         $usuarioCuatro->FkIdGrupo = $idGrupo;
         $usuarioCuatro->save();
 
-        // Validacion de select´s
-
-        if ($request->input('integrante1') == $request->input('integrante2') && $request->input('integrante1') == $request->input('integrante3') && $request->input('integrante1') == $request->input('integrante4')) {
-            $message = "El aprendiz ya ha sido seleccionado";
-        } elseif ($request->input('integrante2') == $request->input('integrante3') && $request->input('integrante2') == $request->input('integrante4')) {
-            $message = "El aprendiz ya ha sido seleccionado";
-        } elseif ($request->input('integrante3') == $request->input('integrante4')) {
-            $message = "El aprendiz ya ha sido seleccionado";
-        }
-
         return redirect('ficha/' . $request->input('idFicha'))->with('mensaje', 'Grupo creado exitosamente');
 
     }
