@@ -42,7 +42,7 @@
     <div class="container">
 
       <div id="logo" class="pull-left">
-        <h1><a href="index.html" id="body" class="scrollto">
+        <h1><a href="{{url('inicio')}}" id="body" class="scrollto">
             <img src=" {{ asset('assets/img/Logo2.png') }} " class="logoImportante" alt="Logo ProjectUp">
         </h1>
         <div id="divisor"></div>
