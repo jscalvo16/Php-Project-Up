@@ -26,6 +26,14 @@
 
   <!-- Main Stylesheet File -->
   <link href=" {{ asset('css/login2.css') }} " rel="stylesheet">
+  <style>
+      .div strong {
+        color: red;
+        position: relative;
+        top: 53px;
+        float: left;
+      }
+  </style>
 </head>
 
 <body>
@@ -47,7 +55,7 @@
                     <div class="div">
                         <h5>Correo misena</h5>
                         <input type="text" class="input" id="usuario" name="email" value="{{old('email')}}">
-                        <strong class="text-danger">{{ $errors->first('email') }}</strong>
+                        <strong>{{ $errors->first('email') }}</strong>
                     </div>
                 </div>
 
@@ -59,7 +67,7 @@
                     <div class="div">
                         <h5>Contraseña</h5>
                         <input type="password" class="input" id="usuario" name="password" value="{{old('password')}}">
-                        <strong class="text-danger">{{ $errors->first('password') }}</strong>
+                        <strong>{{ $errors->first('password') }}</strong>
                     </div>
                 </div>
 
@@ -71,10 +79,11 @@
                     <div class="div">
                         <h5>Confirmar contraseña</h5>
                         <input type="password" class="input" id="usuario" name="password_confirmation">
-                        <strong class="text-danger">{{ $errors->first('password') }}</strong>
+                        <strong>{{ $errors->first('password') }}</strong>
                     </div>
                 </div>
                 <input type="hidden" name="token" value="{{ $token }}">
+                <br>
                 <input type="submit" class="btn" value="Cambiar">
             </form>
         </div>

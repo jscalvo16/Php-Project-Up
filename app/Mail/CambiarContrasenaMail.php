@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Usuario;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,6 +13,7 @@ class CambiarContrasenaMail extends Mailable
     use Queueable, SerializesModels;
 
     public $id;
+    public $correo;
     /**
      * Create a new message instance.
      *
@@ -20,6 +22,7 @@ class CambiarContrasenaMail extends Mailable
     public function __construct($id)
     {
         $this->id = $id;
+        $this->correo = Usuario::find($id);
     }
 
     /**

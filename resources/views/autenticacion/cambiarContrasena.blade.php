@@ -26,6 +26,14 @@
 
   <!-- Main Stylesheet File -->
   <link href=" {{ asset('css/login2.css') }} " rel="stylesheet">
+  <style>
+      .div strong {
+        color: red;
+        position: relative;
+        top: 53px;
+        float: left;
+      }
+  </style>
 </head>
 
 <body>
@@ -44,11 +52,10 @@
                     <div class="i">
                         <i class="fas fa-unlock-alt"></i>
                     </div>
-                    <strong class="text-danger"> {{$errors->first('password')}} </strong>
-                    <br>
                     <div class="div">
                         <h5>Contraseña</h5>
                         <input type="password" class="input" id="usuario" name="password" value="{{old('password')}}">
+                        <strong> {{$errors->first('password')}} </strong>
                     </div>
                 </div>
                 <!-- Input confirmar contraseña -->
@@ -59,8 +66,10 @@
                     <div class="div">
                         <h5>Confirmar contraseña</h5>
                         <input type="password" class="input" id="usuario" name="password_confirmation">
+                        <strong> {{$errors->first('password')}} </strong>
                     </div>
                 </div>
+                <br>
                 <input type="submit" class="btn" value="Cambiar">
             </form>
         </div>

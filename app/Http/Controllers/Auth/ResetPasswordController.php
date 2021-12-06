@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -28,11 +29,12 @@ class ResetPasswordController extends Controller
     {
         // Validación de formulario
         $reglas = [
-            "email" => 'required|exists:usuario,email',
+            "email" => 'required|regex:/(.)@misena\.edu\.co/i|exists:usuario,email',
         ];
         $mensajes = [
-            "required" => "Campo requerido",
-            "exists" => "El Correo no existe",
+            "required" => "Correo misena requerido",
+            "exists" => "El correo no se encuentra registrado",
+            "regex" => "Formato de correo incorrecto (Correo misena)"
         ];
 
         $validador = Validator::make($r->all(), $reglas, $mensajes);
@@ -66,26 +68,8 @@ class ResetPasswordController extends Controller
     }
 
     // Método para reiniciar la contraseña
-    public function resetPassword(Request $r)
+    public function resetPassword(ResetPasswordRequest $r)
     {
-        // Validación del formulario
-        $reglas = [
-            "email" => 'required|exists:usuario,email',
-            "password" => 'required|confirmed',
-        ];
-        $mensajes = [
-            "required" => "Campo requerido",
-            "exist" => "El correo no existe",
-            "confirmed" => "No Coincide",
-        ];
-
-        $validador = Validator::make($r->all(), $reglas, $mensajes);
-        if ($validador->fails()) {
-            return redirect('reset-password')
-                ->withErrors($validador)
-                ->withInput();
-        }
-
         // Obtener el registro correspontiene al token y los datos ingresados en la tabla password_resets
         $pass_reset = DB::table('password_resets')->where(
                 [

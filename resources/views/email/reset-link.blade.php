@@ -15,9 +15,8 @@
     <!-- Cuerpo del mensaje -->
     <div class="email__body">
         <img class="loginImg" src=" {{ asset('assets/img/Logo_login.png') }} " alt="Logo PROJECTUP">
-        <h1 class="body__heading">Bienvenido a Project Up</h1>
-        <p class="body__text">Para cambiar tu contraseña da click en el boton de abajo</p>
-        <p class="body__text">Gracias por contactarte con nosotros </p>
+        <h1 class="body__heading">Bienvenido a ProjectUp</h1>
+        <p class="body__text">Para cambiar tu contraseña da click en el boton de abajo.</p>
     </div>
 
     <!-- Footer del mensaje -->

@@ -28,6 +28,14 @@
 
   <!-- Main Stylesheet File -->
   <link href=" {{ asset('css/login.css') }} " rel="stylesheet">
+  <style>
+      .div strong {
+        color: red;
+        position: relative;
+        top: 53px;
+        float: left;
+      }
+  </style>
 </head>
 
 <body>
@@ -43,7 +51,10 @@
         </a>
         <h3 class="title">INICIAR SESIÓN</h3>
         @if (session("credenciales_invalidas"))
-        <strong class="">{{session('credenciales_invalidas')}}</strong>
+        <strong style="color: red">{{session('credenciales_invalidas')}}</strong>
+        @endif
+        @if (session("mensaje_exito"))
+        <strong id="mensajeExito" style="color: green">{{session('mensaje_exito')}}</strong>
         @endif
         <br>
         <div class="input-div one">
@@ -53,6 +64,7 @@
           <div class="div">
             <h5>Usuario</h5>
             <input type="text" class="input" id="usuario" name="correo">
+            <strong> {{$errors->first('correo')}} </strong>
           </div>
         </div>
         <div class="input-div pass">
@@ -62,8 +74,10 @@
           <div class="div">
             <h5>Contraseña</h5>
             <input type="password" class="input" id="contrasena" name="contrasena">
+            <strong> {{$errors->first('contrasena')}} </strong>
           </div>
         </div>
+        <br>
         <a href="{{url('recuperar-password')}}">Olvidaste la contraseña?</a>
         <input type="submit" class="btn" value="INGRESAR">
         <p id="error" style="color: black;"></p>
@@ -71,6 +85,7 @@
     </div>
   </div>
   <script src=" {{ asset('js/formLogin.js') }} "></script>
+  <script src=" {{ asset('js/cerrarMensajes.js') }} "></script>
 </body>
 
 </html>

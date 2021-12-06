@@ -21,6 +21,6 @@ class CambiarContrasenaController extends Controller
         $modificarUser->password = Hash::make($request->input('password'));
         $modificarUser->save();
 
-        return redirect('login');
+        return redirect('login')->with("mensaje_exito", "Cambio de contraseña exitoso");
     }
 }

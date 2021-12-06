@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,7 @@ class LoginController extends Controller
     }
 
     // Método para la autenticación por login
-    public function login(Request $request){
+    public function login(LoginRequest $request){
         if(Auth::attempt(["email"=> $request->input("correo"),  "password"=> $request->input("contrasena")])){
 
             // Retorno de Administrador

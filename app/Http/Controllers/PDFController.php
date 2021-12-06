@@ -6,6 +6,7 @@ use App\Http\Requests\PDFrequest;
 use App\Models\Avance;
 use Illuminate\Http\Request;
 use Crabbly\Fpdf\Fpdf;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PDF;
 
@@ -69,7 +70,7 @@ class PDFController extends Controller
 
         $pdf->SetFont('Arial', 'B', 6);
         $pdf->SetY(12);
-        $pdf->Cell($ancho + $horizontal, 10,'Usuario: Instructor Carlos', 0, 0, 'R');
+        $pdf->Cell($ancho + $horizontal, 10,'Instructor: '. Auth::user()->NombUsua . ' ' . Auth::user()->ApelUsua , 0, 0, 'R');
         $pdf->SetY(15);
         $pdf->Cell($ancho + $horizontal, 10,'Fecha: '.date('d/m/Y'), 0, 0, 'R');
         $pdf->SetY(18);
