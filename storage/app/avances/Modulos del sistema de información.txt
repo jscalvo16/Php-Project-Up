@@ -1,0 +1,8 @@
+Modulos del proyecto:
+- Modulo usuarios
+- Modulo de avances
+- Modulo de entregables
+- Modulo de reportes
+- Modulo de fichas de caracterización
+- Modulo de grupos de proyecto
+- Modulo principal
